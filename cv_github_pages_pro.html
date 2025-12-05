@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Youssef Fouad — CV Profesional</title>
+  <meta name="description" content="Currículum profesional de Youssef Fouad — Tècnic en sistemes microinformàtics i xarxes. Proyectos, experiencia y contacto." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+  <style>
+    /* ======= VARIABLES ======= */
+    :root{--bg:#f4f7fb;--card:#ffffff;--text:#0f1724;--muted:#6b7280;--primary:#0b5fff;--accent:#06b6d4;--radius:18px;--shadow:0 8px 28px rgba(2,6,23,0.08);--glass:rgba(255,255,255,0.6);--transition:0.24s cubic-bezier(.2,.9,.3,1);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+
+    /* Dark mode support */
+    @media (prefers-color-scheme:dark){:root{--bg:#0b0f15;--card:#0f1720;--text:#e6eef8;--muted:#9aa7b2;--shadow:0 12px 36px rgba(2,6,23,0.6);--glass:rgba(255,255,255,0.03)}}
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),rgba(0,0,0,0.02));color:var(--text);-webkit-font-smoothing:antialiased}
+
+    /* Layout */
+    .wrap{max-width:1100px;margin:36px auto;padding:20px}
+    .card{display:grid;grid-template-columns:320px 1fr;gap:28px;padding:30px;border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transition:transform var(--transition),box-shadow var(--transition)}
+    .card.visible{transform:none;opacity:1}
+    @media(max-width:880px){.card{grid-template-columns:1fr;padding:22px}}
+
+    /* LEFT COLUMN */
+    .aside{display:flex;flex-direction:column;align-items:center;padding:6px}
+    .photo{width:180px;height:180px;border-radius:50%;overflow:hidden;border:6px solid var(--primary);box-shadow:0 8px 28px rgba(11,95,255,0.08);background:linear-gradient(135deg,var(--glass),transparent)}
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .name{margin-top:18px;text-align:center}
+    .name h1{margin:0;font-size:1.6rem}
+    .role{color:var(--muted);font-weight:600;margin-top:6px}
+
+    .contact{margin-top:14px;width:100%;display:flex;flex-direction:column;gap:8px}
+    .chip{display:flex;gap:10px;align-items:center;padding:10px;border-radius:12px;background:transparent;border:1px solid rgba(0,0,0,0.04)}
+    .chip i{font-size:1.06rem;color:var(--primary)}
+    .chip a{color:var(--text);text-decoration:none;font-weight:600}
+    .socials{display:flex;gap:12px;margin-top:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);text-decoration:none;color:var(--primary);border:1px solid rgba(11,95,255,0.08)}
+
+    /* CTA */
+    .cta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:0;cursor:pointer;transition:transform .12s ease}
+    .btn-primary{background:linear-gradient(90deg,var(--primary),#3b82f6);color:white}
+    .btn-muted{background:transparent;border:1px solid rgba(0,0,0,0.06)}
+
+    /* RIGHT COLUMN */
+    .main{padding:4px 2px}
+    h2{margin:0 0 12px;padding-left:12px;font-size:1.25rem;border-left:6px solid var(--primary);color:var(--text)}
+    p.lead{color:var(--muted);margin-top:6px}
+    .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .skill{padding:8px 10px;border-radius:999px;background:linear-gradient(180deg,rgba(11,95,255,0.06),transparent);font-weight:600}
+
+    /* JOBS */
+    .job{margin-top:18px;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(245,248,255,1),transparent);border-left:4px solid var(--accent);box-shadow:0 6px 18px rgba(11,95,255,0.03)}
+    .job h3{margin:0;font-size:1.03rem}
+    .job .meta{color:var(--muted);font-size:.92rem;margin-top:6px}
+    .job ul{margin:10px 0 0 16px}
+
+    /* PROJECTS */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(240,244,255,1),transparent);border:1px solid rgba(11,95,255,0.04)}
+    .project h4{margin:0}
+
+    /* BADGES */
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(0,0,0,0.03);font-weight:700}
+
+    /* Footer */
+    footer{margin-top:22px;text-align:center;color:var(--muted);font-size:0.95rem}
+
+    /* Subtle animations */
+    .card,section,.job,.project,.photo{opacity:0;transform:translateY(18px);transition:opacity .6s var(--transition),transform .6s var(--transition)}
+    .visible{opacity:1;transform:none}
+
+    /* Responsive tweaks */
+    @media(max-width:480px){.photo{width:140px;height:140px}.card{padding:16px}.name h1{font-size:1.25rem}}
+
+    /* QR placeholder */
+    .qr{margin-top:12px;border-radius:8px;padding:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:inline-block}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+
+      <!-- LEFT / ASIDE -->
+      <aside class="aside" aria-label="Información personal">
+        <div class="photo" aria-hidden="false">
+          <!-- Replace 'profile.jpg' with your own photo file in the repo -->
+          <img src="profile.jpg" alt="Foto de Youssef Fouad" onerror="this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" />
+        </div>
+
+        <div class="name">
+          <h1>Youssef Fouad</h1>
+          <div class="role">Tècnic en sistemes microinformàtics i xarxes</div>
+        </div>
+
+        <div class="contact" aria-label="Contacto">
+          <div class="chip"><i class="ri-map-pin-line"></i><span>Tordera, Barcelona</span></div>
+          <div class="chip"><i class="ri-phone-line"></i><a href="tel:+34641617018">+34 641 61 70 18</a></div>
+          <div class="chip"><i class="ri-mail-line"></i><a href="mailto:fouadyoussef0125@gmail.com">fouadyoussef0125@gmail.com</a></div>
+        </div>
+
+        <div class="socials" aria-hidden="false">
+          <a href="https://github.com/TU_USUARIO" target="_blank" rel="noopener" aria-label="GitHub"><i class="ri-github-line" style="font-size:20px"></i></a>
+          <a href="https://www.linkedin.com/in/TU_USUARIO/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ri-linkedin-box-line" style="font-size:20px"></i></a>
+          <a href="mailto:fouadyoussef0125@gmail.com" aria-label="Correo"><i class="ri-mail-line" style="font-size:20px"></i></a>
+        </div>
+
+        <div class="cta">
+          <a class="btn btn-primary" href="CV_YououssefFouadMabrouki.pdf" download aria-label="Descargar CV">Descargar CV</a>
+          <a class="btn btn-muted" href="mailto:fouadyoussef0125@gmail.com">Contactar</a>
+        </div>
+
+        <div class="badges" aria-hidden="false">
+          <div class="badge"><i class="ri-cpu-line"></i>CCNA</div>
+          <div class="badge"><i class="ri-cloud-line"></i>AWS Foundations</div>
+          <div class="badge"><i class="ri-database-2-line"></i>PostgreSQL</div>
+          <div class="badge"><i class="ri-python-fill"></i>Python</div>
+        </div>
+
+        <div style="margin-top:14px;text-align:center">
+          <div class="qr" title="Enlace al CV online">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://TU_USUARIO.github.io/cv-youssef-fouad/" alt="QR CV" style="width:86px;height:86px;display:block;margin:6px auto;border-radius:6px" />
+            <div style="font-size:0.82rem;color:var(--muted);">Escanea para ver el CV</div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT / MAIN -->
+      <main class="main" aria-label="Currículum principal">
+
+        <section aria-labelledby="about">
+          <h2 id="about">Sobre mi</h2>
+          <p class="lead">Tècnic en sistemes microinformàtics i xarxes en formació, amb experiència en suport tècnic, manteniment d'equips, administració de xarxes i projectes en entorns educatius i empresarials. M'agrada resoldre problemes, treballar en equip i aprendre tecnologies cloud i de infraestructura.</p>
+
+          <div class="skills" aria-hidden="false">
+            <div class="skill">Administració de Xarxes</div>
+            <div class="skill">Seguretat Informàtica</div>
+            <div class="skill">Python</div>
+            <div class="skill">PostgreSQL</div>
+            <div class="skill">Docker (bàsic)</div>
+            <div class="skill">AWS Fundamentals</div>
+          </div>
+        </section>
+
+        <section aria-labelledby="experience">
+          <h2 id="experience">Experiència</h2>
+
+          <article class="job" aria-labelledby="job1">
+            <h3 id="job1">Caixer — Grup Carrefour</h3>
+            <div class="meta">Santa Susana · Agost 2025 – Actualitat</div>
+            <ul>
+              <li>Atenció al client, operacions de caixa i gestió d'incidències de punt de venda.</li>
+              <li>Coordinació de tasques i control d'inventari.</li>
+            </ul>
+          </article>
+
+          <article class="job" aria-labelledby="job2">
+            <h3 id="job2">Help Desk — Escola Brianxa / Ignasi Iglesias</h3>
+            <div class="meta">Tordera · Gener – Abril 2024 (300h)</div>
+            <ul>
+              <li>Resolució d'incidències hardware i software; manteniment d'aules i xarxes.</li>
+              <li>Desplegament de comptes i suport a docents.</li>
+            </ul>
+          </article>
+
+          <article class="job" aria-labelledby="job3">
+            <h3 id="job3">Erasmus — IT Technologies</h3>
+            <div class="meta">Leipzig, Alemanya · Juliol – Agost 2023</div>
+            <ul>
+              <li>Formació pràctica en xarxes, seguretat, domòtica i sistemes.</li>
+            </ul>
+          </article>
+        </section>
+
+        <!-- Projects -->
+        <section aria-labelledby="projects">
+          <h2 id="projects">Projectes destacats</h2>
+          <div class="projects">
+            <div class="project">
+              <h4>Sistema de Gestió Hotelera</h4>
+              <p>App en Python + PostgreSQL amb interfície Tkinter per gestió de reserves, facturació i inventari.</p>
+              <small class="meta">Tecnologies: Python, PostgreSQL, Tkinter</small>
+            </div>
+
+            <div class="project">
+              <h4>Desplegament SGBD Alta Disponibilitat</h4>
+              <p>Configuració de rèplica PostgreSQL, failover i backups automatitzats.</p>
+              <small class="meta">Tecnologies: PostgreSQL, rsync, pg_basebackup</small>
+            </div>
+
+            <div class="project">
+              <h4>Portfoli Cloud</h4>
+              <p>Web estàtica desplegada amb GitHub Pages i integracions amb serveis cloud.</p>
+              <small class="meta">Tecnologies: GitHub Pages, HTML, CSS</small>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="education">
+          <h2 id="education">Educació i certificacions</h2>
+          <ul>
+            <li><strong>CFGS Administració de Sistemes Informàtics en Xarxa</strong> — Institut Sa Palomera (2024–2026)</li>
+            <li><strong>CFGM Sistemes Microinformàtics i Xarxes</strong> — Institut Lluís Companys (2022–2024)</li>
+            <li>Certificacions: CCNA, AWS Academy Cloud Foundations</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="languages">
+          <h2 id="languages">Idiomes</h2>
+          <ul>
+            <li>Català — Nadiu</li>
+            <li>Castellà — Nadiu</li>
+            <li>Anglès — Intermedi</li>
+          </ul>
+        </section>
+
+        <footer>
+          <p>© 2025 — Youssef Fouad · <a href="https://TU_USUARIO.github.io/cv-youssef-fouad/" target="_blank" rel="noopener">Versió en línia</a></p>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Intersection observer to reveal elements
+    document.addEventListener('DOMContentLoaded', function(){
+      const elements = document.querySelectorAll('.card, section, .job, .project, .photo');
+      const obs = new IntersectionObserver((ents, obs) => {
+        ents.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, {threshold:0.08});
+      elements.forEach(el => obs.observe(el));
+    });
+
+    // Helpful small enhancement: open mailto with subject
+    const contactBtns = document.querySelectorAll('.btn-muted');
+    contactBtns.forEach(b=> b.addEventListener('click', ()=>{ window.location = 'mailto:fouadyoussef0125@gmail.com?subject=Contacto%20-%20Interés%20CV'; }));
+  </script>
+</body>
+</html>
