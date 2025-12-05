@@ -3,477 +3,521 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Youssef Fouad — Portfolio</title>
-  <meta name="description" content="Portfolio professional de Youssef Fouad — SysAdmin & Network Technician." />
+  <title>Youssef Fouad — CV</title>
+  <meta name="description" content="Professional Resume of Youssef Fouad — IT Systems & Network Administrator." />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
-  <style>
-    /* ======= VARIABLES & THEME ======= */
-    :root {
-      --bg-gradient: linear-gradient(135deg, #1e293b, #0f172a); /* Fondo oscuro profesional */
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --primary: #2563eb; /* Azul intenso */
-      --primary-glow: rgba(37, 99, 235, 0.3);
-      --accent: #0ea5e9;
-      --radius: 20px;
-      --shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+  
+  <!-- Tipografía Profesional Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    /* Dark Mode Auto-support */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --card-bg: #1e293b; 
-        --text-main: #f1f5f9;
-        --text-muted: #94a3b8;
-        --shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.5);
-      }
+  <style>
+    /* ======= EJECUTIVO THEME ======= */
+    :root {
+      --bg-body: #0f172a;       /* Azul muy oscuro (Navy) */
+      --bg-card: #1e293b;       /* Azul pizarra */
+      --text-white: #f8fafc;
+      --text-gray: #94a3b8;
+      --accent: #38bdf8;        /* Azul eléctrico suave */
+      --accent-dark: #0284c7;
+      --border: rgba(255,255,255,0.08);
+      --timeline-line: rgba(56, 189, 248, 0.2);
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
     
     body {
-      background: var(--bg-gradient);
-      color: var(--text-main);
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-white);
+      line-height: 1.6;
       display: flex;
       justify-content: center;
-      padding: 20px;
       min-height: 100vh;
+      padding: 40px 20px;
     }
 
-    /* LANGUAGE SWITCHER */
+    /* LANGUAGE SWITCHER (Flotante y discreto) */
     .lang-switch {
       position: absolute;
       top: 20px;
       right: 20px;
-      display: flex;
-      gap: 10px;
       z-index: 100;
+      display: flex;
+      gap: 8px;
     }
     .lang-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text-gray);
+      padding: 5px 10px;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: 0.8rem;
       font-weight: 600;
-      font-size: 0.85rem;
-      backdrop-filter: blur(4px);
-      transition: var(--transition);
+      transition: all 0.2s;
     }
-    .lang-btn:hover, .lang-btn.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px var(--primary-glow);
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--accent);
+      color: #0f172a;
+      border-color: var(--accent);
     }
 
-    /* LAYOUT */
-    .wrap { width: 100%; max-width: 1100px; margin-top: 40px; position: relative; }
-    
-    .card {
+    /* CONTENEDOR PRINCIPAL */
+    .resume-container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--bg-card);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* HEADER / PERFIL */
+    header {
+      padding: 40px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+      border-bottom: 1px solid var(--border);
       display: grid;
-      grid-template-columns: 340px 1fr; /* Columna izquierda un poco más ancha */
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: slideUp 0.8s forwards;
-    }
-
-    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-
-    /* SIDEBAR (LEFT) */
-    .aside {
-      background: linear-gradient(180deg, rgba(37, 99, 235, 0.03) 0%, transparent 100%);
-      padding: 40px 30px;
-      display: flex;
-      flex-direction: column;
+      grid-template-columns: 140px 1fr;
+      gap: 30px;
       align-items: center;
-      border-right: 1px solid rgba(0,0,0,0.05);
-      text-align: center;
     }
 
-    .photo-container {
-      position: relative;
-      width: 180px;
-      height: 180px;
-      margin-bottom: 20px;
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
     }
-    .photo {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid var(--card-bg);
-      box-shadow: 0 8px 24px var(--primary-glow);
-      transition: var(--transition);
+
+    .header-info h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -1px;
     }
-    .photo img { width: 100%; height: 100%; object-fit: cover; }
-    .photo:hover { transform: scale(1.05); border-color: var(--primary); }
 
-    /* Name & Role */
-    .name h1 { margin: 10px 0 5px; font-size: 1.8rem; letter-spacing: -0.5px; }
-    .role { color: var(--primary); font-weight: 700; font-size: 0.95rem; margin-bottom: 20px; }
+    .job-title {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 5px 0 15px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-    /* Contact Info */
-    .contact-list { width: 100%; display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-    .contact-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px; border-radius: 12px;
-      background: rgba(0,0,0,0.02);
-      transition: var(--transition);
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
       font-size: 0.9rem;
+      color: var(--text-gray);
     }
-    .contact-item i { color: var(--primary); font-size: 1.1rem; }
-    .contact-item a { text-decoration: none; color: var(--text-main); font-weight: 500; }
-    .contact-item:hover { background: rgba(37, 99, 235, 0.08); transform: translateX(5px); }
+    .contact-bar a {
+      color: var(--text-gray);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .contact-bar a:hover { color: var(--accent); }
 
-    /* Buttons */
-    .cta-group { display: flex; gap: 10px; width: 100%; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
+    /* SECCIONES */
+    .section-title {
+      font-size: 1.2rem;
+      color: var(--text-white);
+      margin: 40px 40px 20px 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title i { color: var(--accent); }
+
+    .content-padding { padding: 0 40px 40px 40px; }
+
+    /* SUMMARY */
+    .summary {
+      color: var(--text-gray);
+      font-size: 1rem;
+      margin-bottom: 30px;
+      max-width: 700px;
+    }
+
+    /* TIMELINE (EXPERIENCIA) */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      bottom: 0;
+      width: 2px;
+      background: var(--timeline-line);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 35px;
+      padding-left: 25px;
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -24px; /* Ajuste para centrar en la linea */
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+    }
+
+    .timeline-item h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--text-white); }
+    .timeline-item .company { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+    .timeline-item .date { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px; display: block; font-family: monospace; }
+    .timeline-item p, .timeline-item ul { margin: 0; color: var(--text-gray); font-size: 0.95rem; }
+    .timeline-item ul { padding-left: 20px; margin-top: 8px; }
+    .timeline-item li { margin-bottom: 4px; }
+
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .skill-category h4 {
+      color: var(--accent);
+      margin: 0 0 10px 0;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: rgba(255,255,255,0.05);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      border: 1px solid var(--border);
+    }
+
+    /* BUTTONS AREA */
+    .action-buttons {
+      padding: 40px;
+      background: rgba(0,0,0,0.2);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
     .btn {
-      padding: 12px 20px; border-radius: 12px; font-weight: 600; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: var(--transition); border: none; cursor: pointer; font-size: 0.9rem;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      box-shadow: 0 4px 15px var(--primary-glow);
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px var(--primary-glow); }
-    
-    /* Animation for Contact Button */
-    .btn-outline {
-      background: transparent; border: 2px solid rgba(0,0,0,0.1); color: var(--text-main);
-      position: relative; overflow: hidden;
-    }
-    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-    
-    /* Pulsing animation */
-    @keyframes pulse-border {
-      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
-    }
-    .btn-contact-anim { animation: pulse-border 2s infinite; }
+    .btn-primary { background: var(--accent); color: #0f172a; }
+    .btn-primary:hover { background: #7dd3fc; transform: translateY(-2px); }
+    .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-white); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Badges */
-    .badge-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
-    .badge {
-      font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 20px;
-      background: rgba(0,0,0,0.04); color: var(--text-muted); display: flex; align-items: center; gap: 6px;
-    }
-    .badge.aws { background: rgba(255, 153, 0, 0.1); color: #d97706; border: 1px solid rgba(255, 153, 0, 0.2); }
-
-    /* MAIN CONTENT (RIGHT) */
-    .main { padding: 40px; }
-    
-    section { margin-bottom: 40px; }
-    h2 {
-      font-size: 1.4rem; border-left: 5px solid var(--primary); padding-left: 15px;
-      margin-bottom: 20px; color: var(--text-main); display: flex; align-items: center;
-    }
-
-    /* Skills */
-    .skills-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill-tag {
-      padding: 8px 16px; border-radius: 8px; background: white;
-      border: 1px solid rgba(0,0,0,0.08); font-weight: 600; color: var(--text-main);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03); transition: var(--transition);
-      cursor: default;
-    }
-    /* Dark mode fix for skills */
-    @media (prefers-color-scheme: dark) { .skill-tag { background: #334155; border-color: #475569; color: #fff; } }
-    
-    .skill-tag:hover { transform: translateY(-3px); border-color: var(--primary); color: var(--primary); }
-
-    /* Experience & Projects Cards */
-    .card-item {
-      background: linear-gradient(to right, rgba(248,250,252,1), rgba(248,250,252,0));
-      border-radius: 12px; padding: 20px; margin-bottom: 15px;
-      border-left: 4px solid var(--accent);
-      transition: var(--transition);
-    }
-    @media (prefers-color-scheme: dark) { .card-item { background: rgba(255,255,255,0.03); } }
-
-    .card-item:hover { transform: translateX(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-    .card-item h3, .card-item h4 { margin: 0 0 5px 0; font-size: 1.1rem; }
-    .meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-    .card-item p { margin: 0; color: var(--text-muted); line-height: 1.6; }
-
-    /* Footer */
-    footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; }
-    footer a { color: var(--primary); text-decoration: none; }
-
-    /* Utility: Hide elements based on language */
+    /* UTILS: LANG & RESPONSIVE */
     [data-lang] { display: none; }
-    /* By default show nothing, JS will toggle active class */
-    .show-lang { display: block; animation: fadeIn 0.5s; }
-    .show-lang-inline { display: inline; animation: fadeIn 0.5s; }
+    .show { display: block; animation: fadeIn 0.4s; }
+    .show-inline { display: inline; animation: fadeIn 0.4s; }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @media (max-width: 700px) {
+      header { grid-template-columns: 1fr; text-align: center; padding: 30px 20px; }
+      .profile-pic { margin: 0 auto; width: 120px; height: 120px; }
+      .contact-bar { justify-content: center; }
+      .resume-container { border-radius: 0; border: none; }
+      body { padding: 0; }
+    }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .card { grid-template-columns: 1fr; }
-      .aside { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.05); }
-      .lang-switch { top: 10px; right: 10px; }
+    /* ESTILOS DE IMPRESIÓN (Para RRHH) */
+    @media print {
+      body { background: white; color: black; padding: 0; }
+      .resume-container { box-shadow: none; border: none; max-width: 100%; width: 100%; color: black; }
+      header, .section-title, .timeline-item::after { -webkit-print-color-adjust: exact; }
+      .action-buttons, .lang-switch { display: none; }
+      :root {
+        --bg-card: #ffffff;
+        --text-white: #000000;
+        --text-gray: #333333;
+        --accent: #0056b3; /* Azul oscuro para papel */
+        --border: #ddd;
+        --timeline-line: #ccc;
+      }
+      .profile-pic { border-color: #333; box-shadow: none; }
+      .tag { border-color: #000; color: #000; }
+      a { text-decoration: none; color: #000; }
     }
   </style>
 </head>
 <body>
 
-  <!-- BOTONES IDIOMA -->
+  <!-- SELECTOR DE IDIOMA -->
   <div class="lang-switch">
     <button class="lang-btn active" onclick="setLang('ca')">CA</button>
     <button class="lang-btn" onclick="setLang('es')">ES</button>
     <button class="lang-btn" onclick="setLang('en')">EN</button>
   </div>
 
-  <div class="wrap">
-    <div class="card">
+  <div class="resume-container">
+    
+    <!-- HEADER -->
+    <header>
+      <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/yfm.jpg" alt="Youssef Fouad" class="profile-pic">
+      
+      <div class="header-info">
+        <h1>Youssef Fouad</h1>
+        <div class="job-title" data-lang="ca">Tècnic de Sistemes & Xarxes IT</div>
+        <div class="job-title" data-lang="es">Técnico de Sistemas & Redes IT</div>
+        <div class="job-title" data-lang="en">IT Systems & Network Technician</div>
+        
+        <div class="contact-bar">
+          <a href="mailto:fouadyoussef0125@gmail.com"><i class="ri-mail-send-line"></i> fouadyoussef0125@gmail.com</a>
+          <a href="tel:+34641617018"><i class="ri-phone-line"></i> +34 641 61 70 18</a>
+          <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank"><i class="ri-linkedin-box-fill"></i> LinkedIn</a>
+          <span><i class="ri-map-pin-line"></i> Barcelona, ES</span>
+        </div>
+      </div>
+    </header>
 
-      <!-- ================= SIDEBAR ================= -->
-      <aside class="aside">
-        <div class="photo-container">
-          <div class="photo">
-            <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/yfm.jpg" alt="Profile">
+    <div class="content-padding">
+      
+      <!-- PERFIL / SUMMARY -->
+      <h2 class="section-title"><i class="ri-user-3-line"></i> 
+        <span data-lang="ca">Perfil Professional</span>
+        <span data-lang="es">Perfil Profesional</span>
+        <span data-lang="en">Professional Profile</span>
+      </h2>
+      <div class="summary">
+        <p data-lang="ca">Professional IT en formació contínua amb sòlida base en administració de sistemes Windows/Linux i xarxes (CCNA). Enfocat en l'eficiència operativa, la resolució crítica d'incidències i la seguretat. Busco aportar la meva capacitat d'adaptació i coneixements en Cloud (AWS) a un equip tècnic dinàmic.</p>
+        <p data-lang="es">Profesional IT en formación continua con sólida base en administración de sistemas Windows/Linux y redes (CCNA). Enfocado en la eficiencia operativa, la resolución crítica de incidencias y la seguridad. Busco aportar mi capacidad de adaptación y conocimientos en Cloud (AWS) a un equipo técnico dinámico.</p>
+        <p data-lang="en">IT Professional with a continuous learning mindset and a solid foundation in Windows/Linux system administration and networking (CCNA). Focused on operational efficiency, critical troubleshooting, and security. Seeking to bring my adaptability and Cloud (AWS) knowledge to a dynamic technical team.</p>
+      </div>
+
+      <!-- SKILLS (Prioridad para RRHH) -->
+      <h2 class="section-title"><i class="ri-tools-line"></i> 
+        <span data-lang="ca">Competències Tècniques</span>
+        <span data-lang="es">Competencias Técnicas</span>
+        <span data-lang="en">Technical Skills</span>
+      </h2>
+      <div class="skills-grid">
+        
+        <div class="skill-category">
+          <h4 data-lang="ca">Infraestructura & OS</h4>
+          <h4 data-lang="es">Infraestructura & OS</h4>
+          <h4 data-lang="en">Infrastructure & OS</h4>
+          <div class="skill-tags">
+            <span class="tag">Windows Server 2019/22</span>
+            <span class="tag">Linux (Ubuntu/Debian)</span>
+            <span class="tag">Active Directory</span>
+            <span class="tag">Virtualization</span>
           </div>
         </div>
 
-        <div class="name">
-          <h1>Youssef Fouad</h1>
-          <!-- Roles en 3 idiomas -->
-          <div class="role" data-lang="ca">Tècnic en Sistemes & Xarxes</div>
-          <div class="role" data-lang="es">Técnico en Sistemas y Redes</div>
-          <div class="role" data-lang="en">Systems & Network Technician</div>
-        </div>
-
-        <div class="contact-list">
-          <div class="contact-item">
-            <i class="ri-map-pin-line"></i>
-            <span>Tordera, Barcelona</span>
-          </div>
-          <div class="contact-item">
-            <i class="ri-phone-line"></i>
-            <a href="tel:+34641617018">+34 641 61 70 18</a>
-          </div>
-          <div class="contact-item">
-            <i class="ri-mail-send-line"></i>
-            <a href="mailto:fouadyoussef0125@gmail.com">fouadyoussef0125@gmail.com</a>
-          </div>
-          <div class="contact-item">
-            <i class="ri-linkedin-box-line"></i>
-            <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank">LinkedIn</a>
-          </div>
-          <div class="contact-item">
-            <i class="ri-github-line"></i>
-            <a href="https://github.com/yousseffouad12" target="_blank">GitHub</a>
+        <div class="skill-category">
+          <h4 data-lang="ca">Xarxes & Seguretat</h4>
+          <h4 data-lang="es">Redes & Seguridad</h4>
+          <h4 data-lang="en">Network & Security</h4>
+          <div class="skill-tags">
+            <span class="tag">CCNA Concepts</span>
+            <span class="tag">TCP/IP & Routing</span>
+            <span class="tag">Firewall Config</span>
+            <span class="tag">VLANs</span>
           </div>
         </div>
 
-        <div class="cta-group">
-          <!-- Textos botones -->
-          <a class="btn btn-primary" href="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/CV_YouussefFouadMabrouki.pdf" target="_blank">
-            <i class="ri-download-cloud-2-line"></i> 
-            <span data-lang="ca">Descarregar CV</span>
-            <span data-lang="es">Descargar CV</span>
-            <span data-lang="en">Download CV</span>
-          </a>
-          
-          <a class="btn btn-outline btn-contact-anim" href="mailto:fouadyoussef0125@gmail.com">
-            <i class="ri-send-plane-fill"></i>
-            <span data-lang="ca">Contactar</span>
-            <span data-lang="es">Contactar</span>
-            <span data-lang="en">Contact</span>
-          </a>
+        <div class="skill-category">
+          <h4>Cloud & Data</h4>
+          <div class="skill-tags">
+            <span class="tag" style="border-color:#ec8f12; color:#ec8f12">AWS Certified</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Python Scripting</span>
+            <span class="tag">Docker</span>
+          </div>
         </div>
 
-        <div class="badge-grid">
-          <a href="https://www.credly.com/badges/ea94ab6d-841e-48dd-8ad8-427c157fb4d7" target="_blank" style="text-decoration:none">
-            <div class="badge aws"><i class="ri-cloud-fill"></i>AWS Certified</div>
-          </a>
-          <div class="badge"><i class="ri-router-line"></i>CCNA</div>
-          <div class="badge"><i class="ri-terminal-box-line"></i>Linux</div>
-        </div>
+      </div>
 
-        <!-- QR Code -->
-        <div style="margin-top:20px; opacity:0.8">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://yousseffouad12.github.io/youssef_cv/" style="width:80px;border-radius:8px;" alt="QR">
-        </div>
-      </aside>
-
-      <!-- ================= MAIN CONTENT ================= -->
-      <main class="main">
-
-        <!-- ABOUT ME -->
-        <section>
-          <h2>
-            <i class="ri-user-smile-line" style="margin-right:10px; color:var(--primary)"></i>
-            <span data-lang="ca">Sobre mi</span>
-            <span data-lang="es">Sobre mí</span>
-            <span data-lang="en">About Me</span>
-          </h2>
-          
-          <p class="lead" data-lang="ca">
-            Sóc un Tècnic en sistemes microinformàtics i xarxes apassionat per la infraestructura IT i el Cloud Computing. Tinc experiència pràctica en suport tècnic, administració de servidors (Linux/Windows) i desplegament de xarxes. Actualment enfocat en aprofundir en AWS, automatització i bases de dades.
-          </p>
-          <p class="lead" data-lang="es">
-            Soy Técnico en sistemas microinformáticos y redes apasionado por la infraestructura TI y el Cloud Computing. Tengo experiencia práctica en soporte técnico, administración de servidores (Linux/Windows) y despliegue de redes. Actualmente enfocado en profundizar en AWS, automatización y bases de datos.
-          </p>
-          <p class="lead" data-lang="en">
-            I am a Systems & Network Technician passionate about IT infrastructure and Cloud Computing. I have practical experience in technical support, server administration (Linux/Windows), and network deployment. Currently focused on AWS, automation, and databases.
-          </p>
-
-          <div class="skills-cloud" style="margin-top:15px">
-            <div class="skill-tag">Network Admin</div>
-            <div class="skill-tag">Cybersecurity</div>
-            <div class="skill-tag">Windows Server</div>
-            <div class="skill-tag">Linux (Ubuntu/Debian)</div>
-            <div class="skill-tag">PostgreSQL</div>
-            <div class="skill-tag">Docker</div>
-            <div class="skill-tag">AWS Cloud</div>
-            <div class="skill-tag">Python</div>
-          </div>
-        </section>
-
-        <!-- EXPERIENCE -->
-        <section>
-          <h2>
-            <i class="ri-briefcase-4-line" style="margin-right:10px; color:var(--primary)"></i>
-            <span data-lang="ca">Experiència</span>
-            <span data-lang="es">Experiencia</span>
-            <span data-lang="en">Experience</span>
-          </h2>
-
-          <div class="card-item">
-            <h3>Help Desk IT — Escola Brianxa / Ignasi Iglesias</h3>
-            <div class="meta">
-              <span data-lang="ca">Gener 2024 – Abril 2024</span>
-              <span data-lang="es">Enero 2024 – Abril 2024</span>
-              <span data-lang="en">Jan 2024 – Apr 2024</span>
-            </div>
-            <p data-lang="ca">Resolució d'incidències hardware/software, manteniment d'aules, gestió d'usuaris i suport actiu a docents en entorn Windows/Linux.</p>
-            <p data-lang="es">Resolución de incidencias hardware/software, mantenimiento de aulas, gestión de usuarios y soporte activo a docentes en entorno Windows/Linux.</p>
-            <p data-lang="en">Hardware/software troubleshooting, classroom maintenance, user management, and active support for teachers in Windows/Linux environments.</p>
-          </div>
-
-          <div class="card-item">
-            <h3>Erasmus Intern — IT Technologies (Leipzig, Alemanya)</h3>
-            <div class="meta">
-              <span data-lang="ca">Juliol 2023 – Agost 2023</span>
-              <span data-lang="es">Julio 2023 – Agosto 2023</span>
-              <span data-lang="en">July 2023 – August 2023</span>
-            </div>
-            <p data-lang="ca">Formació intensiva i pràctica en cablejat de xarxes, seguretat IoT i administració de sistemes internacionals.</p>
-            <p data-lang="es">Formación intensiva y práctica en cableado de redes, seguridad IoT y administración de sistemas internacionales.</p>
-            <p data-lang="en">Intensive practical training in network cabling, IoT security, and international systems administration.</p>
-          </div>
-        </section>
-
-        <!-- PROJECTS (MERGED) -->
-        <section>
-          <h2>
-            <i class="ri-code-s-slash-line" style="margin-right:10px; color:var(--primary)"></i>
-            <span data-lang="ca">Projectes</span>
-            <span data-lang="es">Proyectos</span>
-            <span data-lang="en">Projects</span>
-          </h2>
-
-          <div class="card-item" style="border-left-color: var(--primary)">
-            <!-- TITULO PROYECTO -->
-            <h4 data-lang="ca">Sistema de Gestió Hotelera & Alta Disponibilitat</h4>
-            <h4 data-lang="es">Sistema de Gestión Hotelera & Alta Disponibilidad</h4>
-            <h4 data-lang="en">Hotel Management System & High Availability</h4>
-
-            <small class="meta">Python · Tkinter · PostgreSQL · HA/Failover · Linux</small>
-            
-            <!-- DESCRIPCION PROYECTO -->
-            <p data-lang="ca">Desenvolupament complet d'una solució empresarial. Inclou una aplicació d'escriptori (Python/Tkinter) per a la gestió de reserves i facturació, connectada a un <strong>clúster de base de dades PostgreSQL</strong> en Linux configurat amb rèplica (Master-Slave) i scripts de failover automàtic per garantir la continuïtat del servei.</p>
-            
-            <p data-lang="es">Desarrollo completo de una solución empresarial. Incluye una aplicación de escritorio (Python/Tkinter) para la gestión de reservas y facturación, conectada a un <strong>clúster de base de datos PostgreSQL</strong> en Linux configurado con réplica (Master-Slave) y scripts de failover automático para garantizar la continuidad del servicio.</p>
-
-            <p data-lang="en">Full development of a business solution. Includes a desktop app (Python/Tkinter) for booking and billing, connected to a <strong>PostgreSQL database cluster</strong> on Linux configured with replication (Master-Slave) and automatic failover scripts to ensure service continuity.</p>
-          </div>
-
-          <div class="card-item" style="border-left-color: var(--primary)">
-            <h4 data-lang="ca">Cloud Portfolio</h4>
-            <h4 data-lang="es">Cloud Portfolio</h4>
-            <h4 data-lang="en">Cloud Portfolio</h4>
-            <small class="meta">HTML5 · CSS3 · GitHub Pages · CI/CD</small>
-            <p data-lang="ca">Disseny i desplegament d'aquesta web professional optimitzada, allotjada en GitHub Pages.</p>
-            <p data-lang="es">Diseño y despliegue de esta web profesional optimizada, alojada en GitHub Pages.</p>
-            <p data-lang="en">Design and deployment of this professional optimized website, hosted on GitHub Pages.</p>
-          </div>
-        </section>
-
-        <!-- EDUCATION -->
-        <section>
-          <h2>
-            <i class="ri-book-open-line" style="margin-right:10px; color:var(--primary)"></i>
-            <span data-lang="ca">Educació</span>
-            <span data-lang="es">Educación</span>
-            <span data-lang="en">Education</span>
-          </h2>
-          <ul style="padding-left:20px; line-height:1.6; color:var(--text-muted)">
-            <li>
-              <strong>CFGS Administració de Sistemes Informàtics en Xarxa</strong><br>
-              Institut Sa Palomera (2024 – 2026)
-            </li>
-            <li style="margin-top:10px">
-              <strong>CFGM Sistemes Microinformàtics i Xarxes</strong><br>
-              Institut Lluís Companys (2022 – 2024)
-            </li>
+      <!-- EXPERIENCIA (TIMELINE) -->
+      <h2 class="section-title"><i class="ri-briefcase-line"></i> 
+        <span data-lang="ca">Trajectòria Laboral</span>
+        <span data-lang="es">Trayectoria Laboral</span>
+        <span data-lang="en">Work Experience</span>
+      </h2>
+      
+      <div class="timeline">
+        
+        <!-- Job 1 -->
+        <div class="timeline-item">
+          <h3 data-lang="ca">Suport Tècnic IT (Pràctiques)</h3>
+          <h3 data-lang="es">Soporte Técnico IT (Prácticas)</h3>
+          <h3 data-lang="en">IT Support Technician (Internship)</h3>
+          <div class="company">Escola Brianxa / Ignasi Iglesias</div>
+          <span class="date">
+            <span data-lang="ca">Gener 2024 – Abril 2024</span>
+            <span data-lang="es">Enero 2024 – Abril 2024</span>
+            <span data-lang="en">Jan 2024 – Apr 2024</span>
+          </span>
+          <ul data-lang="ca">
+            <li>Administració d'usuaris i permisos en entorn híbrid.</li>
+            <li>Manteniment preventiu i correctiu de parc informàtic (+100 equips).</li>
+            <li>Resolució d'incidències de connectivitat i software per a docents.</li>
           </ul>
-        </section>
+          <ul data-lang="es">
+            <li>Administración de usuarios y permisos en entorno híbrido.</li>
+            <li>Mantenimiento preventivo y correctivo de parque informático (+100 equipos).</li>
+            <li>Resolución de incidencias de conectividad y software para docentes.</li>
+          </ul>
+          <ul data-lang="en">
+            <li>User and permission management in a hybrid environment.</li>
+            <li>Preventive and corrective maintenance of IT assets (+100 devices).</li>
+            <li>Resolution of connectivity and software issues for staff.</li>
+          </ul>
+        </div>
 
-        <!-- FOOTER -->
-        <footer>
-          <p>© 2025 Youssef Fouad — <span data-lang="ca">Fet amb passió</span><span data-lang="es">Hecho con pasión</span><span data-lang="en">Made with passion</span>.</p>
-        </footer>
+        <!-- Job 2 -->
+        <div class="timeline-item">
+          <h3 data-lang="ca">Network & Systems Intern (Erasmus+)</h3>
+          <h3 data-lang="es">Network & Systems Intern (Erasmus+)</h3>
+          <h3 data-lang="en">Network & Systems Intern (Erasmus+)</h3>
+          <div class="company">IT Technologies — Leipzig, Alemanya</div>
+          <span class="date">
+            <span data-lang="ca">Juliol 2023 – Agost 2023</span>
+            <span data-lang="es">Julio 2023 – Agosto 2023</span>
+            <span data-lang="en">July 2023 – August 2023</span>
+          </span>
+          <ul data-lang="ca">
+            <li>Desplegament d'infraestructura de cablejat i configuració de punts d'accés.</li>
+            <li>Introducció a sistemes domòtics i seguretat IoT.</li>
+            <li>Treball en equip internacional amb anglès com a llengua vehicular.</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Despliegue de infraestructura de cableado y configuración de puntos de acceso.</li>
+            <li>Introducción a sistemas domóticos y seguridad IoT.</li>
+            <li>Trabajo en equipo internacional con inglés como lengua vehicular.</li>
+          </ul>
+          <ul data-lang="en">
+            <li>Deployment of cabling infrastructure and Access Point configuration.</li>
+            <li>Introduction to home automation systems and IoT security.</li>
+            <li>International teamwork using English as the working language.</li>
+          </ul>
+        </div>
 
-      </main>
+        <!-- Job 3 (Carrefour - Enfocado a Soft Skills) -->
+        <div class="timeline-item">
+          <h3 data-lang="ca">Atenció al Client & Operativa</h3>
+          <h3 data-lang="es">Atención al Cliente & Operativa</h3>
+          <h3 data-lang="en">Customer Service & Operations</h3>
+          <div class="company">Grup Carrefour</div>
+          <span class="date">
+            <span data-lang="ca">Agost 2025 – Actualitat</span>
+            <span data-lang="es">Agosto 2025 – Actualidad</span>
+            <span data-lang="en">August 2025 – Present</span>
+          </span>
+          <p data-lang="ca" style="font-style:italic; margin-bottom:5px">Rol complementari als estudis.</p>
+          <p data-lang="es" style="font-style:italic; margin-bottom:5px">Rol complementario a los estudios.</p>
+          <p data-lang="en" style="font-style:italic; margin-bottom:5px">Role complementary to studies.</p>
+          <ul data-lang="ca">
+            <li>Gestió eficaç de situacions d'estrès i resolució de conflictes.</li>
+            <li>Treball per objectius i coordinació d'equip.</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Gestión eficaz de situaciones de estrés y resolución de conflictos.</li>
+            <li>Trabajo por objetivos y coordinación de equipo.</li>
+          </ul>
+          <ul data-lang="en">
+            <li>Effective management of high-stress situations and conflict resolution.</li>
+            <li>Goal-oriented work and team coordination.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- EDUCACIÓN -->
+      <h2 class="section-title"><i class="ri-graduation-cap-line"></i> 
+        <span data-lang="ca">Formació Acadèmica</span>
+        <span data-lang="es">Formación Académica</span>
+        <span data-lang="en">Education</span>
+      </h2>
+      <div style="display:grid; grid-template-columns: 1fr; gap:15px">
+        <div>
+          <strong style="color:var(--text-white); font-size:1.05rem">CFGS Administració de Sistemes Informàtics en Xarxa</strong><br>
+          <span style="color:var(--text-gray)">Institut Sa Palomera (2024 – 2026, Actualitat)</span>
+        </div>
+        <div>
+          <strong style="color:var(--text-white); font-size:1.05rem">CFGM Sistemes Microinformàtics i Xarxes</strong><br>
+          <span style="color:var(--text-gray)">Institut Lluís Companys (2022 – 2024)</span>
+        </div>
+      </div>
+
     </div>
+
+    <!-- ACTIONS FOOTER -->
+    <div class="action-buttons">
+      <a href="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/CV_YouussefFouadMabrouki.pdf" target="_blank" class="btn btn-primary">
+        <i class="ri-file-pdf-line"></i> 
+        <span data-lang="ca">Descarregar PDF Oficial</span>
+        <span data-lang="es">Descargar PDF Oficial</span>
+        <span data-lang="en">Download Official PDF</span>
+      </a>
+      <a href="mailto:fouadyoussef0125@gmail.com" class="btn btn-secondary">
+        <i class="ri-send-plane-line"></i> 
+        <span data-lang="ca">Contactar Ara</span>
+        <span data-lang="es">Contactar Ahora</span>
+        <span data-lang="en">Contact Now</span>
+      </a>
+    </div>
+
   </div>
 
   <script>
-    // Configuración Inicial
-    const defaultLang = 'ca'; // Idioma por defecto
-    
+    const defaultLang = 'ca';
+
     function setLang(lang) {
-      // 1. Quitar clase 'active' de todos los botones
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.remove('active');
+        if(b.innerText.toLowerCase() === lang) b.classList.add('active');
       });
 
-      // 2. Ocultar todos los elementos traducibles
       document.querySelectorAll('[data-lang]').forEach(el => {
         el.style.display = 'none';
-        el.classList.remove('show-lang');
+        el.classList.remove('show', 'show-inline');
       });
 
-      // 3. Mostrar solo los del idioma seleccionado
       document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
-        // Si es un span dentro de un botón, usar inline, si no block
-        if(el.tagName === 'SPAN') {
+        if(el.tagName === 'SPAN' || el.tagName === 'A') {
           el.style.display = 'inline';
+          el.classList.add('show-inline');
         } else {
           el.style.display = 'block';
+          el.classList.add('show');
         }
-        el.classList.add('show-lang');
       });
     }
 
-    // Iniciar
-    document.addEventListener('DOMContentLoaded', () => {
-      setLang(defaultLang);
-    });
+    document.addEventListener('DOMContentLoaded', () => setLang(defaultLang));
   </script>
 
 </body>
