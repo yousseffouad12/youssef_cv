@@ -6,7 +6,6 @@
   <title>Youssef Fouad — Portfoli IT</title>
   <meta name="description" content="Portfolio & CV - Youssef Fouad. SysAdmin & Network Technician." />
   
-  <!-- Iconos, Fuentes y EmailJS -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,14 +15,14 @@
     /* ================= VARIABLES & THEME ================= */
     :root {
       --bg-dark: #0f172a;
-      --bg-card: rgba(30, 41, 59, 0.65); /* Cristal Oscuro */
+      --bg-card: rgba(30, 41, 59, 0.7); /* Més opacitat per llegibilitat */
       --primary: #3b82f6;
       --primary-hover: #2563eb;
       --accent: #06b6d4;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --border: rgba(255, 255, 255, 0.08);
-      --glass: blur(14px);
+      --border: rgba(255, 255, 255, 0.1);
+      --glass: blur(16px);
       --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
@@ -44,8 +43,8 @@
     /* FONDO ANIMADO */
     .bg-animation {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-      background: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.12), transparent 25%),
-                  radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.12), transparent 25%);
+      background: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+                  radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
       animation: pulseBg 10s infinite alternate;
     }
     @keyframes pulseBg { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
@@ -76,23 +75,23 @@
     }
 
     .photo-wrapper {
-      width: 150px; height: 150px; margin: 0 auto 20px;
+      width: 160px; height: 160px; margin: 0 auto 20px;
       position: relative;
     }
     .photo-wrapper img {
       width: 100%; height: 100%; object-fit: cover;
       border-radius: 50%;
-      border: 3px solid rgba(255,255,255,0.1);
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+      border: 4px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
     }
     .status {
-      position: absolute; bottom: 8px; right: 8px;
-      width: 18px; height: 18px; background: #22c55e;
-      border: 3px solid var(--bg-dark); border-radius: 50%;
+      position: absolute; bottom: 10px; right: 10px;
+      width: 20px; height: 20px; background: #22c55e;
+      border: 4px solid var(--bg-dark); border-radius: 50%;
       box-shadow: 0 0 10px #22c55e;
     }
 
-    .name { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; }
+    .name { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; letter-spacing: -0.5px; }
     .role { 
       background: linear-gradient(90deg, var(--primary), var(--accent));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -102,18 +101,23 @@
     .contact-info { margin-top: 30px; text-align: left; display: flex; flex-direction: column; gap: 10px; }
     .contact-row {
       display: flex; align-items: center; gap: 12px;
-      padding: 10px; background: rgba(255,255,255,0.03);
+      padding: 12px; background: rgba(255,255,255,0.03);
       border-radius: 12px; color: var(--text-muted); text-decoration: none;
-      font-size: 0.85rem; transition: 0.3s;
+      font-size: 0.9rem; transition: 0.3s; border: 1px solid transparent;
     }
-    .contact-row:hover { background: rgba(255,255,255,0.08); color: var(--text-main); transform: translateX(5px); }
-    .contact-row i { color: var(--primary); font-size: 1.1rem; }
+    .contact-row:hover { 
+      background: rgba(255,255,255,0.08); 
+      color: var(--text-main); 
+      border-color: rgba(255,255,255,0.1);
+      transform: translateX(5px); 
+    }
+    .contact-row i { color: var(--primary); font-size: 1.2rem; }
 
     .btn-download {
       display: flex; align-items: center; justify-content: center; gap: 10px;
       margin-top: 25px; width: 100%;
       background: var(--text-main); color: var(--bg-dark);
-      padding: 12px; border-radius: 12px;
+      padding: 14px; border-radius: 12px;
       font-weight: 700; text-decoration: none;
       transition: 0.3s; border: none; cursor: pointer;
     }
@@ -126,8 +130,8 @@
     .lang-container { display: flex; justify-content: flex-end; gap: 10px; }
     .lang-btn {
       background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      color: var(--text-muted); padding: 6px 14px; border-radius: 20px;
-      cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: 0.3s;
+      color: var(--text-muted); padding: 8px 16px; border-radius: 20px;
+      cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: 0.3s;
     }
     .lang-btn.active, .lang-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
@@ -145,20 +149,25 @@
     }
     .glass-card.visible { opacity: 1; transform: translateY(0); }
 
-    h2 { font-size: 1.4rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; color: var(--text-main); }
+    h2 { font-size: 1.5rem; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; color: var(--text-main); }
     h2 i { color: var(--accent); }
 
     /* Skills Grid */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
     .skill-box {
       background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-      padding: 12px; border-radius: 12px; text-align: center;
-      font-size: 0.9rem; font-weight: 500; transition: 0.3s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 15px; border-radius: 12px; text-align: center;
+      font-size: 0.95rem; font-weight: 500; transition: 0.3s;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
-    .skill-box:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); transform: translateY(-3px); }
+    .skill-box i { font-size: 1.5rem; color: var(--primary); }
+    .skill-box:hover { 
+      border-color: var(--primary); 
+      background: rgba(59, 130, 246, 0.1); 
+      transform: translateY(-5px); 
+    }
     
-    /* Listas Soft Skills */
+    /* Soft Skills List */
     .soft-list { list-style: none; display: flex; flex-wrap: wrap; gap: 15px; }
     .soft-list li {
       background: rgba(6, 182, 212, 0.1); color: var(--accent);
@@ -166,13 +175,50 @@
       border: 1px solid rgba(6, 182, 212, 0.2);
     }
 
-    /* Cert & Tech Images */
-    .cert-grid { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
-    .tech-img { 
-      height: 50px; padding: 8px; background: white; 
-      border-radius: 12px; transition: 0.3s; 
+    /* === NUEVO STACK TECNOLÓGICO (Mejorado) === */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 20px;
+      margin-top: 10px;
     }
-    .tech-img:hover { transform: scale(1.1); }
+    .stack-item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 20px; border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: 0.3s;
+    }
+    .stack-item i {
+      font-size: 3rem; /* Iconos Grandes */
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff, #94a3b8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      transition: 0.3s;
+    }
+    .stack-item span { font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
+    
+    .stack-item:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .stack-item:hover i { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* === NUEVAS CERTIFICACIONES (Cards) === */
+    .cert-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .cert-card {
+      display: flex; align-items: center; gap: 15px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      padding: 20px; border-radius: 16px;
+      text-decoration: none; color: inherit;
+      transition: 0.3s;
+    }
+    .cert-card:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); transform: translateX(5px); }
+    .cert-icon {
+      width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+      background: rgba(59, 130, 246, 0.1); border-radius: 12px;
+      color: var(--primary); font-size: 1.8rem;
+    }
+    .cert-info h4 { font-size: 1rem; margin-bottom: 4px; color: var(--text-main); }
+    .cert-info p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
 
     /* Timeline */
     .timeline { position: relative; padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.1); }
@@ -233,7 +279,6 @@
 
   <div class="container">
     
-    <!-- === SIDEBAR === -->
     <aside class="sidebar">
       <div class="photo-wrapper">
         <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/yfm.jpg" alt="Foto Youssef">
@@ -268,7 +313,6 @@
       </a>
     </aside>
 
-    <!-- === MAIN CONTENT === -->
     <main class="main-content">
       
       <div class="lang-container">
@@ -277,7 +321,6 @@
         <button class="lang-btn" onclick="setLang('en')">EN</button>
       </div>
 
-      <!-- 1. SOBRE MI -->
       <section class="glass-card">
         <h2>
           <i class="ri-user-smile-line"></i> 
@@ -285,12 +328,11 @@
           <span data-lang="es">Sobre Mí</span>
           <span data-lang="en">About Me</span>
         </h2>
-        <p data-lang="ca">Tècnic en sistemes microinformàtics i xarxes en formació, amb experiència en suport tècnic, manteniment d'equips i gestió d'entorns informàtics. Persona responsable, adaptable i amb una motivació constant per aprendre i millorar.</p>
-        <p data-lang="es">Técnico en sistemas microinformáticos y redes en formación, con experiencia en soporte técnico, mantenimiento de equipos y gestión de entornos informáticos. Persona responsable, adaptable y con motivación constante por aprender y mejorar.</p>
-        <p data-lang="en">IT Systems and Network Technician in training, with experience in technical support, equipment maintenance, and IT environment management. Responsible, adaptable, and constantly motivated to learn and improve.</p>
+        <p data-lang="ca">Tècnic en sistemes microinformàtics i xarxes en formació, amb experiència en suport tècnic, manteniment d'equips i gestió d'entorns informàtics (Windows Server, AD). Persona responsable, adaptable i amb una motivació constant per aprendre ciberseguretat i administració de sistemes.</p>
+        <p data-lang="es">Técnico en sistemas microinformáticos y redes en formación, con experiencia en soporte técnico, mantenimiento de equipos y gestión de entornos informáticos (Windows Server, AD). Persona responsable, adaptable y con motivación constante por aprender ciberseguridad y administración de sistemas.</p>
+        <p data-lang="en">IT Systems and Network Technician in training, with experience in technical support, equipment maintenance, and IT environment management (Windows Server, AD). Responsible, adaptable, and constantly motivated to learn cybersecurity and systems administration.</p>
       </section>
 
-      <!-- 2. QUÉ PUEDO APORTAR (Nuevo) -->
       <section class="glass-card">
         <h2>
           <i class="ri-lightbulb-flash-fill"></i>
@@ -303,7 +345,6 @@
         <p data-lang="en">I am a decisive and organized person, capable of maintaining stable and secure environments, contributing improvements, optimizing processes, and offering quality technical support. I have initiative, responsibility, and good adaptability to change.</p>
       </section>
 
-      <!-- 3. HABILIDADES TÉCNICAS (Grid) -->
       <section class="glass-card">
         <h2>
           <i class="ri-code-box-line"></i> 
@@ -312,34 +353,33 @@
           <span data-lang="en">Technical Skills</span>
         </h2>
         <div class="skills-grid">
-          <div class="skill-box"><i class="ri-windows-fill"></i> Windows Server / AD</div>
-          <div class="skill-box"><i class="ri-router-line"></i> CCNA / Cisco</div>
-          <div class="skill-box"><i class="ri-terminal-box-line"></i> Linux Admin</div>
-          <div class="skill-box"><i class="ri-database-2-line"></i> Python / SQL</div>
-          <div class="skill-box"><i class="ri-shield-check-line"></i> Ciberseguretat</div>
-          <div class="skill-box"><i class="ri-customer-service-2-fill"></i> Suport Tècnic</div>
+          <div class="skill-box">
+            <i class="ri-windows-fill"></i> 
+            <span>Windows Server / AD</span>
+          </div>
+          <div class="skill-box">
+            <i class="ri-server-line"></i> 
+            <span>DHCP & DNS</span>
+          </div>
+          <div class="skill-box">
+            <i class="ri-router-line"></i> 
+            <span>Cisco / CCNA</span>
+          </div>
+          <div class="skill-box">
+            <i class="ri-database-2-line"></i> 
+            <span>SQL & Bases de Dades</span>
+          </div>
+          <div class="skill-box">
+            <i class="ri-terminal-box-line"></i> 
+            <span>Python Bàsic</span>
+          </div>
+          <div class="skill-box">
+            <i class="ri-shield-check-line"></i> 
+            <span>Ciberseguretat</span>
+          </div>
         </div>
       </section>
 
-      <!-- 4. HABILIDADES REDES (Nuevo Detallado) -->
-      <section class="glass-card">
-        <h2>
-          <i class="ri-global-line"></i> 
-          <span data-lang="ca">Habilitats en Xarxes</span>
-          <span data-lang="es">Habilidades en Redes</span>
-          <span data-lang="en">Networking Skills</span>
-        </h2>
-        <div class="skills-grid">
-          <div class="skill-box">VLANs / Subnetting</div>
-          <div class="skill-box">Routing Estàtic</div>
-          <div class="skill-box">NAT / DHCP / DNS</div>
-          <div class="skill-box">Cisco IOS Config</div>
-          <div class="skill-box">Firewall Bàsic</div>
-          <div class="skill-box">WiFi Enterprise</div>
-        </div>
-      </section>
-
-      <!-- 5. VISUAL STACK (Imagenes) -->
       <section class="glass-card">
         <h2>
           <i class="ri-stack-line"></i>
@@ -347,16 +387,31 @@
           <span data-lang="es">Stack Tecnológico</span>
           <span data-lang="en">Tech Stack</span>
         </h2>
-        <div class="cert-grid">
-          <img src="https://cdn-icons-png.flaticon.com/512/226/226448.png" title="Sistemas" class="tech-img">
-          <img src="https://cdn-icons-png.flaticon.com/512/6124/6124991.png" title="Linux" class="tech-img">
-          <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" title="Docker" class="tech-img">
-          <img src="https://cdn-icons-png.flaticon.com/128/5968/5968282.png" title="Python" class="tech-img">
-          <img src="https://cdn-icons-png.flaticon.com/128/4248/4248443.png" title="Database" class="tech-img">
+        
+        <div class="stack-grid">
+          <div class="stack-item">
+            <i class="ri-windows-fill"></i>
+            <span>Windows</span>
+          </div>
+          <div class="stack-item">
+            <i class="ri-terminal-window-fill"></i>
+            <span>Linux</span>
+          </div>
+          <div class="stack-item">
+            <i class="ri-database-2-fill"></i>
+            <span>SQL</span>
+          </div>
+          <div class="stack-item">
+            <i class="ri-code-s-slash-line"></i>
+            <span>Python</span>
+          </div>
+          <div class="stack-item">
+            <i class="ri-cloud-fill"></i>
+            <span>AWS Cloud</span>
+          </div>
         </div>
       </section>
 
-      <!-- 6. CERTIFICACIONES -->
       <section class="glass-card">
         <h2>
           <i class="ri-award-fill"></i> 
@@ -364,15 +419,27 @@
           <span data-lang="es">Certificaciones</span>
           <span data-lang="en">Certifications</span>
         </h2>
-        <div class="cert-grid">
-          <a href="https://www.credly.com/badges/ea94ab6d-841e-48dd-8ad8-427c157fb4d7" target="_blank">
-            <img src="https://images.credly.com/images/70e1e3b6-4f05-41ca-a8d0-3dbcd1d5c426/AWS-Cloud-Practitioner.png" class="tech-img" style="height:80px; width:auto">
+        <div class="cert-container">
+          
+          <a href="https://www.credly.com" target="_blank" class="cert-card">
+            <div class="cert-icon"><i class="ri-cloud-line"></i></div>
+            <div class="cert-info">
+              <h4>AWS Academy Cloud Foundations</h4>
+              <p>Amazon Web Services</p>
+            </div>
           </a>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Ccna-logo.png" class="tech-img" style="height:80px; width:auto">
+
+          <a href="#" class="cert-card" style="cursor: default;">
+            <div class="cert-icon"><i class="ri-router-fill"></i></div>
+            <div class="cert-info">
+              <h4>CCNA Routing & Switching</h4>
+              <p>Cisco (Intro & Advanced)</p>
+            </div>
+          </a>
+
         </div>
       </section>
 
-      <!-- 7. SOFT SKILLS (Nuevo) -->
       <section class="glass-card">
         <h2>
           <i class="ri-team-fill"></i>
@@ -391,7 +458,6 @@
         </ul>
       </section>
 
-      <!-- 8. EXPERIENCIA (Timeline) -->
       <section class="glass-card">
         <h2>
           <i class="ri-briefcase-4-line"></i>
@@ -416,9 +482,9 @@
             <h3 data-lang="ca">Help Desk · Escola Brianxa / Ignasi Iglesias</h3>
             <h3 data-lang="es">Help Desk · Escuela Brianxa / Ignasi Iglesias</h3>
             <h3 data-lang="en">Help Desk · Brianxa / Ignasi Iglesias School</h3>
-            <ul data-lang="ca"><li>300 hores de pràctiques com a tècnic.</li><li>Resolució d'incidències informàtiques i manteniment de xarxes.</li></ul>
-            <ul data-lang="es"><li>300 horas de prácticas como técnico.</li><li>Resolución de incidencias informáticas y mantenimiento de redes.</li></ul>
-            <ul data-lang="en"><li>300-hour internship as technician.</li><li>IT troubleshooting and network maintenance.</li></ul>
+            <ul data-lang="ca"><li>300 hores de pràctiques com a tècnic help desk.</li><li>Resolució d'incidències informàtiques i manteniment de xarxes.</li><li>Suport a usuaris en entorn educatiu.</li></ul>
+            <ul data-lang="es"><li>300 horas de prácticas como técnico help desk.</li><li>Resolución de incidencias informáticas y mantenimiento de redes.</li><li>Soporte a usuarios en entorno educativo.</li></ul>
+            <ul data-lang="en"><li>300-hour internship as help desk technician.</li><li>IT troubleshooting and network maintenance.</li><li>User support in an educational environment.</li></ul>
           </div>
 
           <div class="timeline-item">
@@ -426,14 +492,13 @@
             <h3 data-lang="ca">Erasmus Internship · IT Technologies (Leipzig)</h3>
             <h3 data-lang="es">Beca Erasmus · IT Technologies (Leipzig)</h3>
             <h3 data-lang="en">Erasmus Internship · IT Technologies (Leipzig)</h3>
-            <ul data-lang="ca"><li>Aprenentatge en seguretat, xarxes i sistemes.</li><li>Treball en entorn multicultural.</li></ul>
-            <ul data-lang="es"><li>Aprendizaje en seguridad, redes y sistemas.</li><li>Trabajo en entorno multicultural.</li></ul>
-            <ul data-lang="en"><li>Learning in security, networks, and systems.</li><li>Work in a multicultural environment.</li></ul>
+            <ul data-lang="ca"><li>Aprenentatge pràctic en seguretat, xarxes i sistemes.</li><li>Domòtica i aplicacions.</li><li>Treball en entorn multicultural (Alemanya).</li></ul>
+            <ul data-lang="es"><li>Aprendizaje práctico en seguridad, redes y sistemas.</li><li>Domótica y aplicaciones.</li><li>Trabajo en entorno multicultural (Alemania).</li></ul>
+            <ul data-lang="en"><li>Practical learning in security, networks, and systems.</li><li>Home automation and applications.</li><li>Work in a multicultural environment (Germany).</li></ul>
           </div>
         </div>
       </section>
 
-      <!-- 9. EDUCACIÓN -->
       <section class="glass-card">
         <h2>
           <i class="ri-graduation-cap-line"></i>
@@ -451,7 +516,6 @@
         </div>
       </section>
 
-      <!-- 10. CONTACTO (EmailJS) -->
       <section class="glass-card">
         <h2>
           <i class="ri-mail-send-line"></i>
@@ -476,7 +540,7 @@
   </div>
 
   <script>
-    // 1. INICIALIZAR EMAILJS (Con tu Public Key)
+    // 1. INICIALIZAR EMAILJS (No tocat, com vas demanar)
     (function() {
       emailjs.init("Tt7oPKLqddqL07tj2");
     })();
@@ -495,7 +559,6 @@
         message: document.getElementById("message").value
       };
 
-      // Usando tus IDs de servicio y template
       emailjs.send("service_k8uipjc", "template_g1gec17", params)
         .then(() => {
           document.getElementById("formStatus").innerText = "✅ Missatge enviat correctament!";
