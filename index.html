@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Youssef Fouad — CV Profesional</title>
+  <title>Youssef Fouad — Portfoli IT</title>
   <meta name="description" content="Portfolio & CV - Youssef Fouad. SysAdmin & Network Technician." />
   
   <!-- Iconos y Fuentes Premium -->
@@ -53,7 +53,7 @@
       width: 100%; max-width: 1200px;
       margin: 40px 20px;
       display: grid;
-      grid-template-columns: 350px 1fr; /* Sidebar fijo + Contenido */
+      grid-template-columns: 350px 1fr;
       gap: 30px;
       align-items: start;
     }
@@ -87,7 +87,6 @@
     }
     .photo-wrapper:hover img { transform: scale(1.05); border-color: var(--primary); }
 
-    /* Status Dot */
     .status {
       position: absolute; bottom: 10px; right: 10px;
       width: 18px; height: 18px; background: #22c55e;
@@ -129,7 +128,6 @@
       display: flex; flex-direction: column; gap: 30px;
     }
 
-    /* LANGUAGE SWITCHER (Floating Top Right) */
     .lang-container {
       display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px;
     }
@@ -141,7 +139,6 @@
     }
     .lang-btn.active, .lang-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
-    /* SECTIONS */
     .glass-card {
       background: var(--bg-card);
       backdrop-filter: var(--glass);
@@ -150,7 +147,7 @@
       border-radius: 24px;
       padding: 40px;
       box-shadow: var(--shadow);
-      opacity: 0; transform: translateY(30px); /* Hidden for animation */
+      opacity: 0; transform: translateY(30px);
       transition: 0.6s var(--transition);
     }
     .glass-card.visible { opacity: 1; transform: translateY(0); }
@@ -158,19 +155,26 @@
     h2 { font-size: 1.5rem; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; color: var(--text-main); }
     h2 i { color: var(--accent); }
 
-    /* SKILLS GRID */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+    
+    /* LINK CORREGIDO EN SKILLS */
+    .skill-link { text-decoration: none; display: block; height: 100%; }
+    
     .skill-box {
       background: rgba(255,255,255,0.03); border: 1px solid var(--border);
       padding: 15px; border-radius: 16px; text-align: center;
-      transition: 0.3s;
+      transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
     .skill-box:hover { background: rgba(59, 130, 246, 0.1); border-color: var(--primary); transform: translateY(-5px); }
     .skill-box i { font-size: 2rem; color: var(--text-muted); margin-bottom: 10px; display: block; }
     .skill-box:hover i { color: var(--primary); }
-    .skill-name { font-weight: 600; font-size: 0.9rem; }
+    .skill-name { font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
 
-    /* TIMELINE (Experience) */
+    /* Estilo especial para AWS */
+    .skill-box.aws-box { border-color: rgba(245, 158, 11, 0.3); }
+    .skill-box.aws-box i { color: #f59e0b; }
+    .skill-box.aws-box:hover { background: rgba(245, 158, 11, 0.1); border-color: #f59e0b; box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
+
     .timeline { position: relative; padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.1); }
     .timeline-item { position: relative; margin-bottom: 40px; padding-left: 25px; }
     .timeline-item::before {
@@ -195,45 +199,17 @@
       content: '▹'; position: absolute; left: 0; color: var(--accent);
     }
 
-    /* FOOTER */
     footer { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 20px; padding-bottom: 40px; }
 
-    /* UTILITIES */
     [data-lang] { display: none; }
     .show-block { display: block; animation: fadeIn 0.5s; }
     .show-inline { display: inline; animation: fadeIn 0.5s; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       .container { grid-template-columns: 1fr; margin: 20px; }
-      .sidebar { position: relative; top: 0; text-align: center; }
-      .contact-info { max-width: 400px; margin: 30px auto 0; }
-    }
-
-    /* PRINT STYLES (For HR) */
-    @media print {
-      body { background: white; color: black; display: block; }
-      .bg-animation, .lang-container, .btn-download { display: none; }
-      .container { grid-template-columns: 1fr; margin: 0; max-width: 100%; display: block; }
-      .sidebar { 
-        position: relative; box-shadow: none; border: none; background: none; 
-        padding: 0; margin-bottom: 30px; border-bottom: 2px solid #ccc; 
-        text-align: left; display: flex; align-items: center; gap: 30px;
-      }
-      .photo-wrapper { margin: 0; width: 100px; height: 100px; }
-      .contact-info { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; }
-      .contact-row { background: none; padding: 0; color: black; margin: 0; }
-      .glass-card { 
-        box-shadow: none; border: none; padding: 0; margin-bottom: 30px; 
-        opacity: 1; transform: none; color: black;
-      }
-      .skill-box { border: 1px solid #ccc; color: black; }
-      .skill-box i { color: black; }
-      .timeline-date { background: #eee; color: #000; border: 1px solid #ccc; }
-      h2, h3 { color: #000; }
-      * { -webkit-print-color-adjust: exact; }
+      .sidebar { position: relative; top: 0; }
     }
   </style>
 </head>
@@ -243,17 +219,17 @@
 
   <div class="container">
     
-    <!-- === LEFT: PROFILE SIDEBAR === -->
+    <!-- === LEFT: SIDEBAR === -->
     <aside class="sidebar">
       <div class="photo-wrapper">
         <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/yfm.jpg" alt="Youssef Fouad">
-        <div class="status" title="Available to work"></div>
+        <div class="status" title="Disponible / Available"></div>
       </div>
       
       <div class="name">Youssef Fouad</div>
-      <div class="role" data-lang="ca">SysAdmin & Xarxes</div>
-      <div class="role" data-lang="es">SysAdmin & Redes</div>
-      <div class="role" data-lang="en">SysAdmin & Networks</div>
+      <div class="role" data-lang="ca">Tecnologies de la Informació</div>
+      <div class="role" data-lang="es">Tecnologías de la Información</div>
+      <div class="role" data-lang="en">Information Technology</div>
 
       <div class="contact-info">
         <a href="mailto:fouadyoussef0125@gmail.com" class="contact-row">
@@ -266,173 +242,189 @@
         </a>
         <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" class="contact-row">
           <i class="ri-linkedin-box-fill"></i> 
-          <span>LinkedIn Profile</span>
+          <span>LinkedIn</span>
         </a>
         <div class="contact-row" style="cursor:default">
           <i class="ri-map-pin-2-fill"></i> 
-          <span>Barcelona, Spain</span>
+          <span>Tordera, Barcelona</span>
         </div>
       </div>
 
-      <a href="https://github.com/yousseffouad12/youssef_cv/blob/b7311f013b583c7f8110653a78bcc01f5bedd118/CV_YouussefFouadMabrouki.pdf" target="_blank" class="btn-download">
-        <i class="ri-file-download-line"></i>
+      <!-- BOTÓN DESCARGA ARREGLADO (Usa raw.githubusercontent) -->
+      <a href="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/b7311f013b583c7f8110653a78bcc01f5bedd118/CV_YouussefFouadMabrouki.pdf" target="_blank" class="btn-download">
+        <i class="ri-file-pdf-fill"></i>
         <span data-lang="ca">Descarregar CV</span>
         <span data-lang="es">Descargar CV</span>
-        <span data-lang="en">Download Resume</span>
+        <span data-lang="en">Download CV</span>
       </a>
     </aside>
 
-    <!-- === RIGHT: CONTENT === -->
+    <!-- === RIGHT: MAIN CONTENT === -->
     <main class="main-content">
       
-      <!-- Language Switcher -->
       <div class="lang-container">
         <button class="lang-btn active" onclick="setLang('ca')">CA</button>
         <button class="lang-btn" onclick="setLang('es')">ES</button>
         <button class="lang-btn" onclick="setLang('en')">EN</button>
       </div>
 
-      <!-- 1. ABOUT ME -->
+      <!-- 1. SOBRE MI -->
       <section class="glass-card">
         <h2>
           <i class="ri-user-smile-line"></i> 
-          <span data-lang="ca">Perfil Professional</span>
-          <span data-lang="es">Perfil Profesional</span>
-          <span data-lang="en">Professional Profile</span>
+          <span data-lang="ca">Sobre Mi</span>
+          <span data-lang="es">Sobre Mí</span>
+          <span data-lang="en">About Me</span>
         </h2>
-        <p data-lang="ca">Sóc un Tècnic en sistemes microinformàtics i xarxes apassionat per la infraestructura IT i el Cloud. Tinc una base sòlida en administració de servidors (Linux/Windows), xarxes Cisco (CCNA) i resolució d'incidències crítiques. El meu objectiu és créixer en entorns DevOps i Cloud (AWS).</p>
-        <p data-lang="es">Soy Técnico en sistemas microinformáticos y redes apasionado por la infraestructura TI y el Cloud. Tengo una base sólida en administración de servidores (Linux/Windows), redes Cisco (CCNA) y resolución de incidencias críticas. Mi objetivo es crecer en entornos DevOps y Cloud (AWS).</p>
-        <p data-lang="en">I am a Systems & Network Technician passionate about IT infrastructure and Cloud Computing. I have a solid foundation in server administration (Linux/Windows), Cisco networking (CCNA), and critical troubleshooting. My goal is to grow within DevOps and Cloud (AWS) environments.</p>
+        <p data-lang="ca">Tècnic en sistemes microinformàtics i xarxes en formació, amb experiència en suport tècnic i manteniment d'equips i xarxes. Em considero una persona responsable, amb alta capacitat d'aprenentatge i fàcil adaptació a diferents entorns laborals.</p>
+        <p data-lang="es">Técnico en sistemas microinformáticos y redes en formación, con experiencia en soporte técnico y mantenimiento de equipos y redes. Me considero una persona responsable, con alta capacidad de aprendizaje y fácil adaptación a diferentes entornos laborales.</p>
+        <p data-lang="en">Microcomputer systems and network technician in training, with experience in technical support and maintenance of equipment and networks. I am a responsible person with a high capacity for learning and easy adaptation to different work environments.</p>
       </section>
 
-      <!-- 2. SKILLS -->
+      <!-- 2. COMPETÈNCIES TÈCNIQUES -->
       <section class="glass-card">
         <h2>
           <i class="ri-code-box-line"></i> 
-          <span data-lang="ca">Stack Tecnològic</span>
-          <span data-lang="es">Stack Tecnológico</span>
-          <span data-lang="en">Tech Stack</span>
+          <span data-lang="ca">Competències Tècniques</span>
+          <span data-lang="es">Competencias Técnicas</span>
+          <span data-lang="en">Technical Skills</span>
         </h2>
         <div class="skills-grid">
+          
+          <!-- AWS ARREGLADO (Clicable) -->
+          <a href="https://www.credly.com/badges/ea94ab6d-841e-48dd-8ad8-427c157fb4d7" target="_blank" class="skill-link">
+            <div class="skill-box aws-box">
+              <i class="ri-cloud-line"></i>
+              <span class="skill-name">AWS Academy Cloud</span>
+            </div>
+          </a>
+
           <div class="skill-box">
-            <i class="ri-server-line"></i>
-            <span class="skill-name">Linux / Windows</span>
+            <i class="ri-windows-fill"></i>
+            <span class="skill-name">Windows Server / AD</span>
           </div>
           <div class="skill-box">
             <i class="ri-router-line"></i>
-            <span class="skill-name">Cisco / CCNA</span>
-          </div>
-          <div class="skill-box" style="border-color: #f59e0b">
-            <i class="ri-cloud-line" style="color: #f59e0b"></i>
-            <span class="skill-name">AWS Certified</span>
+            <span class="skill-name">CCNA Routing</span>
           </div>
           <div class="skill-box">
             <i class="ri-database-2-line"></i>
-            <span class="skill-name">PostgreSQL</span>
+            <span class="skill-name">Python / SQL</span>
           </div>
           <div class="skill-box">
-            <i class="ri-terminal-window-line"></i>
-            <span class="skill-name">Python / Bash</span>
+            <i class="ri-customer-service-2-line"></i>
+            <span class="skill-name">Suport Tècnic</span>
           </div>
           <div class="skill-box">
-            <i class="ri-shield-check-line"></i>
-            <span class="skill-name">Cybersecurity</span>
+            <i class="ri-shield-keyhole-line"></i>
+            <span class="skill-name">Ciberseguretat</span>
           </div>
         </div>
       </section>
 
-      <!-- 3. EXPERIENCE -->
+      <!-- 3. EXPERIENCIA -->
       <section class="glass-card">
         <h2>
           <i class="ri-briefcase-4-line"></i>
-          <span data-lang="ca">Experiència Laboral</span>
-          <span data-lang="es">Experiencia Laboral</span>
-          <span data-lang="en">Work Experience</span>
+          <span data-lang="ca">Experiència Professional</span>
+          <span data-lang="es">Experiencia Profesional</span>
+          <span data-lang="en">Professional Experience</span>
         </h2>
         
         <div class="timeline">
           
           <div class="timeline-item">
-            <span class="timeline-date">2025 - Present</span>
-            <h3 data-lang="ca">Operativa & Atenció al Client</h3>
-            <h3 data-lang="es">Operativa & Atención al Cliente</h3>
-            <h3 data-lang="en">Operations & Customer Service</h3>
+            <span class="timeline-date">Agost 2025 - Actualitat</span>
+            <h3 data-lang="ca">Caixer</h3>
+            <h3 data-lang="es">Cajero</h3>
+            <h3 data-lang="en">Cashier</h3>
             <span class="role-company">Grup Carrefour — Santa Susana</span>
             <ul data-lang="ca">
-              <li>Gestió eficaç de situacions d'estrès i coordinació d'equip.</li>
-              <li>Resolució de conflictes i atenció al client (Soft Skills).</li>
+              <li>Atenció al client i gestió de cobraments i pagaments.</li>
+              <li>Reposició i organització de productes.</li>
             </ul>
             <ul data-lang="es">
-              <li>Gestión eficaz de situaciones de estrés y coordinación de equipo.</li>
-              <li>Resolución de conflictos y atención al cliente (Soft Skills).</li>
+              <li>Atención al cliente y gestión de cobros y pagos.</li>
+              <li>Reposición y organización de productos.</li>
             </ul>
             <ul data-lang="en">
-              <li>Effective stress management and team coordination.</li>
-              <li>Conflict resolution and customer service excellence.</li>
+              <li>Customer service and payment management.</li>
+              <li>Product restocking and organization.</li>
             </ul>
           </div>
 
           <div class="timeline-item">
-            <span class="timeline-date">Jan 2024 - Apr 2024</span>
-            <h3 data-lang="ca">Tècnic IT / Help Desk</h3>
-            <h3 data-lang="es">Técnico IT / Help Desk</h3>
-            <h3 data-lang="en">IT Technician / Help Desk</h3>
-            <span class="role-company">Escola Brianxa / Ignasi Iglesias</span>
+            <span class="timeline-date">Gener 2024 - Abril 2024</span>
+            <h3 data-lang="ca">Help Desk</h3>
+            <h3 data-lang="es">Help Desk</h3>
+            <h3 data-lang="en">Help Desk</h3>
+            <span class="role-company">Escola Brianxa / Escola Ignasi Iglesias — Tordera</span>
             <ul data-lang="ca">
-              <li>Manteniment de parc informàtic (+100 equips) i xarxes.</li>
-              <li>Administració d'usuaris, Active Directory i suport a docents.</li>
+              <li>300 hores de pràctiques com a tècnic de help desk.</li>
+              <li>Suport tècnic a usuaris, resolució d'incidències informàtiques.</li>
+              <li>Manteniment i supervisió d'equips i xarxes.</li>
             </ul>
             <ul data-lang="es">
-              <li>Mantenimiento de parque informático (+100 equipos) y redes.</li>
-              <li>Administración de usuarios, Active Directory y soporte a docentes.</li>
+              <li>300 horas de prácticas como técnico de help desk.</li>
+              <li>Soporte técnico a usuarios, resolución de incidencias informáticas.</li>
+              <li>Mantenimiento y supervisión de equipos y redes.</li>
             </ul>
             <ul data-lang="en">
-              <li>Maintenance of IT assets (+100 devices) and networks.</li>
-              <li>User administration, Active Directory, and staff support.</li>
+              <li>300 hours internship as Help Desk technician.</li>
+              <li>User technical support and troubleshooting.</li>
+              <li>Maintenance and supervision of equipment and networks.</li>
             </ul>
           </div>
 
           <div class="timeline-item">
-            <span class="timeline-date">Jul 2023 - Aug 2023</span>
-            <h3 data-lang="ca">Erasmus Internship (Sistemes)</h3>
-            <h3 data-lang="es">Erasmus Internship (Sistemas)</h3>
-            <h3 data-lang="en">Erasmus Internship (Systems)</h3>
-            <span class="role-company">IT Technologies — Leipzig, Germany</span>
+            <span class="timeline-date">Juliol 2023 - Agost 2023</span>
+            <h3 data-lang="ca">Erasmus Internship</h3>
+            <h3 data-lang="es">Beca Erasmus</h3>
+            <h3 data-lang="en">Erasmus Internship</h3>
+            <span class="role-company">IT Technologies — Leipzig, Alemanya</span>
             <ul data-lang="ca">
-              <li>Desplegament d'infraestructura de xarxa i punts d'accés.</li>
-              <li>Configuració de sistemes IoT i treball en equip internacional.</li>
+              <li>Participació en programa de capacitació en tecnologies de la informació.</li>
+              <li>Aprenentatge pràctic en seguretat, xarxes, sistemes i domòtica.</li>
+              <li>Treball en equip multicultural i competències en anglès.</li>
             </ul>
             <ul data-lang="es">
-              <li>Despliegue de infraestructura de red y puntos de acceso.</li>
-              <li>Configuración de sistemas IoT y trabajo en equipo internacional.</li>
+              <li>Participación en programa de capacitación en tecnologías de la información.</li>
+              <li>Aprendizaje práctico en seguridad, redes, sistemas y domótica.</li>
+              <li>Trabajo en equipo multicultural y competencias en inglés.</li>
             </ul>
             <ul data-lang="en">
-              <li>Deployment of network infrastructure and Access Points.</li>
-              <li>IoT systems configuration and international teamwork.</li>
+              <li>Participation in IT training program.</li>
+              <li>Practical learning in security, networks, systems, and home automation.</li>
+              <li>Multicultural teamwork and English skills.</li>
             </ul>
           </div>
 
         </div>
       </section>
 
-      <!-- 4. EDUCATION -->
+      <!-- 4. EDUCACIÓN -->
       <section class="glass-card">
         <h2>
           <i class="ri-graduation-cap-line"></i>
-          <span data-lang="ca">Formació</span>
-          <span data-lang="es">Formación</span>
+          <span data-lang="ca">Educació</span>
+          <span data-lang="es">Educación</span>
           <span data-lang="en">Education</span>
         </h2>
         
-        <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          
           <div style="padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05)">
-            <strong style="color:var(--accent); font-size: 1.1rem;">CFGS Administració de Sistemes Informàtics en Xarxa</strong>
-            <div style="color:var(--text-muted)">Institut Sa Palomera (2024 – 2026)</div>
+            <strong style="color:var(--accent); font-size: 1.1rem; display:block">CFGS Administració de Sistemes Informàtics en Xarxa</strong>
+            <span style="color:var(--text-main); font-weight:600">Institut Sa Palomera</span>
+            <div style="color:var(--text-muted)">Setembre 2024 – Maig 2026 (En curs)</div>
           </div>
+
           <div>
-            <strong style="color:var(--text-main); font-size: 1.1rem;">CFGM Sistemes Microinformàtics i Xarxes</strong>
-            <div style="color:var(--text-muted)">Institut Lluís Companys (2022 – 2024)</div>
+            <strong style="color:var(--text-main); font-size: 1.1rem; display:block">CFGM Sistemes Microinformàtics i Xarxes</strong>
+            <span style="color:var(--text-main); font-weight:600">Institut Lluís Companys</span>
+            <div style="color:var(--text-muted)">Setembre 2022 – Juny 2024</div>
           </div>
+
         </div>
       </section>
 
@@ -444,17 +436,15 @@
   </div>
 
   <script>
-    // --- IDIOMA ---
-    const defaultLang = 'ca';
+    // Configuración Idioma
+    const defaultLang = 'ca'; // Catalán por defecto (coincide con el PDF)
 
     function setLang(lang) {
-      // Update buttons
       document.querySelectorAll('.lang-btn').forEach(b => {
         b.classList.remove('active');
         if(b.innerText.toLowerCase() === lang) b.classList.add('active');
       });
 
-      // Update text
       document.querySelectorAll('[data-lang]').forEach(el => {
         el.classList.remove('show-block', 'show-inline');
         el.style.display = 'none';
@@ -471,15 +461,15 @@
       });
     }
 
-    // --- ANIMACIÓN SCROLL (Intersection Observer) ---
+    // Animación Scroll
     document.addEventListener('DOMContentLoaded', () => {
       setLang(defaultLang);
-
+      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            observer.unobserve(entry.target); // Solo animar una vez
+            observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.1 });
