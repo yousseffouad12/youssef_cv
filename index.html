@@ -6,22 +6,24 @@
   <title>Youssef Fouad — Portfoli IT</title>
   <meta name="description" content="Portfolio & CV - Youssef Fouad. SysAdmin & Network Technician." />
   
-  <!-- Iconos y Fuentes Premium -->
+  <!-- Iconos, Fuentes y EmailJS -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <style>
-    /* ================= SETUP & VARIABLES ================= */
+    /* ================= VARIABLES & THEME ================= */
     :root {
       --bg-dark: #0f172a;
-      --bg-card: rgba(30, 41, 59, 0.7); /* Cristal oscuro */
-      --primary: #3b82f6; /* Azul eléctrico */
-      --accent: #06b6d4;  /* Cyan */
+      --bg-card: rgba(30, 41, 59, 0.65); /* Cristal Oscuro */
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent: #06b6d4;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --border: rgba(255, 255, 255, 0.08);
-      --glass: blur(12px);
+      --glass: blur(14px);
       --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
@@ -39,11 +41,11 @@
       line-height: 1.6;
     }
 
-    /* FONDO ANIMADO (Aurora Effect) */
+    /* FONDO ANIMADO */
     .bg-animation {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-      background: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
-                  radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
+      background: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.12), transparent 25%),
+                  radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.12), transparent 25%);
       animation: pulseBg 10s infinite alternate;
     }
     @keyframes pulseBg { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
@@ -53,12 +55,12 @@
       width: 100%; max-width: 1200px;
       margin: 40px 20px;
       display: grid;
-      grid-template-columns: 350px 1fr;
+      grid-template-columns: 340px 1fr;
       gap: 30px;
       align-items: start;
     }
 
-    /* ================= SIDEBAR (Sticky Glass) ================= */
+    /* ================= SIDEBAR ================= */
     .sidebar {
       background: var(--bg-card);
       backdrop-filter: var(--glass);
@@ -70,113 +72,111 @@
       top: 40px;
       text-align: center;
       box-shadow: var(--shadow);
-      animation: slideInLeft 0.8s var(--transition);
       z-index: 10;
     }
 
     .photo-wrapper {
-      width: 160px; height: 160px; margin: 0 auto 20px;
+      width: 150px; height: 150px; margin: 0 auto 20px;
       position: relative;
     }
     .photo-wrapper img {
       width: 100%; height: 100%; object-fit: cover;
       border-radius: 50%;
       border: 3px solid rgba(255,255,255,0.1);
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-      transition: transform 0.3s;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
     }
-    .photo-wrapper:hover img { transform: scale(1.05); border-color: var(--primary); }
-
     .status {
-      position: absolute; bottom: 10px; right: 10px;
+      position: absolute; bottom: 8px; right: 8px;
       width: 18px; height: 18px; background: #22c55e;
       border: 3px solid var(--bg-dark); border-radius: 50%;
       box-shadow: 0 0 10px #22c55e;
     }
 
-    .name { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; }
+    .name { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; }
     .role { 
       background: linear-gradient(90deg, var(--primary), var(--accent));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;
+      font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;
     }
 
-    .contact-info { margin-top: 30px; text-align: left; }
+    .contact-info { margin-top: 30px; text-align: left; display: flex; flex-direction: column; gap: 10px; }
     .contact-row {
       display: flex; align-items: center; gap: 12px;
-      padding: 12px; margin-bottom: 8px;
-      background: rgba(255,255,255,0.03);
-      border-radius: 12px;
-      transition: 0.3s;
-      color: var(--text-muted); text-decoration: none; font-size: 0.9rem;
+      padding: 10px; background: rgba(255,255,255,0.03);
+      border-radius: 12px; color: var(--text-muted); text-decoration: none;
+      font-size: 0.85rem; transition: 0.3s;
     }
     .contact-row:hover { background: rgba(255,255,255,0.08); color: var(--text-main); transform: translateX(5px); }
     .contact-row i { color: var(--primary); font-size: 1.1rem; }
 
     .btn-download {
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      margin-top: 30px; width: 100%;
+      margin-top: 25px; width: 100%;
       background: var(--text-main); color: var(--bg-dark);
-      padding: 14px; border-radius: 12px;
+      padding: 12px; border-radius: 12px;
       font-weight: 700; text-decoration: none;
       transition: 0.3s; border: none; cursor: pointer;
     }
     .btn-download:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,255,255,0.15); }
 
     /* ================= MAIN CONTENT ================= */
-    .main-content {
-      display: flex; flex-direction: column; gap: 30px;
-    }
+    .main-content { display: flex; flex-direction: column; gap: 30px; }
 
-    .lang-container {
-      display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px;
-    }
+    /* Idioma */
+    .lang-container { display: flex; justify-content: flex-end; gap: 10px; }
     .lang-btn {
       background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      color: var(--text-muted); padding: 8px 16px; border-radius: 20px;
-      cursor: pointer; font-weight: 600; font-size: 0.85rem;
-      transition: 0.3s;
+      color: var(--text-muted); padding: 6px 14px; border-radius: 20px;
+      cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: 0.3s;
     }
     .lang-btn.active, .lang-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
+    /* Tarjetas Glass */
     .glass-card {
       background: var(--bg-card);
       backdrop-filter: var(--glass);
       -webkit-backdrop-filter: var(--glass);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 40px;
+      padding: 35px;
       box-shadow: var(--shadow);
-      opacity: 0; transform: translateY(30px);
+      opacity: 0; transform: translateY(20px);
       transition: 0.6s var(--transition);
     }
     .glass-card.visible { opacity: 1; transform: translateY(0); }
 
-    h2 { font-size: 1.5rem; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; color: var(--text-main); }
+    h2 { font-size: 1.4rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; color: var(--text-main); }
     h2 i { color: var(--accent); }
 
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
-    
-    /* LINK CORREGIDO EN SKILLS */
-    .skill-link { text-decoration: none; display: block; height: 100%; }
-    
+    /* Skills Grid */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
     .skill-box {
       background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-      padding: 15px; border-radius: 16px; text-align: center;
-      transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 12px; border-radius: 12px; text-align: center;
+      font-size: 0.9rem; font-weight: 500; transition: 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .skill-box:hover { background: rgba(59, 130, 246, 0.1); border-color: var(--primary); transform: translateY(-5px); }
-    .skill-box i { font-size: 2rem; color: var(--text-muted); margin-bottom: 10px; display: block; }
-    .skill-box:hover i { color: var(--primary); }
-    .skill-name { font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
+    .skill-box:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); transform: translateY(-3px); }
+    
+    /* Listas Soft Skills */
+    .soft-list { list-style: none; display: flex; flex-wrap: wrap; gap: 15px; }
+    .soft-list li {
+      background: rgba(6, 182, 212, 0.1); color: var(--accent);
+      padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
 
-    /* Estilo especial para AWS */
-    .skill-box.aws-box { border-color: rgba(245, 158, 11, 0.3); }
-    .skill-box.aws-box i { color: #f59e0b; }
-    .skill-box.aws-box:hover { background: rgba(245, 158, 11, 0.1); border-color: #f59e0b; box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
+    /* Cert & Tech Images */
+    .cert-grid { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
+    .tech-img { 
+      height: 50px; padding: 8px; background: white; 
+      border-radius: 12px; transition: 0.3s; 
+    }
+    .tech-img:hover { transform: scale(1.1); }
 
+    /* Timeline */
     .timeline { position: relative; padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.1); }
-    .timeline-item { position: relative; margin-bottom: 40px; padding-left: 25px; }
+    .timeline-item { position: relative; margin-bottom: 35px; padding-left: 25px; }
     .timeline-item::before {
       content: ''; position: absolute; left: -29px; top: 0;
       width: 16px; height: 16px; background: var(--bg-dark);
@@ -184,28 +184,42 @@
       box-shadow: 0 0 10px var(--primary);
     }
     .timeline-date {
-      display: inline-block; padding: 4px 12px; border-radius: 20px;
-      background: rgba(6, 182, 212, 0.1); color: var(--accent);
-      font-size: 0.8rem; font-weight: 700; margin-bottom: 8px;
+      display: inline-block; padding: 4px 10px; border-radius: 6px;
+      background: rgba(255,255,255,0.05); color: var(--text-muted);
+      font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; border: 1px solid var(--border);
     }
-    .timeline h3 { margin: 0; font-size: 1.2rem; color: var(--text-main); }
-    .timeline .role-company { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; display: block; }
-    .timeline ul { list-style: none; padding: 0; }
-    .timeline li { 
-      position: relative; padding-left: 20px; margin-bottom: 8px; 
-      color: #cbd5e1; font-size: 0.95rem; 
-    }
-    .timeline li::before {
-      content: '▹'; position: absolute; left: 0; color: var(--accent);
-    }
+    .timeline h3 { margin: 0; font-size: 1.1rem; color: var(--text-main); }
+    .timeline ul { list-style: none; margin-top: 8px; }
+    .timeline li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; padding-left: 15px; position: relative; }
+    .timeline li::before { content: '•'; color: var(--accent); position: absolute; left: 0; font-weight: bold; }
 
-    footer { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 20px; padding-bottom: 40px; }
+    /* FORMULARIO CONTACTO */
+    form { display: flex; flex-direction: column; gap: 15px; }
+    input, textarea {
+      width: 100%; padding: 14px; border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text-main); font-family: 'Inter', sans-serif;
+      transition: 0.3s; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--primary); background: rgba(0,0,0,0.2); }
+    
+    .send-btn {
+      padding: 14px; background: var(--primary);
+      border: none; border-radius: 12px;
+      color: white; font-weight: 700; cursor: pointer;
+      transition: 0.3s; font-size: 1rem;
+    }
+    .send-btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+    
+    #formStatus { margin-top: 10px; font-weight: 600; text-align: center; }
 
+    /* Utilities */
     [data-lang] { display: none; }
     .show-block { display: block; animation: fadeIn 0.5s; }
     .show-inline { display: inline; animation: fadeIn 0.5s; }
+    .show-flex { display: flex; animation: fadeIn 0.5s; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
 
     @media (max-width: 900px) {
       .container { grid-template-columns: 1fr; margin: 20px; }
@@ -219,11 +233,11 @@
 
   <div class="container">
     
-    <!-- === LEFT: SIDEBAR === -->
+    <!-- === SIDEBAR === -->
     <aside class="sidebar">
       <div class="photo-wrapper">
-        <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/yfm.jpg" alt="Youssef Fouad">
-        <div class="status" title="Disponible / Available"></div>
+        <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/yfm.jpg" alt="Foto Youssef">
+        <div class="status"></div>
       </div>
       
       <div class="name">Youssef Fouad</div>
@@ -233,24 +247,19 @@
 
       <div class="contact-info">
         <a href="mailto:fouadyoussef0125@gmail.com" class="contact-row">
-          <i class="ri-mail-send-fill"></i> 
-          <span>fouadyoussef0125@gmail.com</span>
+          <i class="ri-mail-send-fill"></i> <span>fouadyoussef0125@gmail.com</span>
         </a>
         <a href="tel:+34641617018" class="contact-row">
-          <i class="ri-phone-fill"></i> 
-          <span>+34 641 61 70 18</span>
+          <i class="ri-phone-fill"></i> <span>+34 641 61 70 18</span>
         </a>
         <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" class="contact-row">
-          <i class="ri-linkedin-box-fill"></i> 
-          <span>LinkedIn</span>
+          <i class="ri-linkedin-box-fill"></i> <span>LinkedIn Profile</span>
         </a>
         <div class="contact-row" style="cursor:default">
-          <i class="ri-map-pin-2-fill"></i> 
-          <span>Tordera, Barcelona</span>
+          <i class="ri-map-pin-2-fill"></i> <span>Tordera, Barcelona</span>
         </div>
       </div>
 
-      <!-- BOTÓN DESCARGA ARREGLADO (Usa raw.githubusercontent) -->
       <a href="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/b7311f013b583c7f8110653a78bcc01f5bedd118/CV_YouussefFouadMabrouki.pdf" target="_blank" class="btn-download">
         <i class="ri-file-pdf-fill"></i>
         <span data-lang="ca">Descarregar CV</span>
@@ -259,7 +268,7 @@
       </a>
     </aside>
 
-    <!-- === RIGHT: MAIN CONTENT === -->
+    <!-- === MAIN CONTENT === -->
     <main class="main-content">
       
       <div class="lang-container">
@@ -276,12 +285,25 @@
           <span data-lang="es">Sobre Mí</span>
           <span data-lang="en">About Me</span>
         </h2>
-        <p data-lang="ca">Tècnic en sistemes microinformàtics i xarxes en formació, amb experiència en suport tècnic i manteniment d'equips i xarxes. Em considero una persona responsable, amb alta capacitat d'aprenentatge i fàcil adaptació a diferents entorns laborals.</p>
-        <p data-lang="es">Técnico en sistemas microinformáticos y redes en formación, con experiencia en soporte técnico y mantenimiento de equipos y redes. Me considero una persona responsable, con alta capacidad de aprendizaje y fácil adaptación a diferentes entornos laborales.</p>
-        <p data-lang="en">Microcomputer systems and network technician in training, with experience in technical support and maintenance of equipment and networks. I am a responsible person with a high capacity for learning and easy adaptation to different work environments.</p>
+        <p data-lang="ca">Tècnic en sistemes microinformàtics i xarxes en formació, amb experiència en suport tècnic, manteniment d'equips i gestió d'entorns informàtics. Persona responsable, adaptable i amb una motivació constant per aprendre i millorar.</p>
+        <p data-lang="es">Técnico en sistemas microinformáticos y redes en formación, con experiencia en soporte técnico, mantenimiento de equipos y gestión de entornos informáticos. Persona responsable, adaptable y con motivación constante por aprender y mejorar.</p>
+        <p data-lang="en">IT Systems and Network Technician in training, with experience in technical support, equipment maintenance, and IT environment management. Responsible, adaptable, and constantly motivated to learn and improve.</p>
       </section>
 
-      <!-- 2. COMPETÈNCIES TÈCNIQUES -->
+      <!-- 2. QUÉ PUEDO APORTAR (Nuevo) -->
+      <section class="glass-card">
+        <h2>
+          <i class="ri-lightbulb-flash-fill"></i>
+          <span data-lang="ca">Què puc aportar?</span>
+          <span data-lang="es">¿Qué puedo aportar?</span>
+          <span data-lang="en">What can I contribute?</span>
+        </h2>
+        <p data-lang="ca">Sóc una persona resolutiva i organitzada, amb capacitat per mantenir entorns estables i segurs, aportar millores, optimitzar processos i oferir suport tècnic de qualitat. Tinc iniciativa, responsabilitat i bona adaptació als canvis.</p>
+        <p data-lang="es">Soy una persona resolutiva y organizada, con capacidad para mantener entornos estables y seguros, aportar mejoras, optimizar procesos y ofrecer soporte técnico de calidad. Tengo iniciativa, responsabilidad y buena adaptación a los cambios.</p>
+        <p data-lang="en">I am a decisive and organized person, capable of maintaining stable and secure environments, contributing improvements, optimizing processes, and offering quality technical support. I have initiative, responsibility, and good adaptability to change.</p>
+      </section>
+
+      <!-- 3. HABILIDADES TÉCNICAS (Grid) -->
       <section class="glass-card">
         <h2>
           <i class="ri-code-box-line"></i> 
@@ -290,39 +312,86 @@
           <span data-lang="en">Technical Skills</span>
         </h2>
         <div class="skills-grid">
-          
-          <!-- AWS ARREGLADO (Clicable) -->
-          <a href="https://www.credly.com/badges/ea94ab6d-841e-48dd-8ad8-427c157fb4d7" target="_blank" class="skill-link">
-            <div class="skill-box aws-box">
-              <i class="ri-cloud-line"></i>
-              <span class="skill-name">AWS Academy Cloud</span>
-            </div>
-          </a>
-
-          <div class="skill-box">
-            <i class="ri-windows-fill"></i>
-            <span class="skill-name">Windows Server / AD</span>
-          </div>
-          <div class="skill-box">
-            <i class="ri-router-line"></i>
-            <span class="skill-name">CCNA Routing</span>
-          </div>
-          <div class="skill-box">
-            <i class="ri-database-2-line"></i>
-            <span class="skill-name">Python / SQL</span>
-          </div>
-          <div class="skill-box">
-            <i class="ri-customer-service-2-line"></i>
-            <span class="skill-name">Suport Tècnic</span>
-          </div>
-          <div class="skill-box">
-            <i class="ri-shield-keyhole-line"></i>
-            <span class="skill-name">Ciberseguretat</span>
-          </div>
+          <div class="skill-box"><i class="ri-windows-fill"></i> Windows Server / AD</div>
+          <div class="skill-box"><i class="ri-router-line"></i> CCNA / Cisco</div>
+          <div class="skill-box"><i class="ri-terminal-box-line"></i> Linux Admin</div>
+          <div class="skill-box"><i class="ri-database-2-line"></i> Python / SQL</div>
+          <div class="skill-box"><i class="ri-shield-check-line"></i> Ciberseguretat</div>
+          <div class="skill-box"><i class="ri-customer-service-2-fill"></i> Suport Tècnic</div>
         </div>
       </section>
 
-      <!-- 3. EXPERIENCIA -->
+      <!-- 4. HABILIDADES REDES (Nuevo Detallado) -->
+      <section class="glass-card">
+        <h2>
+          <i class="ri-global-line"></i> 
+          <span data-lang="ca">Habilitats en Xarxes</span>
+          <span data-lang="es">Habilidades en Redes</span>
+          <span data-lang="en">Networking Skills</span>
+        </h2>
+        <div class="skills-grid">
+          <div class="skill-box">VLANs / Subnetting</div>
+          <div class="skill-box">Routing Estàtic</div>
+          <div class="skill-box">NAT / DHCP / DNS</div>
+          <div class="skill-box">Cisco IOS Config</div>
+          <div class="skill-box">Firewall Bàsic</div>
+          <div class="skill-box">WiFi Enterprise</div>
+        </div>
+      </section>
+
+      <!-- 5. VISUAL STACK (Imagenes) -->
+      <section class="glass-card">
+        <h2>
+          <i class="ri-stack-line"></i>
+          <span data-lang="ca">Stack Tecnològic</span>
+          <span data-lang="es">Stack Tecnológico</span>
+          <span data-lang="en">Tech Stack</span>
+        </h2>
+        <div class="cert-grid">
+          <img src="https://cdn-icons-png.flaticon.com/512/226/226448.png" title="Sistemas" class="tech-img">
+          <img src="https://cdn-icons-png.flaticon.com/512/6124/6124991.png" title="Linux" class="tech-img">
+          <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" title="Docker" class="tech-img">
+          <img src="https://cdn-icons-png.flaticon.com/128/5968/5968282.png" title="Python" class="tech-img">
+          <img src="https://cdn-icons-png.flaticon.com/128/4248/4248443.png" title="Database" class="tech-img">
+        </div>
+      </section>
+
+      <!-- 6. CERTIFICACIONES -->
+      <section class="glass-card">
+        <h2>
+          <i class="ri-award-fill"></i> 
+          <span data-lang="ca">Certificacions</span>
+          <span data-lang="es">Certificaciones</span>
+          <span data-lang="en">Certifications</span>
+        </h2>
+        <div class="cert-grid">
+          <a href="https://www.credly.com/badges/ea94ab6d-841e-48dd-8ad8-427c157fb4d7" target="_blank">
+            <img src="https://images.credly.com/images/70e1e3b6-4f05-41ca-a8d0-3dbcd1d5c426/AWS-Cloud-Practitioner.png" class="tech-img" style="height:80px; width:auto">
+          </a>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Ccna-logo.png" class="tech-img" style="height:80px; width:auto">
+        </div>
+      </section>
+
+      <!-- 7. SOFT SKILLS (Nuevo) -->
+      <section class="glass-card">
+        <h2>
+          <i class="ri-team-fill"></i>
+          <span data-lang="ca">Soft Skills</span>
+          <span data-lang="es">Habilidades Blandas</span>
+          <span data-lang="en">Soft Skills</span>
+        </h2>
+        <ul class="soft-list" data-lang="ca">
+          <li>Treball en equip</li><li>Gestió del temps</li><li>Resolució de problemes</li><li>Adaptació ràpida</li><li>Comunicació efectiva</li>
+        </ul>
+        <ul class="soft-list" data-lang="es">
+          <li>Trabajo en equipo</li><li>Gestión del tiempo</li><li>Resolución de problemas</li><li>Adaptación rápida</li><li>Comunicación efectiva</li>
+        </ul>
+        <ul class="soft-list" data-lang="en">
+          <li>Teamwork</li><li>Time management</li><li>Problem solving</li><li>Quick adaptation</li><li>Effective communication</li>
+        </ul>
+      </section>
+
+      <!-- 8. EXPERIENCIA (Timeline) -->
       <section class="glass-card">
         <h2>
           <i class="ri-briefcase-4-line"></i>
@@ -332,77 +401,39 @@
         </h2>
         
         <div class="timeline">
-          
           <div class="timeline-item">
             <span class="timeline-date">Agost 2025 - Actualitat</span>
-            <h3 data-lang="ca">Caixer</h3>
-            <h3 data-lang="es">Cajero</h3>
-            <h3 data-lang="en">Cashier</h3>
-            <span class="role-company">Grup Carrefour — Santa Susana</span>
-            <ul data-lang="ca">
-              <li>Atenció al client i gestió de cobraments i pagaments.</li>
-              <li>Reposició i organització de productes.</li>
-            </ul>
-            <ul data-lang="es">
-              <li>Atención al cliente y gestión de cobros y pagos.</li>
-              <li>Reposición y organización de productos.</li>
-            </ul>
-            <ul data-lang="en">
-              <li>Customer service and payment management.</li>
-              <li>Product restocking and organization.</li>
-            </ul>
+            <h3 data-lang="ca">Caixer · Grup Carrefour (Santa Susanna)</h3>
+            <h3 data-lang="es">Cajero · Grupo Carrefour (Santa Susana)</h3>
+            <h3 data-lang="en">Cashier · Carrefour Group (Santa Susana)</h3>
+            <ul data-lang="ca"><li>Atenció al client i gestió de cobraments.</li><li>Reposició i organització de productes.</li></ul>
+            <ul data-lang="es"><li>Atención al cliente y gestión de cobros.</li><li>Reposición y organización de productos.</li></ul>
+            <ul data-lang="en"><li>Customer service and payment management.</li><li>Product restocking and organization.</li></ul>
           </div>
 
           <div class="timeline-item">
             <span class="timeline-date">Gener 2024 - Abril 2024</span>
-            <h3 data-lang="ca">Help Desk</h3>
-            <h3 data-lang="es">Help Desk</h3>
-            <h3 data-lang="en">Help Desk</h3>
-            <span class="role-company">Escola Brianxa / Escola Ignasi Iglesias — Tordera</span>
-            <ul data-lang="ca">
-              <li>300 hores de pràctiques com a tècnic de help desk.</li>
-              <li>Suport tècnic a usuaris, resolució d'incidències informàtiques.</li>
-              <li>Manteniment i supervisió d'equips i xarxes.</li>
-            </ul>
-            <ul data-lang="es">
-              <li>300 horas de prácticas como técnico de help desk.</li>
-              <li>Soporte técnico a usuarios, resolución de incidencias informáticas.</li>
-              <li>Mantenimiento y supervisión de equipos y redes.</li>
-            </ul>
-            <ul data-lang="en">
-              <li>300 hours internship as Help Desk technician.</li>
-              <li>User technical support and troubleshooting.</li>
-              <li>Maintenance and supervision of equipment and networks.</li>
-            </ul>
+            <h3 data-lang="ca">Help Desk · Escola Brianxa / Ignasi Iglesias</h3>
+            <h3 data-lang="es">Help Desk · Escuela Brianxa / Ignasi Iglesias</h3>
+            <h3 data-lang="en">Help Desk · Brianxa / Ignasi Iglesias School</h3>
+            <ul data-lang="ca"><li>300 hores de pràctiques com a tècnic.</li><li>Resolució d'incidències informàtiques i manteniment de xarxes.</li></ul>
+            <ul data-lang="es"><li>300 horas de prácticas como técnico.</li><li>Resolución de incidencias informáticas y mantenimiento de redes.</li></ul>
+            <ul data-lang="en"><li>300-hour internship as technician.</li><li>IT troubleshooting and network maintenance.</li></ul>
           </div>
 
           <div class="timeline-item">
             <span class="timeline-date">Juliol 2023 - Agost 2023</span>
-            <h3 data-lang="ca">Erasmus Internship</h3>
-            <h3 data-lang="es">Beca Erasmus</h3>
-            <h3 data-lang="en">Erasmus Internship</h3>
-            <span class="role-company">IT Technologies — Leipzig, Alemanya</span>
-            <ul data-lang="ca">
-              <li>Participació en programa de capacitació en tecnologies de la informació.</li>
-              <li>Aprenentatge pràctic en seguretat, xarxes, sistemes i domòtica.</li>
-              <li>Treball en equip multicultural i competències en anglès.</li>
-            </ul>
-            <ul data-lang="es">
-              <li>Participación en programa de capacitación en tecnologías de la información.</li>
-              <li>Aprendizaje práctico en seguridad, redes, sistemas y domótica.</li>
-              <li>Trabajo en equipo multicultural y competencias en inglés.</li>
-            </ul>
-            <ul data-lang="en">
-              <li>Participation in IT training program.</li>
-              <li>Practical learning in security, networks, systems, and home automation.</li>
-              <li>Multicultural teamwork and English skills.</li>
-            </ul>
+            <h3 data-lang="ca">Erasmus Internship · IT Technologies (Leipzig)</h3>
+            <h3 data-lang="es">Beca Erasmus · IT Technologies (Leipzig)</h3>
+            <h3 data-lang="en">Erasmus Internship · IT Technologies (Leipzig)</h3>
+            <ul data-lang="ca"><li>Aprenentatge en seguretat, xarxes i sistemes.</li><li>Treball en entorn multicultural.</li></ul>
+            <ul data-lang="es"><li>Aprendizaje en seguridad, redes y sistemas.</li><li>Trabajo en entorno multicultural.</li></ul>
+            <ul data-lang="en"><li>Learning in security, networks, and systems.</li><li>Work in a multicultural environment.</li></ul>
           </div>
-
         </div>
       </section>
 
-      <!-- 4. EDUCACIÓN -->
+      <!-- 9. EDUCACIÓN -->
       <section class="glass-card">
         <h2>
           <i class="ri-graduation-cap-line"></i>
@@ -410,34 +441,78 @@
           <span data-lang="es">Educación</span>
           <span data-lang="en">Education</span>
         </h2>
-        
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          
-          <div style="padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05)">
-            <strong style="color:var(--accent); font-size: 1.1rem; display:block">CFGS Administració de Sistemes Informàtics en Xarxa</strong>
-            <span style="color:var(--text-main); font-weight:600">Institut Sa Palomera</span>
-            <div style="color:var(--text-muted)">Setembre 2024 – Maig 2026 (En curs)</div>
-          </div>
-
-          <div>
-            <strong style="color:var(--text-main); font-size: 1.1rem; display:block">CFGM Sistemes Microinformàtics i Xarxes</strong>
-            <span style="color:var(--text-main); font-weight:600">Institut Lluís Companys</span>
-            <div style="color:var(--text-muted)">Setembre 2022 – Juny 2024</div>
-          </div>
-
+        <div style="margin-bottom:15px">
+          <strong style="color:var(--accent)">CFGS Administració de Sistemes Informàtics en Xarxa</strong><br>
+          <span style="color:var(--text-muted)">Institut Sa Palomera · Sep 2024 – Maig 2026 (En curs)</span>
+        </div>
+        <div>
+          <strong style="color:var(--text-main)">CFGM Sistemes Microinformàtics i Xarxes</strong><br>
+          <span style="color:var(--text-muted)">Institut Lluís Companys · Sep 2022 – Juny 2024</span>
         </div>
       </section>
 
-      <footer>
-        <p>© 2025 Youssef Fouad. <a href="https://github.com/yousseffouad12" target="_blank" style="color:var(--primary);text-decoration:none">GitHub</a> • <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" style="color:var(--primary);text-decoration:none">LinkedIn</a></p>
-      </footer>
+      <!-- 10. CONTACTO (EmailJS) -->
+      <section class="glass-card">
+        <h2>
+          <i class="ri-mail-send-line"></i>
+          <span data-lang="ca">Contacta amb mi</span>
+          <span data-lang="es">Contacta conmigo</span>
+          <span data-lang="en">Contact Me</span>
+        </h2>
+        <form id="contactForm">
+          <input type="text" id="name" placeholder="Nom / Name" required>
+          <input type="email" id="email" placeholder="Email" required>
+          <textarea id="message" placeholder="Missatge / Message" rows="4" required></textarea>
+          <button class="send-btn" type="submit">
+            <span data-lang="ca">Enviar Missatge</span>
+            <span data-lang="es">Enviar Mensaje</span>
+            <span data-lang="en">Send Message</span>
+          </button>
+        </form>
+        <p id="formStatus"></p>
+      </section>
 
     </main>
   </div>
 
   <script>
-    // Configuración Idioma
-    const defaultLang = 'ca'; // Catalán por defecto (coincide con el PDF)
+    // 1. INICIALIZAR EMAILJS (Con tu Public Key)
+    (function() {
+      emailjs.init("Tt7oPKLqddqL07tj2");
+    })();
+
+    // 2. CONTROL DEL FORMULARIO
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const btn = document.querySelector('.send-btn');
+      const originalText = btn.innerHTML;
+      btn.innerText = "Enviando...";
+
+      const params = {
+        from_name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      };
+
+      // Usando tus IDs de servicio y template
+      emailjs.send("service_k8uipjc", "template_g1gec17", params)
+        .then(() => {
+          document.getElementById("formStatus").innerText = "✅ Missatge enviat correctament!";
+          document.getElementById("formStatus").style.color = "#22c55e";
+          document.getElementById("contactForm").reset();
+          btn.innerHTML = originalText;
+        })
+        .catch((err) => {
+          console.error(err);
+          document.getElementById("formStatus").innerText = "❌ Error en enviar el missatge.";
+          document.getElementById("formStatus").style.color = "#ef4444";
+          btn.innerHTML = originalText;
+        });
+    });
+
+    // 3. IDIOMA Y ANIMACIONES
+    const defaultLang = 'ca';
 
     function setLang(lang) {
       document.querySelectorAll('.lang-btn').forEach(b => {
@@ -446,22 +521,21 @@
       });
 
       document.querySelectorAll('[data-lang]').forEach(el => {
-        el.classList.remove('show-block', 'show-inline');
+        el.classList.remove('show-block', 'show-inline', 'show-flex');
         el.style.display = 'none';
       });
 
       document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
         if(el.tagName === 'SPAN') {
-          el.style.display = 'inline';
-          el.classList.add('show-inline');
+          el.style.display = 'inline'; el.classList.add('show-inline');
+        } else if(el.tagName === 'UL') {
+          el.style.display = 'flex'; el.classList.add('show-flex');
         } else {
-          el.style.display = 'block';
-          el.classList.add('show-block');
+          el.style.display = 'block'; el.classList.add('show-block');
         }
       });
     }
 
-    // Animación Scroll
     document.addEventListener('DOMContentLoaded', () => {
       setLang(defaultLang);
       
