@@ -15,10 +15,11 @@
     /* ================= VARIABLES & THEME ================= */
     :root {
       --bg-dark: #0f172a;
-      --bg-card: rgba(30, 41, 59, 0.7); /* Més opacitat per llegibilitat */
+      --bg-card: rgba(30, 41, 59, 0.7);
       --primary: #3b82f6;
       --primary-hover: #2563eb;
       --accent: #06b6d4;
+      --gold: #ffd700; /* Color Dorado */
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --border: rgba(255, 255, 255, 0.1);
@@ -175,7 +176,7 @@
       border: 1px solid rgba(6, 182, 212, 0.2);
     }
 
-    /* === NUEVO STACK TECNOLÓGICO (Mejorado) === */
+    /* Stack Tecnològic */
     .stack-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -190,7 +191,7 @@
       transition: 0.3s;
     }
     .stack-item i {
-      font-size: 3rem; /* Iconos Grandes */
+      font-size: 3rem; 
       margin-bottom: 10px;
       background: linear-gradient(135deg, #fff, #94a3b8);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -201,8 +202,9 @@
     .stack-item:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     .stack-item:hover i { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    /* === NUEVAS CERTIFICACIONES (Cards) === */
+    /* === CERTIFICACIONES (Cards) === */
     .cert-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    
     .cert-card {
       display: flex; align-items: center; gap: 15px;
       background: rgba(255,255,255,0.02);
@@ -215,10 +217,35 @@
     .cert-icon {
       width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
       background: rgba(59, 130, 246, 0.1); border-radius: 12px;
-      color: var(--primary); font-size: 1.8rem;
+      color: var(--primary); font-size: 1.8rem; transition: 0.3s;
     }
-    .cert-info h4 { font-size: 1rem; margin-bottom: 4px; color: var(--text-main); }
+    .cert-info h4 { font-size: 1rem; margin-bottom: 4px; color: var(--text-main); transition: 0.3s; }
     .cert-info p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+    /* === ESTIL ESPECIAL DAURADO (AWS) === */
+    .cert-card.gold {
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+      position: relative;
+    }
+    .cert-card.gold:hover {
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+      background: rgba(255, 215, 0, 0.05);
+      transform: translateY(-5px);
+    }
+    .cert-card.gold .cert-icon {
+      color: var(--gold);
+      background: rgba(255, 215, 0, 0.1);
+    }
+    .cert-card.gold h4 {
+      color: var(--gold);
+    }
+    .cert-card.gold::after {
+      content: 'Click to Verify';
+      position: absolute; top: 10px; right: 10px;
+      font-size: 0.6rem; color: var(--gold); opacity: 0.7;
+      border: 1px solid var(--gold); padding: 2px 6px; border-radius: 4px;
+    }
 
     /* Timeline */
     .timeline { position: relative; padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.1); }
@@ -340,9 +367,9 @@
           <span data-lang="es">¿Qué puedo aportar?</span>
           <span data-lang="en">What can I contribute?</span>
         </h2>
-        <p data-lang="ca">Sóc una persona resolutiva i organitzada, amb capacitat per mantenir entorns estables i segurs, aportar millores, oferir suport tècnic de qualitat. Tinc iniciativa, responsabilitat i bona adaptació als canvis.</p>
-        <p data-lang="es">Soy una persona resolutiva y organizada, con capacidad para mantener entornos estables y seguros, aportar mejoras, ofrecer soporte técnico de calidad. Tengo iniciativa, responsabilidad y buena adaptación a los cambios.</p>
-        <p data-lang="en">I am a decisive and organized person, capable of maintaining stable and secure environments, contributing improvements,  and offering quality technical support. I have initiative, responsibility, and good adaptability to change.</p>
+        <p data-lang="ca">Sóc una persona resolutiva i organitzada, amb capacitat per mantenir entorns estables i segurs, aportar millores, optimitzar processos i oferir suport tècnic de qualitat. Tinc iniciativa, responsabilitat i bona adaptació als canvis.</p>
+        <p data-lang="es">Soy una persona resolutiva y organizada, con capacidad para mantener entornos estables y seguros, aportar mejoras, optimizar procesos y ofrecer soporte técnico de calidad. Tengo iniciativa, responsabilidad y buena adaptación a los cambios.</p>
+        <p data-lang="en">I am a decisive and organized person, capable of maintaining stable and secure environments, contributing improvements, optimizing processes, and offering quality technical support. I have initiative, responsibility, and good adaptability to change.</p>
       </section>
 
       <section class="glass-card">
@@ -421,7 +448,7 @@
         </h2>
         <div class="cert-container">
           
-          <a href="https://www.credly.com" target="_blank" class="cert-card">
+          <a href="https://www.credly.com/badges/ea94ab6d-841e-48dd-8ad8-427c157fb4d7/public_url" target="_blank" class="cert-card gold">
             <div class="cert-icon"><i class="ri-cloud-line"></i></div>
             <div class="cert-info">
               <h4>AWS Academy Cloud Foundations</h4>
@@ -540,7 +567,7 @@
   </div>
 
   <script>
-    // 1. INICIALIZAR EMAILJS (No tocat, com vas demanar)
+    // 1. INICIALIZAR EMAILJS
     (function() {
       emailjs.init("Tt7oPKLqddqL07tj2");
     })();
