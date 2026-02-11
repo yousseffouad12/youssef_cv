@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="ca" class="sr">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Youssef Fouad | IT Infrastructure & Cloud Professional</title>
+    <meta name="description" content="Portfolio professional de Youssef Fouad. Especialista en Infraestructura TI, Cloud AWS, Windows Server i Ciberseguretat.">
+    <meta name="author" content="Youssef Fouad">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
     <!-- =================================================================================
          SEO & METADATA CONFIGURATION
     ================================================================================== -->
@@ -1358,6 +1369,55 @@
             observer.observe(el);
         });
 
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        // INICIALIZAR ANIMACIONES
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-in-out'
+        });
+
+        // CONFIGURACIÓN DE EMAILJS
+        (function() {
+            // RECUERDA: Cambia "TU_USER_ID_AQUI" por tu clave pública de EmailJS
+            emailjs.init("TU_USER_ID_AQUI"); 
+        })();
+
+        // LÓGICA DEL FORMULARIO
+        const contactForm = document.getElementById('contact-form');
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const btn = contactForm.querySelector('button');
+                const originalText = btn.textContent;
+                
+                btn.textContent = "Enviant...";
+                btn.disabled = true;
+
+                // RECUERDA: Cambia 'service_ID' y 'template_ID' por tus IDs reales de EmailJS
+                emailjs.sendForm('service_ID', 'template_ID', this)
+                    .then(function() {
+                        btn.textContent = "¡Enviat amb èxit!";
+                        btn.style.background = "#10b981"; 
+                        contactForm.reset();
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                            btn.style.background = "";
+                            btn.disabled = false;
+                        }, 5000);
+                    }, function(error) {
+                        console.error('FAILED...', error);
+                        btn.textContent = "Error al enviar";
+                        btn.style.background = "#ef4444"; 
+                        btn.disabled = false;
+                    });
+            });
+        }
     </script>
 </body>
 </html>
