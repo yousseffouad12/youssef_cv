@@ -1,21 +1,218 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mostra del Projecte — NoSQLPaTi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta name="author" content="Adrià Rodríguez, Izan Ruiz">
+  <style>
+    :root{
+      --bg:#0f1724; /* slate dark */
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --blue:#0ea5e9; /* corporate blue */
+      --accent:#7c3aed; /* highlight */
+      --glass: rgba(255,255,255,0.03);
+      --pill-bg: rgba(255,255,255,0.04);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--bg),#071123 160%); color:#e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; padding:36px;
+    }
+    .container{max-width:1100px;margin:0 auto}
+    .header{
+      display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:16px
+    }
+    .title{
+      display:flex;gap:14px;align-items:center
+    }
+    .logo{
+      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;color:white;box-shadow:0 6px 18px rgba(12,18,30,0.6)
+    }
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+    .meta{display:flex;gap:12px;align-items:center}
+    .authors{font-size:13px;padding:8px 12px;background:var(--glass);border-radius:999px;color:var(--muted);display:flex;gap:8px;align-items:center}
+    .cta{background:linear-gradient(90deg,var(--blue),#3b82f6);color:white;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(14,165,233,0.14);display:inline-flex;gap:10px;align-items:center}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:20px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:14px;box-shadow:0 6px 16px rgba(2,6,23,0.6);transition:transform .28s cubic-bezier(.2,.9,.2,1),box-shadow .28s;transform:translateY(0);overflow:hidden;min-height:150px
+    }
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.7)}
+    .card .head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .card h3{margin:0;font-size:16px}
+    .icon{width:44px;height:44px;border-radius:10px;background:var(--pill-bg);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:18px}
+    .problem,.solution,.tech{font-size:13px;color:var(--muted);margin:8px 0}
+    .tech{display:flex;flex-wrap:wrap;gap:8px}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);font-size:12px;border:1px solid rgba(255,255,255,0.02)}
+    .pill .fa-fw{opacity:0.9;color:var(--accent)}
+
+    /* Small badges for highlight */
+    .badge-blue{background:linear-gradient(90deg,var(--blue),#2dd4bf);color:#051226}
+    .badge-accent{background:linear-gradient(90deg,var(--accent),#c084fc);color:#051226}
+
+    .footer{margin-top:20px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+
+    /* subtle entrance */
+    .card{opacity:0;transform:translateY(10px);animation:fadeUp .6s ease forwards}
+    .card:nth-child(1){animation-delay:.08s}
+    .card:nth-child(2){animation-delay:.14s}
+    .card:nth-child(3){animation-delay:.20s}
+    .card:nth-child(4){animation-delay:.26s}
+    .card:nth-child(5){animation-delay:.32s}
+    .card:nth-child(6){animation-delay:.38s}
+    .card:nth-child(7){animation-delay:.44s}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+    /* responsive tweaks */
+    @media (max-width:520px){body{padding:18px}.header{flex-direction:column;align-items:flex-start}.logo{width:56px;height:56px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="title">
+        <div class="logo">NP</div>
+        <div>
+          <h1>Mostra del Projecte — NoSQLPaTi</h1>
+          <p class="lead">Solució integral per a la gestió hotelera amb èmfasi en seguretat, alta disponibilitat i anàlisi.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="authors"><i class="fa-solid fa-user"></i> Autors: Adrià Rodríguez i Izan Ruiz</div>
+        <a class="cta" href="https://github.com/adriiiii/NoSQLPaTi" target="_blank" rel="noopener"> <i class="fa-brands fa-github"></i> Veure Codi a GitHub</a>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="Mostra del Projecte NoSQLPaTi">
+
+      <!-- Resum del Projecte -->
+      <article class="card">
+        <div class="head">
+          <div class="icon"><i class="fa-solid fa-building"></i></div>
+          <h3>Resum del Projecte</h3>
+        </div>
+        <p class="problem"><strong>Problema:</strong> Sistemes fragmentats de gestió hotelera que dificulten la traçabilitat, seguretat i l'anàlisi d'ingressos.</p>
+        <p class="solution"><strong>Solució:</strong> Plataforma centralitzada per a la gestió integral (reserves, clients, facturació, check-in/out) amb interfície d'escriptori i processos automatitzats.</p>
+        <div class="tech">
+          <span class="pill badge-blue"><i class="fa-solid fa-check"></i> Gestió integral</span>
+          <span class="pill"><i class="fa-brands fa-github"></i> Jira · GitHub</span>
+        </div>
+      </article>
+
+      <!-- Arquitectura i Base de Dades -->
+      <article class="card">
+        <div class="head">
+          <div class="icon"><i class="fa-solid fa-database"></i></div>
+          <h3>Arquitectura i Base de Dades</h3>
+        </div>
+        <p class="problem"><strong>Problema:</strong> Models ER complexos que poden portar a anomalies si no s'optimitzen.</p>
+        <p class="solution"><strong>Solució:</strong> Disseny ER rigorós i normalització relacional per garantir integritat i rendiment sobre PostgreSQL desplegat en Debian 12.</p>
+        <div class="tech">
+          <span class="pill"><i class="fa-solid fa-layer-group"></i> Disseny ER</span>
+          <span class="pill"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+          <span class="pill"><i class="fa-solid fa-shield-alt"></i> Normalització</span>
+        </div>
+      </article>
+
+      <!-- Seguretat Avançada -->
+      <article class="card">
+        <div class="head">
+          <div class="icon"><i class="fa-solid fa-lock"></i></div>
+          <h3>Seguretat Avançada</h3>
+        </div>
+        <p class="problem"><strong>Problema:</strong> Dades sensibles exposades i accés sense control granular.</p>
+        <p class="solution"><strong>Solució:</strong> Arquitectura de seguretat amb SSL amb renovació automatitzada, enmascarament de dades, RBAC i triggers PL/pgSQL que eliminen automàticament dades de targetes al check-out.</p>
+        <div class="tech">
+          <span class="pill badge-accent"><i class="fa-solid fa-lock"></i> SSL · Renovació</span>
+          <span class="pill"><i class="fa-solid fa-user-lock"></i> RBAC</span>
+          <span class="pill"><i class="fa-solid fa-bolt"></i> Data Masking</span>
+        </div>
+      </article>
+
+      <!-- Alta Disponibilitat i DevOps -->
+      <article class="card">
+        <div class="head">
+          <div class="icon"><i class="fa-solid fa-server"></i></div>
+          <h3>Alta Disponibilitat i DevOps</h3>
+        </div>
+        <p class="problem"><strong>Problema:</strong> Interrupcions i processos manuals de recuperació que impacten operacions crítiques.</p>
+        <p class="solution"><strong>Solució:</strong> Repligació entre nodes (modes actiu-actiu / actiu-passiu), balanceig i scripts automatitzats en Bash/Python agendats amb Cron per backups i restores. Dimensionament de hardware especificat per SLA.</p>
+        <div class="tech">
+          <span class="pill"><i class="fa-solid fa-network-wired"></i> Replicació</span>
+          <span class="pill"><i class="fa-brands fa-docker"></i> Docker/VM</span>
+          <span class="pill"><i class="fa-solid fa-cloud-arrow-up"></i> Backups (Cron)</span>
+        </div>
+      </article>
+
+      <!-- Desenvolupament Backend/App -->
+      <article class="card">
+        <div class="head">
+          <div class="icon"><i class="fa-solid fa-code"></i></div>
+          <h3>Desenvolupament Backend / App</h3>
+        </div>
+        <p class="problem"><strong>Problema:</strong> Necessitat d'una UI d'escriptori lleugera i fiable per a recepció i gestió.</p>
+        <p class="solution"><strong>Solució:</strong> Aplicació en Python amb Tkinter per processos de front-office, login segur amb hashing bcrypt i mòduls per a la gestió completa de reserves i check-in/out.</p>
+        <div class="tech">
+          <span class="pill"><i class="fa-brands fa-python"></i> Python · Tkinter</span>
+          <span class="pill"><i class="fa-solid fa-key"></i> Hashing (bcrypt)</span>
+        </div>
+      </article>
+
+      <!-- Integracions i BI -->
+      <article class="card">
+        <div class="head">
+          <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Integracions i BI</h3>
+        </div>
+        <p class="problem"><strong>Problema:</strong> Falta d'informes accionables i interoperabilitat amb entitats externes.</p>
+        <p class="solution"><strong>Solució:</strong> Integració amb API Mossos d'Esquadra (JSON), exportació XML de reserves i dashboard operatiu a PowerBI per anàlisi d'ingressos i KPI.</p>
+        <div class="tech">
+          <span class="pill"><i class="fa-solid fa-file-code"></i> API JSON</span>
+          <span class="pill"><i class="fa-solid fa-file-export"></i> XML</span>
+          <span class="pill"><i class="fa-solid fa-chart-pie"></i> PowerBI</span>
+        </div>
+      </article>
+
+      <!-- Testing -->
+      <article class="card">
+        <div class="head">
+          <div class="icon"><i class="fa-solid fa-vial"></i></div>
+          <h3>Testing</h3>
+        </div>
+        <p class="problem"><strong>Problema:</strong> Escenaris reals de càrrega sovint no reproduïts en proves bàsiques.</p>
+        <p class="solution"><strong>Solució:</strong> Generació de dades de prova (100k reserves, 50k clients) amb suport multi-idioma i scripts de càrrega per validar integritat i rendiment abans del desplegament.</p>
+        <div class="tech">
+          <span class="pill"><i class="fa-solid fa-database"></i> 100k registres</span>
+          <span class="pill"><i class="fa-solid fa-globe"></i> Multi-idioma</span>
+        </div>
+      </article>
+
+    </section>
+
+    <footer class="footer">
+      <div>Document tècnic i manuals d'instal·lació i usuari inclosos.</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a href="https://github.com/adriiiii/NoSQLPaTi" target="_blank" rel="noopener" class="pill"><i class="fa-brands fa-github"></i> Veure repositori</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ca" class="sr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Youssef Fouad | IT Infrastructure & Cloud Professional</title>
-    <meta name="description" content="Portfolio professional de Youssef Fouad. Especialista en Infraestructura TI, Cloud AWS, Windows Server i Ciberseguretat.">
-    <meta name="author" content="Youssef Fouad">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
     <!-- =================================================================================
          SEO & METADATA CONFIGURATION
     ================================================================================== -->
@@ -28,453 +225,453 @@
 
     <!-- =================================================================================
          EXTERNAL DEPENDENCIES & ASSETS
-    ================================================================================== -->
-    <!-- FONT: Inter & Plus Jakarta Sans (Tipografía moderna y profesional) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-    
-    <!-- ICONS: FontAwesome Pro CDN (Simulated via Free CDN) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- ANIMATIONS: Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!doctype html>
+    <html lang="ca">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>NoSQLPaTi — Showcase de Projecte</title>
 
-    <!-- EMAILJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <!-- FontAwesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- CREDLY EMBED -->
-    <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+        <style>
+            :root{
+                --bg:#0f1724; /* slate-900 */
+                --card:#0b1220;
+                --muted:#94a3b8;
+                --accent:#0b66ff; /* corporate blue */
+                --accent-2:#06b6d4; /* cyan highlight */
+                --glass: rgba(255,255,255,0.03);
+                --pill-bg: rgba(255,255,255,0.04);
+                --shadow: 0 8px 24px rgba(2,6,23,0.6);
+                --radius:14px;
+                font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            }
 
-    <style>
-        /* 
-        ======================================================================================
-         1. CORE VARIABLE DEFINITIONS (DESIGN SYSTEM)
-         Definimos una paleta de colores corporativa "Midnight Corporate".
-        ======================================================================================
-        */
-        :root {
-            /* COLOR PALETTE */
-            --primary-50: #f0f9ff;
-            --primary-100: #e0f2fe;
-            --primary-400: #38bdf8;
-            --primary-500: #0ea5e9;
-            --primary-600: #0284c7;  /* Corporate Blue */
-            --primary-700: #0369a1;
+            /* Base */
+            html,body{height:100%}
+            body{
+                margin:0;
+                background: linear-gradient(180deg, #071029 0%, #07101a 60%);
+                color:#e6eef8;
+                -webkit-font-smoothing:antialiased;
+                -moz-osx-font-smoothing:grayscale;
+                padding:32px;
+                display:flex;
+                align-items:flex-start;
+                justify-content:center;
+                box-sizing:border-box;
+            }
 
-            --bg-body: #0f172a;       /* Slate 900 - Dark Elegance */
-            --bg-card: #1e293b;       /* Slate 800 */
-            --bg-card-hover: #334155; /* Slate 700 */
-            
-            --text-main: #f8fafc;     /* Slate 50 */
-            --text-muted: #94a3b8;    /* Slate 400 */
-            --text-dark: #0f172a;
-            
-            --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
-            --glass-bg: rgba(30, 41, 59, 0.7);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-            --border-subtle: 1px solid rgba(148, 163, 184, 0.1);
+            .container{
+                width:min(1200px,96%);
+                display:flex;
+                flex-direction:column;
+                gap:20px;
+                align-items:stretch;
+                animation:fadeInUp .6s ease both;
+            }
 
-            /* SPACING & SIZING */
-            --container-max: 1280px;
-            --header-height: 90px;
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            
-            /* TRANSITIONS */
-            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            
-            /* SHADOWS */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-            --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.15);
-        }
+            header.hero{
+                display:flex;
+                gap:20px;
+                align-items:center;
+                justify-content:space-between;
+                background: linear-gradient(90deg, rgba(11,102,255,0.10), rgba(6,182,212,0.04));
+                border-radius:var(--radius);
+                padding:20px;
+                box-shadow:var(--shadow);
+                border:1px solid rgba(255,255,255,0.03);
+            }
 
-        /* 
-        ======================================================================================
-         2. GLOBAL RESETS & TYPOGRAPHY
-        ======================================================================================
-        */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+            .hero-left{
+                display:flex;
+                gap:16px;
+                align-items:center;
+            }
 
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
+            .logo{
+                width:72px;
+                height:72px;
+                border-radius:12px;
+                background:linear-gradient(135deg,var(--accent),var(--accent-2));
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-weight:700;
+                font-size:20px;
+                color:white;
+                box-shadow: 0 6px 18px rgba(11,102,255,0.18);
+            }
 
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.05), transparent 40%);
-        }
+            .title{
+                display:flex;
+                flex-direction:column;
+                gap:4px;
+            }
 
-        /* Typography Hierarchy */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-main);
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
+            .title h1{
+                margin:0;
+                font-size:20px;
+                letter-spacing: -0.2px;
+            }
+            .title p{
+                margin:0;
+                color:var(--muted);
+                font-size:13px;
+            }
 
-        h1 { font-size: 3.5rem; margin-bottom: 1.5rem; }
-        h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-        h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
-        
-        p { margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.1rem; }
-        
-        a { text-decoration: none; color: inherit; transition: var(--transition-fast); }
-        ul { list-style: none; }
-        
-        img { max-width: 100%; height: auto; display: block; }
+            .hero-actions{
+                display:flex;
+                gap:12px;
+                align-items:center;
+            }
 
-        /* SCROLLBAR CUSTOMIZATION */
-        ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: var(--bg-body); }
-        ::-webkit-scrollbar-thumb { 
-            background-color: var(--bg-card-hover); 
-            border: 3px solid var(--bg-body); 
-            border-radius: 10px; 
-        }
-        ::-webkit-scrollbar-thumb:hover { background-color: var(--primary-600); }
+            .btn{
+                display:inline-flex;
+                gap:10px;
+                align-items:center;
+                background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+                color:var(--accent);
+                border:1px solid rgba(11,102,255,0.18);
+                padding:10px 14px;
+                border-radius:12px;
+                text-decoration:none;
+                font-weight:600;
+                transition:transform .18s ease, box-shadow .18s ease;
+                box-shadow: 0 6px 18px rgba(11,102,255,0.06);
+            }
+            .btn:hover{ transform: translateY(-4px); box-shadow: 0 12px 30px rgba(11,102,255,0.14); }
 
-        /* 
-        ======================================================================================
-         3. UTILITY CLASSES (LAYOUT & VISUALS)
-        ======================================================================================
-        */
-        .container {
-            max-width: var(--container-max);
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-        }
+            /* Grid */
+            .grid{
+                display:grid;
+                grid-template-columns: repeat(1,1fr);
+                gap:18px;
+                margin-top:6px;
+            }
 
-        .section-padding { padding: 100px 0; }
-        .section-padding-sm { padding: 60px 0; }
+            @media(min-width:800px){
+                .grid{ grid-template-columns: repeat(2,1fr); }
+            }
+            @media(min-width:1200px){
+                .grid{ grid-template-columns: repeat(3,1fr); }
+            }
 
-        .text-gradient {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
+            .card{
+                background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+                border-radius:12px;
+                padding:18px;
+                box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+                border:1px solid rgba(255,255,255,0.02);
+                transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s ease;
+                display:flex;
+                flex-direction:column;
+                gap:12px;
+            }
 
-        .flex-center { display: flex; align-items: center; justify-content: center; }
-        .flex-between { display: flex; align-items: center; justify-content: space-between; }
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+            .card:hover{
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(2,6,23,0.8);
+            }
 
-        /* Language Toggle Classes */
-        [data-lang] { display: none; }
-        [data-lang].active { display: block; animation: fadeIn 0.5s ease forwards; }
-        span[data-lang].active { display: inline-block; }
+            .card .head{
+                display:flex;
+                gap:12px;
+                align-items:center;
+            }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+            .icon{
+                width:44px;
+                height:44px;
+                border-radius:10px;
+                background:var(--glass);
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:var(--accent);
+                font-size:18px;
+                border:1px solid rgba(255,255,255,0.03);
+            }
 
-        /* 
-        ======================================================================================
-         4. HEADER & NAVIGATION MODULE
-         Glassmorphism sticky header with advanced responsive logic.
-        ======================================================================================
-        */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: var(--glass-border);
-            z-index: 999;
-            transition: all var(--transition-smooth);
-        }
+            h3{ margin:0; font-size:16px; }
+            p.lead{ margin:0; color:var(--muted); font-size:13px; }
 
-        .navbar.scrolled {
-            height: 70px;
-            background: rgba(15, 23, 42, 0.95);
-            box-shadow: var(--shadow-md);
-        }
+            .pill-row{
+                display:flex;
+                gap:8px;
+                flex-wrap:wrap;
+                margin-top:6px;
+            }
+            .pill{
+                background:var(--pill-bg);
+                color:#e6eef8;
+                padding:6px 10px;
+                border-radius:999px;
+                font-size:12px;
+                border:1px solid rgba(255,255,255,0.02);
+                display:inline-flex;
+                gap:8px;
+                align-items:center;
+            }
+            .pill .fa-brands, .pill .fa-solid{ opacity:0.95; font-size:12px; color:var(--accent-2); }
 
-        .nav-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-        }
+            .meta{
+                margin-top:6px;
+                color:var(--muted);
+                font-size:12px;
+                display:flex;
+                gap:12px;
+                align-items:center;
+                flex-wrap:wrap;
+            }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+            .authors{
+                display:flex;
+                gap:8px;
+                align-items:center;
+            }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--accent-gradient);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            font-family: 'Plus Jakarta Sans';
-        }
+            /* footer small */
+            .foot{
+                display:flex;
+                gap:12px;
+                align-items:center;
+                justify-content:space-between;
+                margin-top:6px;
+            }
 
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.01em;
-        }
+            /* subtle badges variants */
+            .pill.postgres{ background: linear-gradient(90deg,#0a5f8a,#0077b6); color:#eaf6ff; border:none; }
+            .pill.python{ background: linear-gradient(90deg,#1e3a8a,#3b82f6); }
+            .pill.docker{ background: linear-gradient(90deg,#0db7ed,#006b9f); }
+            .pill.powerbi{ background: linear-gradient(90deg,#f7b500,#ffdf6b); color:#08111a; }
+            .pill.jira{ background: linear-gradient(90deg,#2b8cc4,#0b66ff); }
 
-        .nav-menu { display: flex; gap: 32px; }
+            /* small utilities */
+            .muted{ color:var(--muted); font-size:13px; }
+            .small{ font-size:13px; color:var(--muted); }
 
-        .nav-link {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            padding: 8px 0;
-            position: relative;
-        }
+            /* Animations */
+            @keyframes fadeInUp{
+                from{ opacity:0; transform: translateY(8px); }
+                to{ opacity:1; transform: translateY(0); }
+            }
 
-        .nav-link:hover, .nav-link.current {
-            color: var(--primary-400);
-        }
+            /* Accessible focus */
+            .btn:focus{ outline:3px solid rgba(11,102,255,0.12); outline-offset:3px; }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-500);
-            transition: width 0.3s ease;
-        }
+        </style>
+    </head>
+    <body>
+        <main class="container" role="main" aria-labelledby="project-title">
+            <header class="hero" role="banner">
+                <div class="hero-left">
+                    <div class="logo" aria-hidden="true">NoSQL</div>
+                    <div class="title">
+                        <h1 id="project-title">NoSQLPaTi — Solució per a gestió hotelera</h1>
+                        <p>Plataforma integral per a reserves, check-in/out i anàlisi operativa</p>
+                        <div class="small">Autors: <strong>Adrià Rodríguez</strong> i <strong>Izan Ruiz</strong></div>
+                    </div>
+                </div>
 
-        .nav-link:hover::after { width: 100%; }
+                <div class="hero-actions">
+                    <a class="btn" href="https://github.com/adriiiii/NoSQLPaTi" target="_blank" rel="noopener noreferrer" aria-label="Veure codi a GitHub">
+                        <i class="fab fa-github"></i> Veure Codi a GitHub
+                    </a>
+                </div>
+            </header>
 
-        .lang-switcher {
-            display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 4px;
-            margin-left: 20px;
-        }
+            <section class="grid" aria-label="Secció de projectes">
 
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.8rem;
-            padding: 6px 12px;
-            cursor: pointer;
-            border-radius: 16px;
-            transition: var(--transition-fast);
-        }
+                <!-- Resum del Projecte -->
+                <article class="card" aria-labelledby="resum-title">
+                    <div class="head">
+                        <div class="icon" aria-hidden="true"><i class="fa-solid fa-hotel"></i></div>
+                        <div>
+                            <h3 id="resum-title">Resum del Projecte</h3>
+                            <p class="lead">Gestió integral per a establiments hotelers (Espamus+).</p>
+                        </div>
+                    </div>
 
-        .lang-btn.active {
-            background: var(--primary-600);
-            color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+                    <p class="muted"><strong>Problema:</strong> Operacions fragmentades i processos manuals que generen errors, pèrdues d'ingressos i mala experiència d'usuari.</p>
+                    <p class="muted"><strong>Solució:</strong> Plataforma centralitzada que unifica reserves, facturació, check-in/out i informes en una interfície estable i segura, amb exportacions per a tercers i dashboards analítics.</p>
 
-        /* 
-        ======================================================================================
-         5. HERO SECTION
-         Clean, high-impact introductory area with split layout.
-        ======================================================================================
-        */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: var(--header-height);
-            overflow: hidden;
-        }
+                    <div class="pill-row" aria-hidden="true">
+                        <span class="pill python"><i class="fa-brands fa-python"></i> Python</span>
+                        <span class="pill postgres"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+                        <span class="pill jira"><i class="fa-brands fa-jira"></i> Jira</span>
+                        <span class="pill"><i class="fa-solid fa-code-branch"></i> GitHub</span>
+                    </div>
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(60px);
-            z-index: -1;
-        }
+                    <div class="meta">
+                        <div class="small"><i class="fa-solid fa-calendar-days"></i> Projecte: Espamus+</div>
+                        <div class="small"><i class="fa-solid fa-users"></i> Equip: 2 autors</div>
+                    </div>
+                </article>
 
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-        }
+                <!-- Arquitectura i Base de Dades -->
+                <article class="card" aria-labelledby="db-title">
+                    <div class="head">
+                        <div class="icon"><i class="fa-solid fa-diagram-project"></i></div>
+                        <div>
+                            <h3 id="db-title">Arquitectura i Base de Dades</h3>
+                            <p class="lead">Model ER, normalització i optimitzacions per a rendiment.</p>
+                        </div>
+                    </div>
 
-        .hero-text { flex: 1.2; }
-        .hero-image-wrap { flex: 1; display: flex; justify-content: flex-end; position: relative; }
+                    <p class="muted"><strong>Problema:</strong> Models de dades insuficients provoquen inconsistències i consultes lentes.</p>
+                    <p class="muted"><strong>Solució:</strong> Disseny ER formal, normalització fins a la forma adequada i estratègia d'indexació per a consultes crítiques; desplegament sobre Debian 12 amb PostgreSQL optimitzat.</p>
 
-        .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(14, 165, 233, 0.1);
-            border: 1px solid rgba(14, 165, 233, 0.2);
-            color: var(--primary-400);
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
+                    <div class="pill-row">
+                        <span class="pill postgres"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+                        <span class="pill"><i class="fa-solid fa-project-diagram"></i> ER Design</span>
+                        <span class="pill"><i class="fa-solid fa-flask"></i> PL/pgSQL</span>
+                        <span class="pill"><i class="fa-solid fa-server"></i> Debian 12</span>
+                    </div>
 
-        .hero-description {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin-bottom: 40px;
-            max-width: 90%;
-        }
+                    <div class="meta">
+                        <div class="small"><i class="fa-solid fa-bolt"></i> Índexs, particions i consultes preparades</div>
+                    </div>
+                </article>
 
-        .btn-group { display: flex; gap: 16px; }
+                <!-- Seguretat Avançada -->
+                <article class="card" aria-labelledby="sec-title">
+                    <div class="head">
+                        <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <h3 id="sec-title">Seguretat Avançada</h3>
+                            <p class="lead">Protecció i govern de dades com a prioritat.</p>
+                        </div>
+                    </div>
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 28px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            gap: 10px;
-        }
+                    <p class="muted"><strong>Problema:</strong> Dades sensibles exposades i requisits de compliment normatiu.</p>
+                    <p class="muted"><strong>Solució:</strong> Capa TLS (SSL) amb renovació automatitzada, estratègies de data-masking per dades sensibles, model RBAC per permisos i triggers PL/pgSQL que eliminen dades de targetes en acabar el procés de check-out.</p>
 
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: white;
-            border: none;
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-        }
+                    <div class="pill-row">
+                        <span class="pill"><i class="fa-solid fa-lock"></i> SSL / TLS</span>
+                        <span class="pill"><i class="fa-solid fa-user-shield"></i> RBAC</span>
+                        <span class="pill"><i class="fa-solid fa-mask"></i> Data Masking</span>
+                        <span class="pill"><i class="fa-solid fa-database"></i> Triggers PL/pgSQL</span>
+                    </div>
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 30px -10px rgba(14, 165, 233, 0.4);
-        }
+                    <div class="meta">
+                        <div class="small"><i class="fa-solid fa-key"></i> Hashing d'accés amb bcrypt</div>
+                    </div>
+                </article>
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
+                <!-- Alta Disponibilitat i DevOps -->
+                <article class="card" aria-labelledby="ha-title">
+                    <div class="head">
+                        <div class="icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <div>
+                            <h3 id="ha-title">Alta Disponibilitat i DevOps</h3>
+                            <p class="lead">Disseny per continuïtat i recuperació ràpida.</p>
+                        </div>
+                    </div>
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
+                    <p class="muted"><strong>Problema:</strong> Temps d'inactivitat i pèrdua de servei en pic de càrrega.</p>
+                    <p class="muted"><strong>Solució:</strong> Arquitectura amb rèplica (modes actiu-actiu / actiu-passiu), balanceig de càrrega, i scripts automàtics (Bash/Python + cron) per backups i restauracions. Planificació de capacity/hardware sizing per SLA.</p>
 
-        .profile-card {
-            width: 380px;
-            height: 480px;
-            background: linear-gradient(160deg, #1e293b, #0f172a);
-            border-radius: var(--radius-lg);
-            border: var(--border-subtle);
-            padding: 10px;
-            position: relative;
-            box-shadow: var(--shadow-lg);
-            z-index: 10;
-        }
-        
-        /* Floating abstract shapes for decoration */
-        .deco-shape {
-            position: absolute;
-            z-index: 5;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            animation: float 6s ease-in-out infinite;
-        }
-        .shape-1 { width: 80px; height: 80px; top: -30px; left: -40px; }
-        .shape-2 { width: 120px; height: 120px; bottom: -20px; right: -20px; animation-delay: 2s; }
+                    <div class="pill-row">
+                        <span class="pill docker"><i class="fa-brands fa-docker"></i> Docker / VM</span>
+                        <span class="pill"><i class="fa-solid fa-network-wired"></i> Replicació</span>
+                        <span class="pill"><i class="fa-solid fa-gear"></i> Bash / Python</span>
+                        <span class="pill"><i class="fa-solid fa-clock-rotate-left"></i> Automatització (cron)</span>
+                    </div>
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+                    <div class="meta">
+                        <div class="small"><i class="fa-solid fa-hdd"></i> Backups incrementals i restores verificats</div>
+                    </div>
+                </article>
 
-        .profile-img-wrap {
-            width: 100%;
-            height: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Filter updated to professional tones */
-            filter: contrast(1.05) saturate(1.1); 
-        }
+                <!-- Desenvolupament Backend/App -->
+                <article class="card" aria-labelledby="app-title">
+                    <div class="head">
+                        <div class="icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <div>
+                            <h3 id="app-title">Desenvolupament Backend/App</h3>
+                            <p class="lead">Aplicació d'escriptori i lògica de negoci segura.</p>
+                        </div>
+                    </div>
 
-        /* 
-        ======================================================================================
-         6. SERVICES & COMPETENCIES CARD GRID
-         Using sophisticated hover effects and layout.
-        ======================================================================================
-        */
-        .card {
-            background: var(--bg-card);
-            border: var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: 32px;
-            transition: all var(--transition-smooth);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
+                    <p class="muted"><strong>Problema:</strong> Interfície bàsica i autenticació feble.</p>
+                    <p class="muted"><strong>Solució:</strong> Aplicació en Python amb Tkinter per gestió operativa, sistema de login amb hashing (bcrypt), i mòduls de gestió de reserves i processos de check-in/out amb validacions i controls transaccionals.</p>
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border-color: rgba(14, 165, 233, 0.3);
-            background: var(--bg-card-hover);
-        }
+                    <div class="pill-row">
+                        <span class="pill python"><i class="fa-brands fa-python"></i> Python</span>
+                        <span class="pill"><i class="fa-solid fa-desktop"></i> Tkinter</span>
+                        <span class="pill"><i class="fa-solid fa-lock"></i> bcrypt</span>
+                    </div>
 
-        .card::before {
-            content: '';
-            position: absolute;
+                    <div class="meta">
+                        <div class="small"><i class="fa-solid fa-shield"></i> Validacions i gestió d'errors robusta</div>
+                    </div>
+                </article>
+
+                <!-- Integracions i BI -->
+                <article class="card" aria-labelledby="int-title">
+                    <div class="head">
+                        <div class="icon"><i class="fa-solid fa-sitemap"></i></div>
+                        <div>
+                            <h3 id="int-title">Integracions i BI</h3>
+                            <p class="lead">Connexions externes i visibilitat comercial.</p>
+                        </div>
+                    </div>
+
+                    <p class="muted"><strong>Problema:</strong> Dades aïllades i processos de report limitats.</p>
+                    <p class="muted"><strong>Solució:</strong> Integració amb APIs externes (ex. Mossos d'Esquadra via JSON), exportacions XML estructurades per proves i intercanvi, i dashboards a PowerBI per anàlisi d'ingressos i KPI operatius.</p>
+
+                    <div class="pill-row">
+                        <span class="pill"><i class="fa-solid fa-file-export"></i> XML Export</span>
+                        <span class="pill"><i class="fa-solid fa-network-wired"></i> API JSON</span>
+                        <span class="pill powerbi"><i class="fa-solid fa-chart-column"></i> PowerBI</span>
+                    </div>
+
+                    <div class="meta">
+                        <div class="small"><i class="fa-solid fa-chart-line"></i> Informes automatitzats i connectors ETL</div>
+                    </div>
+                </article>
+
+                <!-- Testing -->
+                <article class="card" aria-labelledby="test-title">
+                    <div class="head">
+                        <div class="icon"><i class="fa-solid fa-vial"></i></div>
+                        <div>
+                            <h3 id="test-title">Testing</h3>
+                            <p class="lead">Dades sintètiques i proves de càrrega a escala.</p>
+                        </div>
+                    </div>
+
+                    <p class="muted"><strong>Problema:</strong> Cobertura insuficient d'escenaris i volums reals.</p>
+                    <p class="muted"><strong>Solució:</strong> Conjunt de dades dummy (100k reserves, 50k clients) amb suport multi-idioma, proves de rendiment i regressió per validar latència i escalabilitat abans de producció.</p>
+
+                    <div class="pill-row">
+                        <span class="pill"><i class="fa-solid fa-database"></i> 100k Registres</span>
+                        <span class="pill"><i class="fa-solid fa-globe"></i> Multi-idioma</span>
+                        <span class="pill"><i class="fa-solid fa-bolt"></i> Stress Tests</span>
+                    </div>
+
+                    <div class="meta">
+                        <div class="small"><i class="fa-solid fa-check-to-slot"></i> Scripts de generació i benchmarks</div>
+                    </div>
+                </article>
+
+            </section>
+
+            <div class="foot" aria-hidden="true">
+                <div class="small">Documentació tècnica i manuals d'instal·lació inclosos.</div>
+                <div style="display:flex;gap:10px">
+                    <a class="btn" href="https://github.com/adriiiii/NoSQLPaTi" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github"></i> Veure Codi a GitHub
+                    </a>
+                </div>
+            </div>
+
+        </main>
+    </body>
+    </html>
             top: 0;
             left: 0;
             width: 100%;
@@ -771,6 +968,13 @@
                         <span data-lang="es">Contacto</span>
                         <span data-lang="en">Contact</span>
                     </a></li>
+
+                    { /* CHANGED: Afegeixo l'enllaç a Projectes */ }
+                    <li><a href="#projects" class="nav-link">
+                        <span data-lang="ca" class="active">Projectes</span>
+                        <span data-lang="es">Proyectos</span>
+                        <span data-lang="en">Projects</span>
+                    </a></li>
                 </ul>
             </nav>
 
@@ -865,7 +1069,7 @@
                     <p data-lang="es">
                         Soy Técnico en sistemas microinformáticos y redes, actualmente ampliando mi formación superior (ASIX) con un enfoque especial en arquitecturas Cloud (AWS) y Ciberseguridad. Me defino como una persona proactiva, capaz de adaptarme rápidamente a nuevos entornos y tecnologías.
                         <br><br>
-                        Mi trayectoria me ha permitido desarrollar no solo habilidades técnicas sólidas ("Hard Skills"), sino también competencias interpersonales clave ("Soft Skills") a través del trabajo de cara al público y en equipos internacionales.
+                        Mi trayectoria me ha permitido desarrollar no solo habilidades técnicas sólidas ("Hard Skills") but también competencias interpersonales clave ("Soft Skills") a través del trabajo de cara al público y en equipos internacionales.
                     </p>
                     <p data-lang="en">
                         I am a Microcomputer Systems and Network Technician, currently expanding my higher education (ASIX) with a special focus on Cloud architectures (AWS) and Cybersecurity. I define myself as a proactive person, capable of quickly adapting to new environments and technologies.
@@ -1078,7 +1282,7 @@
                             </div>
                         </div>
                         <p data-lang="ca" class="active">Experiència internacional intensiva.</p>
-                        <p data-lang="es">Experiencia internacional intensiva.</p>
+                        <p data-lang="es">Experiència internacional intensiva.</p>
                         <p data-lang="en">Intensive international experience.</p>
                         <ul class="task-list">
                             <li>Smart Home / IoT implementations.</li>
@@ -1365,59 +1569,10 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.card, .info-card').forEach(el => {
+        document.querySelectorAll('.card, .info-card, .project-card').forEach(el => {
             observer.observe(el);
         });
 
-   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-    <script>
-        // INICIALIZAR ANIMACIONES
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100,
-            easing: 'ease-in-out'
-        });
-
-        // CONFIGURACIÓN DE EMAILJS
-        (function() {
-            // RECUERDA: Cambia "TU_USER_ID_AQUI" por tu clave pública de EmailJS
-            emailjs.init("TU_USER_ID_AQUI"); 
-        })();
-
-        // LÓGICA DEL FORMULARIO
-        const contactForm = document.getElementById('contact-form');
-        if(contactForm) {
-            contactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const btn = contactForm.querySelector('button');
-                const originalText = btn.textContent;
-                
-                btn.textContent = "Enviant...";
-                btn.disabled = true;
-
-                // RECUERDA: Cambia 'service_ID' y 'template_ID' por tus IDs reales de EmailJS
-                emailjs.sendForm('service_ID', 'template_ID', this)
-                    .then(function() {
-                        btn.textContent = "¡Enviat amb èxit!";
-                        btn.style.background = "#10b981"; 
-                        contactForm.reset();
-                        setTimeout(() => {
-                            btn.textContent = originalText;
-                            btn.style.background = "";
-                            btn.disabled = false;
-                        }, 5000);
-                    }, function(error) {
-                        console.error('FAILED...', error);
-                        btn.textContent = "Error al enviar";
-                        btn.style.background = "#ef4444"; 
-                        btn.disabled = false;
-                    });
-            });
-        }
     </script>
 </body>
 </html>
