@@ -10,9 +10,17 @@
     ================================================================================== -->
     <title>Youssef Fouad | IT Infrastructure & Cloud Professional</title>
     <meta name="description" content="Portfolio professional de Youssef Fouad. Especialista en Infraestructura TI, Cloud AWS, Windows Server i Ciberseguretat.">
-    <meta name="keywords" content="Youssef Fouad, SysAdmin, Cloud Engineer, AWS, IT Support, Network Administration, Tordera">
+    <meta name="keywords" content="Youssef Fouad, SysAdmin, Cloud Engineer, AWS, IT Support, Network Administration, Tordera, Help Desk">
     <meta name="author" content="Youssef Fouad">
     <meta name="theme-color" content="#0f172a">
+
+    <!-- OPEN GRAPH (LinkedIn / WhatsApp Preview) -->
+    <meta property="og:title" content="Youssef Fouad | IT Infrastructure & Cloud">
+    <meta property="og:description" content="SysAdmin Profile: Windows Server, AWS, Python Automation & Network Security.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/main/yfm.jpg">
+    <meta property="og:url" content="https://yousseffouad12.github.io/">
+    <meta property="og:type" content="website">
+
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -85,7 +93,7 @@
 
         /* 
         ======================================================================================
-         2. NAVIGATION
+         2. NAVIGATION & MOBILE MENU
         ======================================================================================
         */
         .navbar {
@@ -125,6 +133,16 @@
         [data-lang] { display: none; }
         [data-lang].active { display: block; }
         span[data-lang].active { display: inline; }
+
+        /* Mobile Menu Toggle Button (Hidden on Desktop) */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
         /* 
         ======================================================================================
@@ -496,7 +514,7 @@
 
         /* 
         ======================================================================================
-         11. RESPONSIVE ADJUSTMENTS
+         11. RESPONSIVE ADJUSTMENTS (WITH MOBILE MENU)
         ======================================================================================
         */
         @media (max-width: 1024px) {
@@ -510,16 +528,44 @@
         }
 
         @media (max-width: 768px) {
+            /* General Sizing */
             h1 { font-size: 2.2rem; }
             h2 { font-size: 1.8rem; }
-            .nav-menu, .lang-switcher { display: none; } /* Mobile Menu would go here (simplified for this code) */
             .grid-2 { grid-template-columns: 1fr; }
             .timeline::before { left: 0; } 
             .timeline-item { padding-left: 20px; }
-            .timeline-marker { left: -9px; } /* Adjust layout */
+            .timeline-marker { left: -9px; }
             .form-wrap { padding: 24px; }
             .footer-grid { grid-template-columns: 1fr; }
             .section-padding { padding: 60px 0; }
+            .lang-switcher { display: none; /* Consider moving into menu if needed, but keeping clean for now */ } 
+            
+            /* Mobile Navigation Implementation */
+            .mobile-toggle { display: block; }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px; /* Adjust based on navbar height */
+                left: -100%;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                gap: 30px;
+                border-bottom: 1px solid var(--border-subtle);
+                transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+
+            .lang-switcher.mobile {
+                display: flex;
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
@@ -535,34 +581,45 @@
                 <div class="logo-text">Youssef Fouad</div>
             </div>
 
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="#about" class="nav-link">
+                    <li><a href="#about" class="nav-link" onclick="closeMenu()">
                         <span data-lang="ca" class="active">Perfil</span>
                         <span data-lang="es">Perfil</span>
                         <span data-lang="en">Profile</span>
                     </a></li>
-                    <li><a href="#competencies" class="nav-link">
+                    <li><a href="#competencies" class="nav-link" onclick="closeMenu()">
                         <span data-lang="ca" class="active">Competències</span>
                         <span data-lang="es">Competencias</span>
                         <span data-lang="en">Expertise</span>
                     </a></li>
-                    <li><a href="#experience" class="nav-link">
+                    <li><a href="#experience" class="nav-link" onclick="closeMenu()">
                         <span data-lang="ca" class="active">Experiència</span>
                         <span data-lang="es">Experiencia</span>
                         <span data-lang="en">Experience</span>
                     </a></li>
-                    <li><a href="#contact" class="nav-link">
+                    <li><a href="#contact" class="nav-link" onclick="closeMenu()">
                         <span data-lang="ca" class="active">Contacte</span>
                         <span data-lang="es">Contacto</span>
                         <span data-lang="en">Contact</span>
                     </a></li>
 
-                    <li><a href="#projects" class="nav-link">
+                    <li><a href="#projects" class="nav-link" onclick="closeMenu()">
                         <span data-lang="ca" class="active">Projectes</span>
                         <span data-lang="es">Proyectos</span>
                         <span data-lang="en">Projects</span>
                     </a></li>
+
+                    <!-- Mobile Lang Switcher duplicated inside menu for mobile only -->
+                    <div class="lang-switcher mobile" style="display:none;">
+                         <button class="lang-btn active" onclick="switchLang('ca')">CA</button>
+                         <button class="lang-btn" onclick="switchLang('es')">ES</button>
+                         <button class="lang-btn" onclick="switchLang('en')">EN</button>
+                    </div>
                 </ul>
             </nav>
 
@@ -602,8 +659,8 @@
                 </p>
 
                 <div class="btn-group">
-                    <!-- LINK DE CV ACTUALIZADO AQUI (GITHUB RAW) -->
-                    <a href="https://github.com/yousseffouad12/youssef_cv/raw/590876bdb24c7d403a9e814d4c8262eb2fbd0d89/YoussefFouadMabrouki_CV.pdf" class="btn btn-primary">
+                    <!-- ENLACE MEJORADO: Usando RAW /main/ para actualizaciones automáticas -->
+                    <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf" class="btn btn-primary" rel="noopener noreferrer">
                         <i class="fa-solid fa-file-arrow-down"></i>
                         <span data-lang="ca" class="active">Descarregar CV</span>
                         <span data-lang="es">Descargar CV</span>
@@ -631,7 +688,7 @@
                     <div class="deco-shape shape-1"></div>
                     <div class="deco-shape shape-2"></div>
                     <div class="profile-img-wrap">
-                        <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/ec606e575bf6d255bf68c6004ea114d977eb2f50/yfm.jpg" alt="Youssef Fouad Professional Photo" class="profile-img">
+                        <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/main/yfm.jpg" alt="Youssef Fouad Professional Photo" class="profile-img">
                     </div>
                 </div>
             </div>
@@ -911,7 +968,7 @@
                     <i class="fa-solid fa-user"></i> Autors: Adrià Rodríguez i Izan Ruiz
                 </div>
                 <div style="margin-top:20px;">
-                    <a class="btn btn-secondary" href="https://github.com/adriiiii/NoSQLPaTi" target="_blank"> 
+                    <a class="btn btn-secondary" href="https://github.com/adriiiii/NoSQLPaTi" target="_blank" rel="noopener noreferrer"> 
                         <i class="fa-brands fa-github"></i> Veure Codi a GitHub
                     </a>
                 </div>
@@ -1154,8 +1211,8 @@
                 <div class="footer-col">
                     <h5>Socials</h5>
                     <ul class="footer-links">
-                        <li><a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                        <li><a href="https://github.com/yousseffouad12" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="https://github.com/yousseffouad12" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></li>
                         <li><a href="mailto:fouadyoussef0125@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
                     </ul>
                 </div>
@@ -1169,38 +1226,67 @@
 
     <!-- =================================================================================
          JAVASCRIPT LOGIC
-         Handling language switching, sticky navbar, smooth scroll and form submission.
+         Handling language switching (persistent), mobile menu, sticky navbar, and forms.
     ================================================================================== -->
     <script>
-        // 1. LANGUAGE SWITCHER LOGIC
-        // ===============================================
+        // 1. LANGUAGE SWITCHER (PERSISTENT WITH LOCALSTORAGE)
+        // ==================================================
         function switchLang(lang) {
-            // Remove 'active' from all data-lang elements
+            // Save selection to localStorage
+            localStorage.setItem('preferredLang', lang);
+
+            // Apply visible changes
             document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('active'));
-            // Add 'active' to matching lang elements
             document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => el.classList.add('active'));
 
-            // Update buttons state
+            // Update buttons (all instances, including mobile)
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            // Find the button clicked (simple heuristic match)
-            const btns = document.querySelectorAll('.lang-btn');
-            btns.forEach(btn => {
+            
+            // Highlight buttons matching the selected lang text (case-insensitive)
+            document.querySelectorAll('.lang-btn').forEach(btn => {
                 if(btn.textContent.toLowerCase() === lang) btn.classList.add('active');
             });
-            
-            // Persist preference if needed (Optional localstorage implementation could go here)
         }
 
-        // Initialize (Default to Català)
+        // Initialize (Load preference or default to Català)
         document.addEventListener('DOMContentLoaded', () => {
-            switchLang('ca');
+            const savedLang = localStorage.getItem('preferredLang') || 'ca';
+            switchLang(savedLang);
             document.getElementById('year').textContent = new Date().getFullYear();
         });
 
-        // 2. STICKY NAVBAR EFFECT
+        // 2. MOBILE MENU TOGGLE LOGIC
+        // ===============================================
+        const toggleBtn = document.querySelector('.mobile-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navbar = document.querySelector('.navbar');
+
+        toggleBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // Change icon from bars to X
+            const icon = toggleBtn.querySelector('i');
+            if(navMenu.classList.contains('active')){
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                navbar.style.background = "rgba(15, 23, 42, 1)"; // Solid bg when open
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+                navbar.style.background = ""; // Return to default
+            }
+        });
+
+        function closeMenu() {
+            if(navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                toggleBtn.querySelector('i').classList.remove('fa-xmark');
+                toggleBtn.querySelector('i').classList.add('fa-bars');
+            }
+        }
+
+        // 3. STICKY NAVBAR EFFECT
         // ===============================================
         window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
@@ -1208,7 +1294,7 @@
             }
         });
 
-        // 3. EMAILJS CONFIGURATION
+        // 4. EMAILJS CONFIGURATION
         // ===============================================
         (function() {
             if(typeof emailjs !== 'undefined'){
@@ -1268,7 +1354,7 @@
             });
         }
 
-        // 4. ANIMATION OBSERVER (FADE IN ON SCROLL)
+        // 5. ANIMATION OBSERVER (FADE IN ON SCROLL)
         // ===============================================
         const observerOptions = {
             threshold: 0.1
