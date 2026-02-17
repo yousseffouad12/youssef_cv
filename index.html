@@ -26,7 +26,6 @@
         /* 
         ======================================================================================
          1. VARIABLES & RESET
-         Restored missing CSS variables based on usage in the file.
         ======================================================================================
         */
         :root {
@@ -235,7 +234,6 @@
             border-color: rgba(14, 165, 233, 0.3);
         }
 
-        /* Restoration of the CSS that was cut off in the paste */
         .card::before {
             content: '';
             position: absolute;
@@ -282,7 +280,7 @@
 
         /* 
         ======================================================================================
-         5. PROJECTS SECTION STYLES (Adapted from NoSQLPaTi)
+         5. PROJECTS SECTION STYLES
         ======================================================================================
         */
         .pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
@@ -306,7 +304,6 @@
         /* 
         ======================================================================================
          7. TIMELINE SECTION (EXPERIENCE)
-         Elegant vertical timeline layout.
         ======================================================================================
         */
         .timeline {
@@ -393,12 +390,15 @@
             padding: 15px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
         }
 
         /* 
         ======================================================================================
          9. CONTACT FORM DESIGN
-         High-end form styling with focus effects.
         ======================================================================================
         */
         .form-wrap {
@@ -497,7 +497,6 @@
         /* 
         ======================================================================================
          11. RESPONSIVE ADJUSTMENTS
-         Media Queries to ensure seamless adaptation across all devices.
         ======================================================================================
         */
         @media (max-width: 1024px) {
@@ -603,7 +602,8 @@
                 </p>
 
                 <div class="btn-group">
-                    <a href="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/b7311f013b583c7f8110653a78bcc01f5bedd118/CV_YouussefFouadMabrouki.pdf" target="_blank" class="btn btn-primary">
+                    <!-- LINK DE CV ACTUALIZADO AQUI (GITHUB RAW) -->
+                    <a href="https://github.com/yousseffouad12/youssef_cv/raw/590876bdb24c7d403a9e814d4c8262eb2fbd0d89/YoussefFouadMabrouki_CV.pdf" class="btn btn-primary">
                         <i class="fa-solid fa-file-arrow-down"></i>
                         <span data-lang="ca" class="active">Descarregar CV</span>
                         <span data-lang="es">Descargar CV</span>
@@ -804,8 +804,27 @@
             <h2 style="text-align: center; margin-bottom: 60px;">Cronologia Professional</h2>
 
             <div class="timeline">
-                <!-- ITEM 1 -->
+                <!-- ITEM NUEVO: SERHS -->
                 <div class="timeline-item animate__animated animate__fadeInLeft">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="role-header">
+                            <div>
+                                <h3>Help Desk & Suport IT (Pràctiques)</h3>
+                                <div class="job-meta">SERHS Serveis</div>
+                            </div>
+                            <div class="job-location">
+                                <i class="fa-solid fa-location-dot"></i> Pineda de Mar | Gener 2026 – Actualitat
+                            </div>
+                        </div>
+                        <p data-lang="ca" class="active">Suport tècnic de Nivell 1 i 2 a usuaris corporatius (Maquinari i Programari). Resolució d'incidències, gestió de tiquets i manteniment preventiu. Administració bàsica d'usuaris i permisos de xarxa.</p>
+                        <p data-lang="es">Soporte técnico de Nivel 1 y 2 a usuarios corporativos (Hardware y Software). Resolución de incidencias, gestión de tickets y mantenimiento preventivo. Administración básica de usuarios y permisos de red.</p>
+                        <p data-lang="en">Level 1 & 2 technical support for corporate users (Hardware & Software). Incident resolution, ticket management, and preventive maintenance. Basic user administration and network permissions.</p>
+                    </div>
+                </div>
+
+                <!-- ITEM 1 (Antiguo) -->
+                <div class="timeline-item animate__animated animate__fadeInRight">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="role-header">
@@ -824,7 +843,7 @@
                 </div>
 
                 <!-- ITEM 2 -->
-                <div class="timeline-item animate__animated animate__fadeInRight">
+                <div class="timeline-item animate__animated animate__fadeInLeft">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="role-header">
@@ -853,7 +872,7 @@
                 </div>
 
                 <!-- ITEM 3 -->
-                <div class="timeline-item animate__animated animate__fadeInLeft">
+                <div class="timeline-item animate__animated animate__fadeInRight">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="role-header">
@@ -880,7 +899,7 @@
     </section>
 
     <!-- =================================================================================
-         PROJECTS SECTION (Integrated NoSQLPaTi)
+         PROJECTS SECTION
     ================================================================================== -->
     <section id="projects" class="section-padding">
         <div class="container">
@@ -1015,18 +1034,12 @@
                     </div>
                 </div>
 
-                <!-- Credly Badge Area -->
+                <!-- Credly Badge Area FIX -->
                 <div style="flex: 1; display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap:wrap;">
-                    <!-- AWS BADGE -->
                     <div class="badge-wrapper animate__animated animate__pulse animate__infinite animate__slower">
+                        <!-- CÓDIGO CREDLY INSERTADO Y ARREGLADO -->
                         <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="ea94ab6d-841e-48dd-8ad8-427c157fb4d7" data-share-badge-host="https://www.credly.com"></div>
-                    </div>
-                    
-                    <!-- CCNA Custom Representation (As no embedded badge provided) -->
-                    <div class="badge-wrapper" style="text-align: center; min-width: 150px; min-height:270px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                         <i class="fa-solid fa-certificate fa-4x" style="color:#00bceb; margin-bottom:20px;"></i>
-                         <h4 style="color:#0f172a; margin-bottom:5px;">CISCO CCNA</h4>
-                         <span style="font-size:0.8rem; color:#64748b;">Routing & Switching<br>Modules Completed</span>
+                        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
                     </div>
                 </div>
             </div>
