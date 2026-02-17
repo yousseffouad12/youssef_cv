@@ -227,10 +227,32 @@
         .hero-image-wrap { flex: 1; display: flex; justify-content: flex-end; position: relative; }
         .profile-card { position: relative; width: 350px; height: 400px; }
         .profile-img-wrap {
-            width: 100%; height: 100%; overflow: hidden; border-radius: 20px;
-            position: relative; z-index: 2; border: 1px solid rgba(255,255,255,0.1);
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            border-radius: 20px;
+            position: relative; 
+            z-index: 2; 
             background: var(--bg-card);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.5s ease;
         }
+
+        .profile-card:hover .profile-img-wrap {
+            transform: scale(1.02);
+        }
+        
+        .deco-shape { 
+            position: absolute; 
+            border-radius: 20px; 
+            z-index: 1; 
+            opacity: 0.4; /* Bajamos la opacidad */
+            transition: all 0.5s ease;
+        }
+        
+        /* Cuando pases el ratón, las formas se expanden */
+        .profile-card:hover .shape-1 { top: -25px; right: -25px; opacity: 0.6; }
+        .profile-card:hover .shape-2 { bottom: -25px; left: -25px; opacity: 0.6; }
         .profile-img { width: 100%; height: 100%; object-fit: cover; }
         
         .deco-shape { position: absolute; border-radius: 20px; z-index: 1; }
