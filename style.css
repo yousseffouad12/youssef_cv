@@ -1,318 +1,230 @@
-/* 
-======================================================================================
- YOUSSEF FOUAD - IT & CLOUD PORTFOLIO STYLES
- Architecture: Modern Tech (Dark/Glassmorphism) + Bento Design + Utilities
-======================================================================================
-*/
++/* ======================================================================================
+ YOUSSEF FOUAD - ENGINE V3.0 (THE ULTIMATE TECH EXPERIENCE)
+ Features: Kinetic Borders, Mesh Backgrounds, Advanced Bento Logic
+====================================================================================== */
 
-/* --- 1. VARIABLES GLOBALES --- */
-:root {
-    /* Color Palette - Deeper slate for a more premium tech feel */
-    --bg-body: #0a0f1c;       
-    --bg-card: rgba(30, 41, 59, 0.4); 
-    --bg-card-hover: rgba(30, 41, 59, 0.8);
-    --text-main: #f8fafc;     
-    --text-muted: #94a3b8;    
-    --text-dark: #0f172a;
-
-    /* Accents (Sky Blue to Cyan) */
-    --primary-400: #38bdf8;   
-    --primary-500: #0ea5e9;   
-    --primary-600: #0284c7;   
-    --accent-gradient: linear-gradient(135deg, #0ea5e9, #06b6d4);
-    
-    /* Tech Brand Colors */
-    --aws-color: #FF9900;
-    --python-color: #3b82f6; 
-    --postgres-color: #0077b6;
-    
-    /* Effects & Metrics */
-    --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
-    --border-glow: 1px solid rgba(14, 165, 233, 0.5);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-    --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.15);
-    --glass-blur: blur(12px);
-    
-    --radius-sm: 0.5rem;
-    --radius-md: 1rem;
-    --radius-lg: 1.5rem;
-    
-    --transition-fast: all 0.25s ease;
-    --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+/* --- 1. KEYFRAMES DE ÉLITE --- */
+@keyframes border-rotate {
+    100% { transform: rotate(360deg); }
 }
 
-/* --- 2. RESET & BASE --- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-
-body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--bg-body);
-    color: var(--text-main);
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
 }
 
-a { text-decoration: none; color: inherit; transition: var(--transition-fast); }
-ul { list-style: none; }
-img { max-width: 100%; height: auto; display: block; }
-button { font-family: inherit; }
-
-/* Tipografía Básica */
-h1, h2, h3, h4, h5 { font-weight: 700; color: white; line-height: 1.2; margin-bottom: 0.5em; }
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -1px; }
-h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1rem; }
-h3 { font-size: 1.25rem; }
-h4 { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
-p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.05rem; }
-
-/* --- 3. CLASES UTILITARIAS (Para evitar código en línea del HTML) --- */
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.section-padding { padding: 100px 0; }
-.text-gradient { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
-.text-center { text-align: center; }
-.text-muted { color: var(--text-muted); }
-.text-sm { font-size: 0.9rem; }
-.font-semibold { font-weight: 600; }
-.mb-1 { margin-bottom: 0.5rem; } .mb-2 { margin-bottom: 1rem; } .mb-3 { margin-bottom: 1.5rem; } .mb-4 { margin-bottom: 2rem; } .mb-5 { margin-bottom: 3rem; }
-.mt-1 { margin-top: 0.5rem; } .mt-2 { margin-top: 1rem; } .mt-4 { margin-top: 2rem; }
-.d-flex { display: flex; } .flex-col { flex-direction: column; }
-.items-center { align-items: center; } .justify-center { justify-content: center; }
-.gap-2 { gap: 0.5rem; } .gap-3 { gap: 1rem; } .gap-4 { gap: 1.5rem; }
-
-/* Lógica Multi-idioma de CSS simple */ { display: none; }.active { display: block; animation: fadeIn 0.4s ease forwards; }
-span.active { display: inline; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-/* --- 4. NAVEGACIÓN (HEADER) --- */
-.navbar {
-    position: fixed; top: 0; width: 100%; padding: 20px 0;
-    background: rgba(10, 15, 28, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    z-index: 1000; border-bottom: 1px solid transparent; transition: var(--transition-smooth);
-}
-.navbar.scrolled { padding: 12px 0; border-bottom: var(--border-subtle); background: rgba(10, 15, 28, 0.9); }
-.nav-inner { display: flex; justify-content: space-between; align-items: center; }
-
-.logo-container { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px;}
-.logo-icon { 
-    width: 38px; height: 38px; background: var(--accent-gradient); 
-    border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; 
-    color: white; font-weight: 800; font-size: 1rem; box-shadow: var(--shadow-glow);
+@keyframes mesh-pulse {
+    0% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+    100% { opacity: 0.3; transform: scale(1); }
 }
 
-.nav-menu { display: flex; gap: 30px; align-items: center;}
-.nav-link { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; padding: 5px 0; position: relative; }
-.nav-link::after {
-    content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-    background: var(--accent-gradient); transition: width 0.3s ease;
+@keyframes slide-in-top {
+    from { opacity: 0; transform: translateY(-30px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-.nav-link:hover { color: white; }
-.nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-/* --- BOTONES E INTERACCIONES --- */
-.btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    gap: 10px; padding: 12px 28px; border-radius: 8px; font-weight: 600;
-    cursor: pointer; transition: var(--transition-fast); border: none; font-size: 1rem; outline: none;
+/* --- 2. FONDO CÓSMICO DINÁMICO --- */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.1) 0, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(45, 212, 191, 0.1) 0, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
 }
-.btn-primary { 
-    background: var(--accent-gradient); color: white; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+
+/* Capa de ruido (Texture Grain) para un look analógico premium */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04;
+    z-index: -1;
+    pointer-events: none;
 }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5); }
 
-.btn-secondary { background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); }
-.btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); transform: translateY(-3px); }
-
-/* Switcher Idioma Moderno */
-.lang-switcher { display: flex; gap: 6px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 6px; }
-.lang-btn {
-    background: transparent; border: none; color: var(--text-muted); padding: 6px 12px;
-    border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: var(--transition-fast);
-}
-.lang-btn.active, .lang-btn:hover { background: var(--primary-500); color: white; }
-
-.mobile-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-
-/* Widget Sistema Operacional (Recomendado añadirlo al Header HTML) */
-.system-status { display: inline-flex; align-items: center; gap: 8px; border: var(--border-subtle); background: rgba(16, 185, 129, 0.05); padding: 6px 14px; border-radius: 99px; font-size: 0.75rem; letter-spacing: 0.5px; }
-.status-pulse { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-@keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
-
-/* --- 5. GRIDS TIPO "BENTO BOX" Y TARJETAS (Glassmorphism Avanzado) --- */
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.bento-grid {
+/* --- 3. BENTO GRID AVANZADO (Layouts Asimétricos) --- */
+.bento-grid-fancy {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 20px;
 }
 
-.card {
-    background: var(--bg-card);
-    backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-    border: var(--border-subtle); border-radius: var(--radius-md);
-    padding: 30px; transition: var(--transition-smooth);
-    position: relative; overflow: hidden; display: flex; flex-direction: column; z-index: 1;
-}
-/* Efecto de borde superior iluminado */
-.card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-    background: var(--accent-gradient); opacity: 0; transition: var(--transition-smooth); z-index: 2;
-}
-.card:hover {
-    transform: translateY(-5px); border-color: rgba(14, 165, 233, 0.4); 
-    background: var(--bg-card-hover); box-shadow: var(--shadow-glow);
-}
-.card:hover::before { opacity: 1; }
+.bento-big { grid-column: span 2; grid-row: span 2; }
+.bento-wide { grid-column: span 2; }
+.bento-tall { grid-row: span 2; }
 
-.card-icon-wrap {
-    width: 60px; height: 60px; border-radius: 12px; margin-bottom: 24px; font-size: 26px;
-    background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(14,165,233,0)); border: 1px solid rgba(14,165,233,0.2);
-    display: flex; align-items: center; justify-content: center; color: var(--primary-400);
+@media (max-width: 900px) {
+    .bento-grid-fancy { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Pills (Tech Tags) Mejorados */
-.skill-tags { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; padding-top: 20px; }
-.pill {
-    background: rgba(255,255,255,0.04); color: #e6eef8; border: 1px solid rgba(255,255,255,0.06);
-    padding: 6px 14px; border-radius: 99px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px; font-weight: 500;
-}
-.pill:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); }
-
-.pill.postgres{ border-color: rgba(0, 119, 182, 0.3); color: #90e0ef; }
-.pill.python{ border-color: rgba(255, 212, 59, 0.3); color: #ffd43b; }
-.pill.aws{ border-color: rgba(255, 153, 0, 0.3); color: var(--aws-color); }
-.pill.docker{ border-color: rgba(13, 183, 237, 0.3); color: #48cae4; }
-.pill.powerbi{ border-color: rgba(242, 200, 17, 0.3); color: #F2C811; }
-
-/* --- 6. SECCIONES ESPECÍFICAS --- */
-
-/* Hero */
-.hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 80px; }
-/* Mancha Radial desenfocada atrás */
-.hero::before {
-    content: ''; position: absolute; top: -10%; left: -20%; width: 60%; height: 70%;
-    background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 60%);
-    filter: blur(100px); pointer-events: none; z-index: 0;
-}
-.hero-content { display: flex; align-items: center; justify-content: space-between; gap: 60px; z-index: 2; position: relative; }
-.hero-text { flex: 1.2; }
-.hero-image-wrap { flex: 1; display: flex; justify-content: flex-end; position: relative; }
-
-/* Insignia Disponibilidad Hero */
-.badge-pill {
-    display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; margin-bottom: 24px;
-    background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;
-    border-radius: 99px; font-size: 0.85rem; font-weight: 600;
+/* --- 4. BORDES ANIMADOS (Efecto Tarjeta de Crédito Premium) --- */
+.card-border-gradient {
+    position: relative;
+    padding: 1px; /* Espacio para el borde */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    overflow: hidden;
 }
 
-/* Efectos 3D Tarjeta Foto Hero */
-.profile-card { position: relative; width: 340px; aspect-ratio: 4/5; }
-.profile-img-wrap {
-    width: 100%; height: 100%; overflow: hidden; border-radius: var(--radius-md); position: relative; z-index: 2; 
-    border: var(--border-subtle); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-.profile-img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
-.profile-card:hover .profile-img { transform: scale(1.03); }
-
-/* --- 7. TIMELINE DE EXPERIENCIA (Diseño Profesional Moderno) --- */
-.timeline { position: relative; max-width: 850px; margin: 0 auto; padding-left: 2rem;}
-.timeline::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%;
-    background: linear-gradient(to bottom, var(--primary-500) 0%, rgba(30, 41, 59, 0.1) 100%);
-}
-.timeline-item { position: relative; margin-bottom: 50px; }
-.timeline-marker {
-    position: absolute; top: 6px; left: -2.4rem; width: 16px; height: 16px;
-    background: var(--bg-body); border: 3px solid var(--primary-500); border-radius: 50%;
-    box-shadow: 0 0 10px rgba(14, 165, 233, 0.4); z-index: 2;
-}
-.role-header { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 8px; align-items: baseline; gap: 10px;}
-.job-meta { font-size: 0.85rem; color: var(--primary-400); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
-.task-list { padding-left: 1rem; margin-top: 15px; }
-.task-list li { margin-bottom: 8px; color: var(--text-muted); font-size: 0.95rem; list-style-type: '⚡  '; }
-
-/* --- 8. CERTIFICACIONES --- */
-.cert-container { background: rgba(15, 23, 42, 0.4); border: var(--border-subtle); border-radius: var(--radius-lg); padding: 50px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 40px; position: relative;}
-.cert-container::after { content:''; position: absolute; right:0; top:0; height:100%; width: 50%; background: radial-gradient(circle right, rgba(255,153,0,0.05), transparent 70%); border-radius: var(--radius-lg); z-index:0; pointer-events: none;}
-
-/* Credly Badge (Ya no marea, sólo en hover se acerca un poco) */
-.badge-wrapper {
-    background: #ffffff; padding: 20px; border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3); transition: transform 0.3s ease;
-    z-index: 1; display: flex; justify-content: center; min-width: 200px; border: 4px solid transparent; background-clip: padding-box;
-}
-.badge-wrapper:hover { transform: translateY(-5px) scale(1.02); }
-
-/* --- 9. CONTACTO Y FORMULARIO (Inputs High-End) --- */
-.form-wrap { background: rgba(30,41,59, 0.3); border: var(--border-subtle); padding: 40px; border-radius: var(--radius-lg); backdrop-filter: var(--glass-blur);}
-.form-group { margin-bottom: 20px; }
-.form-label { display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
-
-.form-control {
-    width: 100%; background: #0b1120; border: 1px solid #1e293b; color: white;
-    padding: 16px; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: var(--transition-fast);
-}
-.form-control::placeholder { color: #475569; }
-.form-control:focus { outline: none; border-color: var(--primary-500); box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15); background: #0f172a;}
-textarea.form-control { resize: vertical; min-height: 140px; }
-
-.info-card {
-    display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4);
-    border: var(--border-subtle); border-radius: 12px; margin-bottom: 16px; transition: var(--transition-fast);
-}
-.info-card:hover { border-color: var(--primary-500); transform: translateX(5px); background: rgba(30,41,59,0.7); }
-.icon-circle {
-    width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), transparent);
-    border: 1px solid rgba(14, 165, 233, 0.2); color: var(--primary-400); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+.card-border-gradient::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0 340deg,
+        var(--primary) 360deg
+    );
+    animation: border-rotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-/* --- 10. FOOTER --- */
-footer { background: #060913; border-top: var(--border-subtle); padding: 80px 0 30px; font-size: 0.9rem; color: var(--text-muted); }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 60px; }
-.footer-links li { margin-bottom: 12px; }
-.footer-links a:hover { color: var(--primary-400); text-shadow: 0 0 8px rgba(56, 189, 248, 0.4); padding-left: 5px; }
-.copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; }
-
-
-/* --- 11. ADAPTABILIDAD MÓVIL (RESPONSIVE) --- */
-@media (max-width: 1024px) {
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .hero-content { flex-direction: column; text-align: center; justify-content: center;}
-    .hero-text { order: 2; padding-top: 30px;}
-    .hero-image-wrap { order: 1; justify-content: center; }
-    .profile-card { width: 280px; }
-    .btn-group, .skill-tags { justify-content: center; }
+.card-border-gradient:hover::before {
+    opacity: 1;
 }
 
-@media (max-width: 768px) {
-    .section-padding { padding: 70px 0; }
-    h1 { font-size: 2.2rem; }
-    
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; text-align: center;}
-    .footer-links a:hover { padding-left: 0; }
+.card-content-inner {
+    position: relative;
+    background: var(--bg-body);
+    border-radius: calc(var(--radius-md) - 1px);
+    height: 100%;
+    padding: 2rem;
+    z-index: 1;
+}
 
-    /* Timeline corrección móvil */
-    .timeline { padding-left: 1.5rem; }
-    .timeline::before { left: 0; }
-    .timeline-marker { left: -9px; width: 18px; height: 18px;}
-    
-    .cert-container { padding: 30px 20px; text-align: center; }
+/* --- 5. COMPONENTES TECNOLÓGICOS (Dashboard Style) --- */
 
-    /* Menu hamburguesa en Mobile */
-    .mobile-toggle { display: block; }
-    .lang-switcher:not(.mobile) { display: none; }
-    
-    .nav-menu {
-        position: fixed; top: 0; left: -100%; width: 100vw; height: 100vh;
-        background: rgba(10, 15, 28, 0.98); backdrop-filter: blur(20px);
-        flex-direction: column; justify-content: center; align-items: center; gap: 40px;
-        transition: left 0.4s ease;
-    }
-    .nav-menu.active { left: 0; }
-    .nav-link { font-size: 1.5rem; }
-    .lang-switcher.mobile { display: flex; transform: scale(1.2); margin-top: 20px;}
+/* Badge de "Disponibilidad" con pulso dinámico */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #34d399;
+    backdrop-filter: blur(5px);
+}
+
+.pulse-dot {
+    width: 8px; height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    position: relative;
+}
+
+.pulse-dot::after {
+    content: "";
+    position: absolute;
+    width: 100%; height: 100%;
+    background: inherit;
+    border-radius: 50%;
+    animation: ping 1.5s infinite;
+}
+
+/* Barra de progreso de Skills (Modernas) */
+.skill-bar-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: var(--brand-gradient);
+    box-shadow: 0 0 10px var(--primary-glow);
+    border-radius: 10px;
+    transform: translateX(-100%);
+    transition: transform 1.5s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+
+.card:hover .skill-progress {
+    transform: translateX(0);
+}
+
+/* --- 6. EFECTO DE TEXTO "GLITCH" SUAVE PARA TÍTULOS --- */
+.hero-title {
+    position: relative;
+    animation: slide-in-top 0.8s ease-out forwards;
+}
+
+.hero-title:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    background: var(--bg-body);
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: noise-anim 2s infinite linear alternate-reverse;
+}
+
+/* --- 7. BOTÓN MAGNÉTICO (SIMULACIÓN) --- */
+.btn-magnetic {
+    position: relative;
+    padding: 16px 32px;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-magnetic span { position: relative; z-index: 2; }
+
+.btn-magnetic::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: 1;
+}
+
+.btn-magnetic:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-magnetic:hover {
+    color: var(--bg-body);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* --- 8. FOOTER ULTRA-MODERNO --- */
+.footer-blur {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: rgba(3, 7, 18, 0.8);
+    backdrop-filter: blur(20px);
+    position: relative;
+}
+
+.footer-blur::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 50%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
 }
