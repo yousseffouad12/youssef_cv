@@ -152,6 +152,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
       padding: 40px 48px;
       border-right: 1px solid var(--line);
       position: relative;
@@ -244,7 +245,7 @@
     .hero-right img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: top center;
+      object-position: center center;
       opacity: 0.85;
       filter: grayscale(15%);
       transition: transform 8s ease;
@@ -291,16 +292,22 @@
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    /* LinkedIn badge inside hero-right */
-    .hero-right .badge-base {
-      position: absolute;
-      top: 16px; right: 16px;
-      z-index: 10;
-      transform: scale(0.78);
-      transform-origin: top right;
-      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.5));
-      border-radius: 8px;
-      overflow: hidden;
+    /* LinkedIn badge below hero */
+    .linkedin-badge-section {
+      background: var(--cream);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .linkedin-badge-section .badge-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     /* =============================================
@@ -1041,10 +1048,6 @@
     <div class="hero-right">
       <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/main/yfm.jpg" alt="Youssef Fouad" />
       <div class="hero-right-overlay"></div>
-      <!-- LinkedIn Badge -->
-      <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="youssef-fouad-mabrouki-12275630a" data-version="v1">
-        <a class="badge-base__link LI-simple-link" href="https://es.linkedin.com/in/youssef-fouad-mabrouki-12275630a?trk=profile-badge">Youssef Fouad M.</a>
-      </div>
       <div class="hero-right-label">
         <h3>Youssef Fouad Mabrouki</h3>
         <p>Tordera, Barcelona · SMX + ASIX</p>
@@ -1053,7 +1056,13 @@
     </div>
   </section>
 
-  <!-- LinkedIn Badge Script -->
+  <!-- LinkedIn Badge Section -->
+  <div class="linkedin-badge-section">
+    <span class="badge-label">Perfil LinkedIn verificat</span>
+    <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="youssef-fouad-mabrouki-12275630a" data-version="v1">
+      <a class="badge-base__link LI-simple-link" href="https://es.linkedin.com/in/youssef-fouad-mabrouki-12275630a?trk=profile-badge">Youssef Fouad M.</a>
+    </div>
+  </div>
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
   <!-- MARQUEE -->
@@ -1138,7 +1147,7 @@
         <div class="section-label" style="width:100%; margin-bottom:14px;">Idiomes</div>
         <span class="lang-chip">🇪🇸 Castellà — Natiu</span>
         <span class="lang-chip">🇨🇦 Català — Natiu</span>
-        <span class="lang-chip">🇬🇧 Anglès — Intermedi (B1)</span>
+        <span class="lang-chip">🇬🇧 Anglès — Intermedi</span>
         <span class="lang-chip">🇲🇦 Àrab — Natal</span>
       </div>
     </div>
