@@ -151,8 +151,8 @@
     .hero-left {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 80px 48px 80px 48px;
+      justify-content: center;
+      padding: 40px 48px;
       border-right: 1px solid var(--line);
       position: relative;
     }
@@ -173,11 +173,11 @@
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(4rem, 8vw, 7.5rem);
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
       line-height: 0.92;
       letter-spacing: -0.02em;
       color: var(--ink);
-      margin-bottom: 40px;
+      margin-bottom: 24px;
     }
     .hero-title em { font-style: italic; color: var(--rust); }
     .hero-subtitle {
@@ -185,7 +185,7 @@
       color: var(--muted);
       max-width: 460px;
       line-height: 1.65;
-      margin-bottom: 50px;
+      margin-bottom: 32px;
       font-weight: 400;
     }
     .hero-actions {
@@ -290,6 +290,18 @@
       animation: blink 2s infinite;
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* LinkedIn badge inside hero-right */
+    .hero-right .badge-base {
+      position: absolute;
+      top: 16px; right: 16px;
+      z-index: 10;
+      transform: scale(0.78);
+      transform-origin: top right;
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.5));
+      border-radius: 8px;
+      overflow: hidden;
+    }
 
     /* =============================================
        MARQUEE STRIP
@@ -1029,6 +1041,10 @@
     <div class="hero-right">
       <img src="https://raw.githubusercontent.com/yousseffouad12/youssef_cv/main/yfm.jpg" alt="Youssef Fouad" />
       <div class="hero-right-overlay"></div>
+      <!-- LinkedIn Badge -->
+      <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="youssef-fouad-mabrouki-12275630a" data-version="v1">
+        <a class="badge-base__link LI-simple-link" href="https://es.linkedin.com/in/youssef-fouad-mabrouki-12275630a?trk=profile-badge">Youssef Fouad M.</a>
+      </div>
       <div class="hero-right-label">
         <h3>Youssef Fouad Mabrouki</h3>
         <p>Tordera, Barcelona · SMX + ASIX</p>
@@ -1036,6 +1052,9 @@
       </div>
     </div>
   </section>
+
+  <!-- LinkedIn Badge Script -->
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
   <!-- MARQUEE -->
   <div class="marquee-wrap">
@@ -1410,7 +1429,7 @@
         </div>
       </div>
       <div class="social-row">
-        <a href="www.linkedin.com/in/youssef-fouad-mabrouki-12275630a/" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn">
           <i class="fa-brands fa-linkedin-in"></i>
         </a>
         <a href="https://github.com/yousseffouad12" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub">
@@ -1454,7 +1473,7 @@
   <footer>
     <span>© <span id="year"></span> Youssef Fouad Mabrouki</span>
     <span>Tordera, Barcelona · IT &amp; Cloud Systems</span>
-    <a href="www.linkedin.com/in/youssef-fouad-mabrouki-12275630a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </footer>
 
   <!-- EMAIL JS SDK -->
@@ -1522,7 +1541,7 @@
 
     // EMAILJS
     (function() {
-      if(typeof emailjs !== 'undefined') emailjs.init("Tt7oPKLqddqL07tj2");
+      if(typeof emailjs !== 'undefined') emailjs.init("FC0HEcEgzVjCPFVIp");
     })();
     const form = document.getElementById('contact-form');
     const btnText = document.getElementById('btn-text');
@@ -1538,7 +1557,7 @@
         message: document.getElementById('message').value
       };
       if(typeof emailjs !== 'undefined') {
-        emailjs.send("service_k8uipjc", "template_g1gec17", params)
+        emailjs.send("service_f7ge46s", "template_g1gec17", params)
           .then(() => {
             btnText.textContent = 'Enviat! ✓';
             formStatus.style.display = 'block';
