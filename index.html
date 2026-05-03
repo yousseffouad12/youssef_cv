@@ -1000,6 +1000,37 @@
       .projects { padding: 64px 24px; }
       footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
     }
+
+    /* =============================================
+       LANGUAGE SWITCHER
+    ============================================= */
+    .lang-switcher-btns {
+      display: flex; gap: 4px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(13,13,13,0.2);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 5px 9px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-btn:hover { border-color: var(--rust); color: var(--rust); }
+    .lang-btn.active { background: var(--rust); border-color: var(--rust); color: white; }
+    @media (max-width: 768px) {
+      .lang-switcher-btns { order: -1; }
+    }
+
+    /* Hide/show i18n elements */
+    [data-lang] { display: none !important; }
+    [data-lang].lang-active { display: block !important; }
+    span[data-lang].lang-active { display: inline !important; }
+    li[data-lang].lang-active { display: list-item !important; }
   </style>
 </head>
 <body>
@@ -1012,14 +1043,19 @@
   <nav class="nav" id="navbar">
     <div class="nav-logo">Youssef <span>Fouad</span></div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about" onclick="closeNav()">Sobre mi</a></li>
-      <li><a href="#experience" onclick="closeNav()">Experiència</a></li>
-      <li><a href="#competencies" onclick="closeNav()">Skills</a></li>
-      <li><a href="#projects" onclick="closeNav()">Projectes</a></li>
-      <li><a href="#education" onclick="closeNav()">Formació</a></li>
-      <li><a href="#contact" onclick="closeNav()">Contacte</a></li>
+      <li><a href="#about" onclick="closeNav()" data-i18n="nav_about">Sobre mi</a></li>
+      <li><a href="#experience" onclick="closeNav()" data-i18n="nav_exp">Experiència</a></li>
+      <li><a href="#competencies" onclick="closeNav()" data-i18n="nav_skills">Habilitats</a></li>
+      <li><a href="#projects" onclick="closeNav()" data-i18n="nav_projects">Projectes</a></li>
+      <li><a href="#education" onclick="closeNav()" data-i18n="nav_edu">Formació</a></li>
+      <li><a href="#contact" onclick="closeNav()" data-i18n="nav_contact">Contacte</a></li>
     </ul>
-    <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf" class="nav-cta" rel="noopener noreferrer">↓ CV</a>
+    <div class="lang-switcher-btns">
+      <button class="lang-btn active" onclick="setLang('ca')">CA</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf" class="nav-cta" rel="noopener noreferrer" data-i18n="nav_cv">↓ CV</a>
     <button class="mobile-tog" id="mobileTog" aria-label="Menu">
       <i class="fa-solid fa-bars" id="togIcon"></i>
     </button>
@@ -1028,21 +1064,38 @@
   <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero-left">
-      <div class="hero-tag">Disponible per a noves oportunitats</div>
+      <div class="hero-tag">
+        <span data-lang="ca" class="lang-active">Disponible per a noves oportunitats</span>
+        <span data-lang="es">Disponible para nuevas oportunidades</span>
+        <span data-lang="en">Available for new opportunities</span>
+      </div>
       <h1 class="hero-title">
-        Sistemes<br/>
-        <em>IT</em> &amp;<br/>
-        Cloud
+        <span data-lang="ca" class="lang-active">Sistemes<br/><em>IT</em> &amp;<br/>Cloud</span>
+        <span data-lang="es">Sistemas<br/><em>IT</em> &amp;<br/>Cloud</span>
+        <span data-lang="en">IT &amp;<br/><em>Cloud</em><br/>Systems</span>
       </h1>
       <p class="hero-subtitle">
-        Tècnic en Administració de Sistemes i Xarxes. Especialitzat en entorns Windows Server, arquitectures AWS i automatització. Ara fent pràctiques a SERHS Serveis (Pineda de Mar).
+        <span data-lang="ca" class="lang-active">Tècnic en Administració de Sistemes i Xarxes. Especialitzat en entorns Windows Server, arquitectures AWS i automatització. Ara fent pràctiques a SERHS Serveis (Pineda de Mar).</span>
+        <span data-lang="es">Técnico en Administración de Sistemas y Redes. Especializado en entornos Windows Server, arquitecturas AWS y automatización. Actualmente en prácticas en SERHS Serveis (Pineda de Mar).</span>
+        <span data-lang="en">Systems and Networks Administration Technician. Specialized in Windows Server environments, AWS architectures and automation. Currently on internship at SERHS Serveis (Pineda de Mar).</span>
       </p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-dark"><i class="fa-solid fa-paper-plane"></i> Parlem</a>
-        <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf" class="btn-outline" rel="noopener noreferrer"><i class="fa-solid fa-file-arrow-down"></i> Descarregar CV</a>
+        <a href="#contact" class="btn-dark"><i class="fa-solid fa-paper-plane"></i>
+        <span data-lang="ca" class="lang-active">Parlem</span>
+        <span data-lang="es">Hablemos</span>
+        <span data-lang="en">Let's Talk</span>
+      </a>
+        <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf" class="btn-outline" rel="noopener noreferrer"><i class="fa-solid fa-file-arrow-down"></i>
+        <span data-lang="ca" class="lang-active">Descarregar CV</span>
+        <span data-lang="es">Descargar CV</span>
+        <span data-lang="en">Download CV</span>
+      </a>
       </div>
       <div class="hero-scroll-hint">
-        <i class="fa-solid fa-arrow-down"></i> Scroll per veure més
+        <i class="fa-solid fa-arrow-down"></i>
+        <span data-lang="ca" class="lang-active">Scroll per veure més</span>
+        <span data-lang="es">Desplázate para ver más</span>
+        <span data-lang="en">Scroll to see more</span>
       </div>
     </div>
     <div class="hero-right">
@@ -1051,14 +1104,22 @@
       <div class="hero-right-label">
         <h3>Youssef Fouad Mabrouki</h3>
         <p>Tordera, Barcelona · SMX + ASIX</p>
-        <div class="avail-dot">Obert a oportunitats laborals</div>
+        <div class="avail-dot">
+          <span data-lang="ca" class="lang-active">Obert a oportunitats laborals</span>
+          <span data-lang="es">Abierto a oportunidades laborales</span>
+          <span data-lang="en">Open to job opportunities</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- LinkedIn Badge Section -->
   <div class="linkedin-badge-section">
-    <span class="badge-label">Perfil LinkedIn verificat</span>
+    <span class="badge-label">
+      <span data-lang="ca" class="lang-active">Perfil LinkedIn verificat</span>
+      <span data-lang="es">Perfil LinkedIn verificado</span>
+      <span data-lang="en">Verified LinkedIn profile</span>
+    </span>
     <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="youssef-fouad-mabrouki-12275630a" data-version="v1">
       <a class="badge-base__link LI-simple-link" href="https://es.linkedin.com/in/youssef-fouad-mabrouki-12275630a?trk=profile-badge">Youssef Fouad M.</a>
     </div>
@@ -1098,25 +1159,39 @@
   <!-- ABOUT -->
   <section id="about" class="about">
     <div class="about-left">
-      <div class="section-label reveal">Sobre el meu perfil</div>
+      <div class="section-label reveal">
+        <span data-lang="ca" class="lang-active">Sobre el meu perfil</span>
+        <span data-lang="es">Sobre mi perfil</span>
+        <span data-lang="en">About me</span>
+      </div>
       <h2 class="about-title reveal reveal-delay-1">
-        Adaptació,<br/> <em>criteri tècnic</em><br/> i millora contínua.
+        <span data-lang="ca" class="lang-active">Adaptació,<br/> <em>criteri tècnic</em><br/> i millora contínua.</span>
+        <span data-lang="es">Adaptación,<br/> <em>criterio técnico</em><br/> y mejora continua.</span>
+        <span data-lang="en">Adaptability,<br/> <em>technical judgment</em><br/> and continuous growth.</span>
       </h2>
       <p class="about-body reveal reveal-delay-2">
-        Sóc Tècnic en Sistemes Microinformàtics i Xarxes (SMX), ara cursant el CFGS d'Administració de Sistemes Informàtics en Xarxa (ASIX) a l'Institut Sa Palomera, amb enfocament especial en arquitectures Cloud (AWS) i Ciberseguretat.
+        <span data-lang="ca" class="lang-active">Sóc Tècnic en Sistemes Microinformàtics i Xarxes (SMX), ara cursant el CFGS d'Administració de Sistemes Informàtics en Xarxa (ASIX) a l'Institut Sa Palomera, amb enfocament especial en arquitectures Cloud (AWS) i Ciberseguretat.</span>
+        <span data-lang="es">Soy Técnico en Sistemas Microinformáticos y Redes (SMX), actualmente cursando el CFGS de Administración de Sistemas Informáticos en Red (ASIX) en el Institut Sa Palomera, con enfoque especial en arquitecturas Cloud (AWS) y Ciberseguridad.</span>
+        <span data-lang="en">I am a Microcomputer Systems and Networks Technician (SMX), currently studying the CFGS in Networked Computer Systems Administration (ASIX) at Institut Sa Palomera, with a special focus on Cloud architectures (AWS) and Cybersecurity.</span>
       </p>
       <p class="about-body reveal reveal-delay-2">
-        La meva trajectòria combina habilitats tècniques sòlides amb experiència de cara al públic i treball en equips internacionals —incloent una estada Erasmus+ a Leipzig (Alemanya) en l'àmbit de ciberseguretat i domòtica.
+        <span data-lang="ca" class="lang-active">La meva trajectòria combina habilitats tècniques sòlides amb experiència de cara al públic i treball en equips internacionals —incloent una estada Erasmus+ a Leipzig (Alemanya) en l'àmbit de ciberseguretat i domòtica.</span>
+        <span data-lang="es">Mi trayectoria combina sólidas habilidades técnicas con experiencia de cara al público y trabajo en equipos internacionales —incluyendo una estancia Erasmus+ en Leipzig (Alemania) en el ámbito de la ciberseguridad y la domótica.</span>
+        <span data-lang="en">My career combines solid technical skills with customer-facing experience and work in international teams —including an Erasmus+ stay in Leipzig (Germany) focused on cybersecurity and home automation.</span>
       </p>
       <div class="stat-grid reveal reveal-delay-3">
-        <div class="stat-cell"><div class="stat-num">2+</div><div class="stat-desc">Anys d'exp. tècnica</div></div>
-        <div class="stat-cell"><div class="stat-num">3</div><div class="stat-desc">Pràctiques / Empresa</div></div>
-        <div class="stat-cell"><div class="stat-num">Erasmus+</div><div class="stat-desc">Leipzig, Alemanya</div></div>
-        <div class="stat-cell"><div class="stat-num">AWS</div><div class="stat-desc">Certified Foundations</div></div>
+        <div class="stat-cell"><div class="stat-num">2+</div><div class="stat-desc"><span data-lang="ca" class="lang-active">Anys d'exp. tècnica</span><span data-lang="es">Años de exp. técnica</span><span data-lang="en">Years tech exp.</span></div></div>
+        <div class="stat-cell"><div class="stat-num">3</div><div class="stat-desc"><span data-lang="ca" class="lang-active">Pràctiques / Empresa</span><span data-lang="es">Prácticas / Empresa</span><span data-lang="en">Internships / Jobs</span></div></div>
+        <div class="stat-cell"><div class="stat-num">Erasmus+</div><div class="stat-desc"><span data-lang="ca" class="lang-active">Leipzig, Alemanya</span><span data-lang="es">Leipzig, Alemania</span><span data-lang="en">Leipzig, Germany</span></div></div>
+        <div class="stat-cell"><div class="stat-num">AWS</div><div class="stat-desc"><span data-lang="ca" class="lang-active">Certificat Foundations</span><span data-lang="es">Certificado Foundations</span><span data-lang="en">Certified Foundations</span></div></div>
       </div>
     </div>
     <div class="about-right">
-      <div class="section-label reveal">Competències clau</div>
+      <div class="section-label reveal">
+        <span data-lang="ca" class="lang-active">Competències clau</span>
+        <span data-lang="es">Competencias clave</span>
+        <span data-lang="en">Key skills</span>
+      </div>
       <div class="skill-list" style="margin-top:24px;">
         <div class="skill-row reveal">
           <div class="skill-name">Windows Server / AD <span>Expert</span></div>
@@ -1144,58 +1219,86 @@
         </div>
       </div>
       <div class="lang-chips reveal reveal-delay-3" style="margin-top:40px;">
-        <div class="section-label" style="width:100%; margin-bottom:14px;">Idiomes</div>
-        <span class="lang-chip">🇪🇸 Castellà — Natiu</span>
-        <span class="lang-chip">🇨🇦 Català — Natiu</span>
-        <span class="lang-chip">🇬🇧 Anglès — Intermedi</span>
-        <span class="lang-chip">🇲🇦 Àrab — Natal</span>
+        <div class="section-label" style="width:100%; margin-bottom:14px;">
+          <span data-lang="ca" class="lang-active">Idiomes</span>
+          <span data-lang="es">Idiomas</span>
+          <span data-lang="en">Languages</span>
+        </div>
+        <span class="lang-chip">🇪🇸 <span data-lang="ca" class="lang-active">Castellà</span><span data-lang="es">Castellano</span><span data-lang="en">Spanish</span> — <span data-lang="ca" class="lang-active">Natiu</span><span data-lang="es">Nativo</span><span data-lang="en">Native</span></span>
+        <span class="lang-chip">🇨🇦 <span data-lang="ca" class="lang-active">Català</span><span data-lang="es">Catalán</span><span data-lang="en">Catalan</span> — <span data-lang="ca" class="lang-active">Natiu</span><span data-lang="es">Nativo</span><span data-lang="en">Native</span></span>
+        <span class="lang-chip">🇬🇧 <span data-lang="ca" class="lang-active">Anglès</span><span data-lang="es">Inglés</span><span data-lang="en">English</span> — <span data-lang="ca" class="lang-active">Intermedi</span><span data-lang="es">Intermedio</span><span data-lang="en">Intermediate</span></span>
+        <span class="lang-chip">🇲🇦 <span data-lang="ca" class="lang-active">Àrab</span><span data-lang="es">Árabe</span><span data-lang="en">Arabic</span> — <span data-lang="ca" class="lang-active">Natiu</span><span data-lang="es">Nativo</span><span data-lang="en">Native</span></span>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
   <section id="experience" class="experience">
-    <div class="section-label reveal">Trajectòria professional</div>
-    <h2 class="exp-title reveal reveal-delay-1">Experiència</h2>
+    <div class="section-label reveal">
+      <span data-lang="ca" class="lang-active">Trajectòria professional</span>
+      <span data-lang="es">Trayectoria profesional</span>
+      <span data-lang="en">Professional journey</span>
+    </div>
+    <h2 class="exp-title reveal reveal-delay-1">
+      <span data-lang="ca" class="lang-active">Experiència</span>
+      <span data-lang="es">Experiencia</span>
+      <span data-lang="en">Experience</span>
+    </h2>
     <table class="exp-table">
       <tbody>
         <tr class="reveal">
           <td class="exp-num">01</td>
-          <td class="exp-date">Gen 2026 — Actualitat</td>
+          <td class="exp-date"><span data-lang="ca" class="lang-active">Gen 2026 — Actualitat</span><span data-lang="es">Ene 2026 — Actualidad</span><span data-lang="en">Jan 2026 — Present</span></td>
           <td>
-            <div class="exp-role">Help Desk &amp; Suport IT</div>
+            <div class="exp-role"><span data-lang="ca" class="lang-active">Help Desk &amp; Suport IT</span><span data-lang="es">Help Desk &amp; Soporte IT</span><span data-lang="en">Help Desk &amp; IT Support</span></div>
             <div class="exp-company">SERHS Serveis · Pineda de Mar</div>
-            <p class="exp-desc">Suport tècnic de Nivell 1 i 2 a usuaris corporatius. Resolució d'incidències, gestió de tiquets (Jira), manteniment preventiu i administració bàsica d'usuaris i permisos de xarxa.</p>
-            <span class="exp-badge">Pràctiques ASIX en curs</span>
+            <p class="exp-desc">
+      <span data-lang="ca" class="lang-active">Suport tècnic de Nivell 1 i 2 a usuaris corporatius. Resolució d'incidències, gestió de tiquets (Jira), manteniment preventiu i administració bàsica d'usuaris i permisos de xarxa.</span>
+      <span data-lang="es">Soporte técnico de Nivel 1 y 2 a usuarios corporativos. Resolución de incidencias, gestión de tickets (Jira), mantenimiento preventivo y administración básica de usuarios y permisos de red.</span>
+      <span data-lang="en">Level 1 and 2 technical support for corporate users. Incident resolution, ticket management (Jira), preventive maintenance and basic user and network permissions administration.</span>
+    </p>
+            <span class="exp-badge"><span data-lang="ca" class="lang-active">Pràctiques ASIX en curs</span><span data-lang="es">Prácticas ASIX en curso</span><span data-lang="en">ASIX internship ongoing</span></span>
           </td>
         </tr>
         <tr class="reveal reveal-delay-1">
           <td class="exp-num">02</td>
-          <td class="exp-date">Ago 2025 — Actualitat</td>
+          <td class="exp-date"><span data-lang="ca" class="lang-active">Ago 2025 — Actualitat</span><span data-lang="es">Ago 2025 — Actualidad</span><span data-lang="en">Aug 2025 — Present</span></td>
           <td>
-            <div class="exp-role">Atenció al Client / Caixer</div>
+            <div class="exp-role"><span data-lang="ca" class="lang-active">Atenció al Client / Caixer</span><span data-lang="es">Atención al Cliente / Cajero</span><span data-lang="en">Customer Service / Cashier</span></div>
             <div class="exp-company">Grup Carrefour · Santa Susanna</div>
-            <p class="exp-desc">Atenció al client en entorn d'alt volum. Gestió de cobraments, resolució de conflictes en primera instància i treball sota pressió. Habilitats interpersonals i organitzatives.</p>
+            <p class="exp-desc">
+      <span data-lang="ca" class="lang-active">Atenció al client en entorn d'alt volum. Gestió de cobraments, resolució de conflictes en primera instància i treball sota pressió. Habilitats interpersonals i organitzatives.</span>
+      <span data-lang="es">Atención al cliente en entorno de alto volumen. Gestión de cobros, resolución de conflictos en primera instancia y trabajo bajo presión. Habilidades interpersonales y organizativas.</span>
+      <span data-lang="en">Customer service in a high-volume environment. Payment processing, first-instance conflict resolution and working under pressure. Interpersonal and organisational skills.</span>
+    </p>
           </td>
         </tr>
         <tr class="reveal reveal-delay-2">
           <td class="exp-num">03</td>
-          <td class="exp-date">Gen 2024 — Abr 2024</td>
+          <td class="exp-date"><span data-lang="ca" class="lang-active">Gen 2024 — Abr 2024</span><span data-lang="es">Ene 2024 — Abr 2024</span><span data-lang="en">Jan 2024 — Apr 2024</span></td>
           <td>
             <div class="exp-role">Help Desk Technician</div>
             <div class="exp-company">Escola Brianxa / I. Iglesias · Tordera</div>
-            <p class="exp-desc">Suport tècnic de nivell 1 a personal docent i alumnes. Manteniment de parc informàtic (+300h), diagnòstic d'avaries i configuració de xarxa local LAN/WLAN.</p>
-            <span class="exp-badge">Pràctiques SMX</span>
+            <p class="exp-desc">
+      <span data-lang="ca" class="lang-active">Suport tècnic de nivell 1 a personal docent i alumnes. Manteniment de parc informàtic (+300h), diagnòstic d'avaries i configuració de xarxa local LAN/WLAN.</span>
+      <span data-lang="es">Soporte técnico de nivel 1 a personal docente y alumnos. Mantenimiento del parque informático (+300h), diagnóstico de averías y configuración de red local LAN/WLAN.</span>
+      <span data-lang="en">Level 1 technical support for teaching staff and students. IT equipment maintenance (+300h), fault diagnosis and LAN/WLAN local network configuration.</span>
+    </p>
+            <span class="exp-badge"><span data-lang="ca" class="lang-active">Pràctiques SMX</span><span data-lang="es">Prácticas SMX</span><span data-lang="en">SMX internship</span></span>
           </td>
         </tr>
         <tr class="reveal reveal-delay-3">
           <td class="exp-num">04</td>
-          <td class="exp-date">Jul 2023 — Ago 2023</td>
+          <td class="exp-date"><span data-lang="ca" class="lang-active">Jul 2023 — Ago 2023</span><span data-lang="es">Jul 2023 — Ago 2023</span><span data-lang="en">Jul 2023 — Aug 2023</span></td>
           <td>
             <div class="exp-role">Erasmus+ IT Technician</div>
             <div class="exp-company">IT Technologies Training · Leipzig, Alemanya</div>
-            <p class="exp-desc">Estada formativa internacional intensiva en Ciberseguretat, Xarxes i Domòtica (Smart Home / IoT). Treball en equips multiculturals en anglès tècnic.</p>
-            <span class="exp-badge">Beca Erasmus+</span>
+            <p class="exp-desc">
+      <span data-lang="ca" class="lang-active">Estada formativa internacional intensiva en Ciberseguretat, Xarxes i Domòtica (Smart Home / IoT). Treball en equips multiculturals en anglès tècnic.</span>
+      <span data-lang="es">Estancia formativa internacional intensiva en Ciberseguridad, Redes y Domótica (Smart Home / IoT). Trabajo en equipos multiculturales en inglés técnico.</span>
+      <span data-lang="en">Intensive international training placement in Cybersecurity, Networks and Home Automation (Smart Home / IoT). Working in multicultural teams using technical English.</span>
+    </p>
+            <span class="exp-badge"><span data-lang="ca" class="lang-active">Beca Erasmus+</span><span data-lang="es">Beca Erasmus+</span><span data-lang="en">Erasmus+ Grant</span></span>
           </td>
         </tr>
       </tbody>
@@ -1205,9 +1308,9 @@
   <!-- COMPETENCIES -->
   <section id="competencies" class="comp">
     <div class="comp-sidebar">
-      <div class="section-label">Àrees</div>
-      <h2 class="comp-title">Àrees d'<em>expertise</em></h2>
-      <p class="comp-intro">Perfil tècnic orientat a infraestructures estables, segures i escalables.</p>
+      <div class="section-label"><span data-lang="ca" class="lang-active">Àrees</span><span data-lang="es">Áreas</span><span data-lang="en">Areas</span></div>
+      <h2 class="comp-title"><span data-lang="ca" class="lang-active">Àrees d'<em>expertesa</em></span><span data-lang="es">Áreas de <em>expertise</em></span><span data-lang="en">Areas of <em>expertise</em></span></h2>
+      <p class="comp-intro"><span data-lang="ca" class="lang-active">Perfil tècnic orientat a infraestructures estables, segures i escalables.</span><span data-lang="es">Perfil técnico orientado a infraestructuras estables, seguras y escalables.</span><span data-lang="en">Technical profile focused on stable, secure and scalable infrastructures.</span></p>
       <div class="comp-nav">
         <div class="comp-nav-item active">Server Admin</div>
         <div class="comp-nav-item">Networking</div>
@@ -1222,7 +1325,7 @@
           <div class="comp-card-icon"><i class="fa-brands fa-windows"></i></div>
           <div>
             <h3>Server Administration</h3>
-            <p>Instal·lació i configuració de Windows Server 2016/2019/2022. Gestió avançada de rols (AD DS, DNS, DHCP) i polítiques de grup (GPO). Virtualització amb Hyper-V.</p>
+            <p><span data-lang="ca" class="lang-active">Instal·lació i configuració de Windows Server 2016/2019/2022. Gestió avançada de rols (AD DS, DNS, DHCP) i polítiques de grup (GPO). Virtualització amb Hyper-V.</span><span data-lang="es">Instalación y configuración de Windows Server 2016/2019/2022. Gestión avanzada de roles (AD DS, DNS, DHCP) y políticas de grupo (GPO). Virtualización con Hyper-V.</span><span data-lang="en">Installation and configuration of Windows Server 2016/2019/2022. Advanced role management (AD DS, DNS, DHCP) and group policies (GPO). Hyper-V virtualisation.</span></p>
             <div class="tag-row">
               <span class="tag">Active Directory</span>
               <span class="tag">PowerShell</span>
@@ -1235,7 +1338,7 @@
           <div class="comp-card-icon"><i class="fa-solid fa-network-wired"></i></div>
           <div>
             <h3>Network Engineering</h3>
-            <p>Disseny i manteniment de xarxes LAN/WAN. Configuració de routers i switches CISCO (CCNA). VLANs, subnetting, protocols d'enrutament i seguretat perimetral.</p>
+            <p><span data-lang="ca" class="lang-active">Disseny i manteniment de xarxes LAN/WAN. Configuració de routers i switches CISCO (CCNA). VLANs, subnetting, protocols d'enrutament i seguretat perimetral.</span><span data-lang="es">Diseño y mantenimiento de redes LAN/WAN. Configuración de routers y switches CISCO (CCNA). VLANs, subnetting, protocolos de enrutamiento y seguridad perimetral.</span><span data-lang="en">LAN/WAN network design and maintenance. CISCO router and switch configuration (CCNA). VLANs, subnetting, routing protocols and perimeter security.</span></p>
             <div class="tag-row">
               <span class="tag">VLAN</span>
               <span class="tag">TCP/IP</span>
@@ -1248,7 +1351,7 @@
           <div class="comp-card-icon"><i class="fa-brands fa-aws"></i></div>
           <div>
             <h3>Cloud Solutions (AWS)</h3>
-            <p>Implementació de solucions al núvol amb Amazon Web Services. Model de responsabilitat compartida, IAM, EC2, S3, VPC. Certificat AWS Academy Cloud Foundations.</p>
+            <p><span data-lang="ca" class="lang-active">Implementació de solucions al núvol amb Amazon Web Services. Model de responsabilitat compartida, IAM, EC2, S3, VPC. Certificat AWS Academy Cloud Foundations.</span><span data-lang="es">Implementación de soluciones en la nube con Amazon Web Services. Modelo de responsabilidad compartida, IAM, EC2, S3, VPC. Certificado AWS Academy Cloud Foundations.</span><span data-lang="en">Cloud solution deployment with Amazon Web Services. Shared responsibility model, IAM, EC2, S3, VPC. AWS Academy Cloud Foundations certified.</span></p>
             <div class="tag-row">
               <span class="tag">EC2</span>
               <span class="tag">S3</span>
@@ -1261,7 +1364,7 @@
           <div class="comp-card-icon"><i class="fa-solid fa-code"></i></div>
           <div>
             <h3>Programming &amp; DB</h3>
-            <p>Automatització de tasques amb Python i scripting Bash. Disseny i consultes de bases de dades relacionals SQL (PostgreSQL). Control de versions amb Git/GitHub.</p>
+            <p><span data-lang="ca" class="lang-active">Automatització de tasques amb Python i scripting Bash. Disseny i consultes de bases de dades relacionals SQL (PostgreSQL). Control de versions amb Git/GitHub.</span><span data-lang="es">Automatización de tareas con Python y scripting Bash. Diseño y consultas de bases de datos relacionales SQL (PostgreSQL). Control de versiones con Git/GitHub.</span><span data-lang="en">Task automation with Python and Bash scripting. Relational SQL database design and querying (PostgreSQL). Version control with Git/GitHub.</span></p>
             <div class="tag-row">
               <span class="tag">Python</span>
               <span class="tag">SQL</span>
@@ -1274,7 +1377,7 @@
           <div class="comp-card-icon"><i class="fa-solid fa-headset"></i></div>
           <div>
             <h3>Technical Support L1 &amp; L2</h3>
-            <p>Diagnòstic de hardware i software. Resolució d'incidències per a usuari final. Gestió de tiquets amb Jira. Manteniment preventiu i gestió d'inventari de parc informàtic.</p>
+            <p><span data-lang="ca" class="lang-active">Diagnòstic de hardware i software. Resolució d'incidències per a usuari final. Gestió de tiquets amb Jira. Manteniment preventiu i gestió d'inventari de parc informàtic.</span><span data-lang="es">Diagnóstico de hardware y software. Resolución de incidencias para usuario final. Gestión de tickets con Jira. Mantenimiento preventivo y gestión de inventario de parque informático.</span><span data-lang="en">Hardware and software diagnostics. End-user incident resolution. Ticket management with Jira. Preventive maintenance and IT asset inventory management.</span></p>
             <div class="tag-row">
               <span class="tag">Help Desk</span>
               <span class="tag">Jira</span>
@@ -1290,8 +1393,8 @@
   <section id="projects" class="projects">
     <div class="proj-header">
       <div>
-        <div class="section-label reveal">Projectes destacats</div>
-        <h2 class="proj-title reveal reveal-delay-1">Projectes<br/><em>reals</em></h2>
+        <div class="section-label reveal"><span data-lang="ca" class="lang-active">Projectes destacats</span><span data-lang="es">Proyectos destacados</span><span data-lang="en">Featured projects</span></div>
+        <h2 class="proj-title reveal reveal-delay-1"><span data-lang="ca" class="lang-active">Projectes<br/><em>reals</em></span><span data-lang="es">Proyectos<br/><em>reales</em></span><span data-lang="en">Real<br/><em>projects</em></span></h2>
       </div>
       <a href="https://github.com/yousseffouad12" target="_blank" rel="noopener noreferrer" class="btn-outline reveal">
         <i class="fa-brands fa-github"></i> GitHub
@@ -1301,9 +1404,9 @@
       <div class="proj-wide reveal">
         <div class="proj-wide-text">
           <div class="proj-card-icon"><i class="fa-solid fa-hotel"></i></div>
-          <div class="proj-card-meta">Projecte final ASIX · Treball en equip</div>
+          <div class="proj-card-meta"><span data-lang="ca" class="lang-active">Projecte final ASIX · Treball en equip</span><span data-lang="es">Proyecto final ASIX · Trabajo en equipo</span><span data-lang="en">Final ASIX project · Team work</span></div>
           <div class="proj-card-title">NoSQLPaTi — Gestió Hotelera Integral</div>
-          <p class="proj-card-desc">Plataforma centralitzada per a la gestió hotelera amb èmfasi en seguretat, alta disponibilitat i anàlisi de dades. Inclou app d'escriptori Python/Tkinter, base de dades PostgreSQL amb SSL automatitzat, RBAC i data masking, replicació actiu-passiu, i dashboard Power BI per a KPIs d'ingressos.</p>
+          <p class="proj-card-desc"><span data-lang="ca" class="lang-active">Plataforma centralitzada per a la gestió hotelera amb èmfasi en seguretat, alta disponibilitat i anàlisi de dades. Inclou app d'escriptori Python/Tkinter, base de dades PostgreSQL amb SSL automatitzat, RBAC i data masking, replicació actiu-passiu, i dashboard Power BI per a KPIs d'ingressos.</span><span data-lang="es">Plataforma centralizada para la gestión hotelera con énfasis en seguridad, alta disponibilidad y análisis de datos. Incluye app de escritorio Python/Tkinter, base de datos PostgreSQL con SSL automatizado, RBAC y data masking, replicación activo-pasivo y dashboard Power BI para KPIs de ingresos.</span><span data-lang="en">Centralised platform for hotel management with a focus on security, high availability and data analysis. Includes a Python/Tkinter desktop app, PostgreSQL database with automated SSL, RBAC and data masking, active-passive replication, and a Power BI dashboard for revenue KPIs.</span></p>
           <div class="tag-row" style="margin-bottom:16px;">
             <span class="tag">Python · Tkinter</span>
             <span class="tag">PostgreSQL</span>
@@ -1358,14 +1461,14 @@
 
   <!-- EDUCATION & CERTS -->
   <section id="education" class="edu">
-    <div class="section-label reveal">Formació i certificacions</div>
+    <div class="section-label reveal"><span data-lang="ca" class="lang-active">Formació i certificacions</span><span data-lang="es">Formación y certificaciones</span><span data-lang="en">Education &amp; certifications</span></div>
     <h2 class="about-title reveal reveal-delay-1" style="font-family:var(--serif); font-size:clamp(2.2rem,4vw,3.4rem); margin-bottom:0;">
-      Educació &amp; <em style="font-style:italic; color:var(--rust);">Certs</em>
+      <span data-lang="ca" class="lang-active">Educació &amp; <em style="font-style:italic; color:var(--rust);">Certs</em></span><span data-lang="es">Educación &amp; <em style="font-style:italic; color:var(--rust);">Certs</em></span><span data-lang="en">Education &amp; <em style="font-style:italic; color:var(--rust);">Certs</em></span>
     </h2>
     <div class="edu-grid">
       <div>
         <div class="edu-item reveal">
-          <div class="edu-year">2024 – 2026 (en curs)</div>
+          <div class="edu-year"><span data-lang="ca" class="lang-active">2024 – 2026 (en curs)</span><span data-lang="es">2024 – 2026 (en curso)</span><span data-lang="en">2024 – 2026 (ongoing)</span></div>
           <div class="edu-name">CFGS Administració de Sistemes Informàtics en Xarxa</div>
           <div class="edu-school">Institut Sa Palomera · Blanes</div>
         </div>
@@ -1375,9 +1478,9 @@
           <div class="edu-school">Institut Lluís Companys · Mataró</div>
         </div>
         <div class="edu-item reveal reveal-delay-2">
-          <div class="edu-year">Juliol – Agost 2023</div>
+          <div class="edu-year"><span data-lang="ca" class="lang-active">Juliol – Agost 2023</span><span data-lang="es">Julio – Agosto 2023</span><span data-lang="en">July – August 2023</span></div>
           <div class="edu-name">Erasmus+ — IT Technologies Training</div>
-          <div class="edu-school">Leipzig, Alemanya · Ciberseguretat, Xarxes, IoT</div>
+          <div class="edu-school"><span data-lang="ca" class="lang-active">Leipzig, Alemanya · Ciberseguretat, Xarxes, IoT</span><span data-lang="es">Leipzig, Alemania · Ciberseguridad, Redes, IoT</span><span data-lang="en">Leipzig, Germany · Cybersecurity, Networks, IoT</span></div>
         </div>
       </div>
       <div>
@@ -1400,7 +1503,7 @@
 
         <!-- CREDLY BADGE -->
         <div class="credly-wrap reveal reveal-delay-2">
-          <div class="credly-label">Verificació oficial · Credly</div>
+          <div class="credly-label"><span data-lang="ca" class="lang-active">Verificació oficial · Credly</span><span data-lang="es">Verificación oficial · Credly</span><span data-lang="en">Official verification · Credly</span></div>
           <div data-iframe-width="150" data-iframe-height="270"
                data-share-badge-id="ea94ab6d-841e-48dd-8ad8-427c157fb4d7"
                data-share-badge-host="https://www.credly.com"></div>
@@ -1413,9 +1516,17 @@
   <!-- CONTACT -->
   <section id="contact" class="contact">
     <div class="contact-left">
-      <div class="section-label">Parlem</div>
-      <h2 class="contact-title">Tens un<br/> <em>projecte</em><br/> en ment?</h2>
-      <p class="contact-body">Estic obert a oportunitats laborals a jornada completa, mitja jornada o projectes en l'àmbit de la infraestructura IT i cloud. Escriu-me.</p>
+      <div class="section-label"><span data-lang="ca" class="lang-active">Parlem</span><span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></div>
+      <h2 class="contact-title">
+        <span data-lang="ca" class="lang-active">Tens un<br/> <em>projecte</em><br/> en ment?</span>
+        <span data-lang="es">¿Tienes un<br/> <em>proyecto</em><br/> en mente?</span>
+        <span data-lang="en">Got a<br/> <em>project</em><br/> in mind?</span>
+      </h2>
+      <p class="contact-body">
+        <span data-lang="ca" class="lang-active">Estic obert a oportunitats laborals a jornada completa, mitja jornada o projectes en l'àmbit de la infraestructura IT i cloud. Escriu-me.</span>
+        <span data-lang="es">Estoy abierto a oportunidades laborales a jornada completa, media jornada o proyectos en el ámbito de la infraestructura IT y cloud. Escríbeme.</span>
+        <span data-lang="en">I am open to full-time, part-time or freelance opportunities in IT infrastructure and cloud. Get in touch.</span>
+      </p>
       <div class="contact-info-row">
         <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
         <div>
@@ -1426,14 +1537,14 @@
       <div class="contact-info-row">
         <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
         <div>
-          <div class="contact-info-label">Telèfon</div>
+          <div class="contact-info-label"><span data-lang="ca" class="lang-active">Telèfon</span><span data-lang="es">Teléfono</span><span data-lang="en">Phone</span></div>
           <div class="contact-info-val">(+34) 641 61 70 18</div>
         </div>
       </div>
       <div class="contact-info-row">
         <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
         <div>
-          <div class="contact-info-label">Ubicació</div>
+          <div class="contact-info-label"><span data-lang="ca" class="lang-active">Ubicació</span><span data-lang="es">Ubicación</span><span data-lang="en">Location</span></div>
           <div class="contact-info-val">Tordera, Barcelona</div>
         </div>
       </div>
@@ -1453,7 +1564,7 @@
       <form id="contact-form">
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="name">Nom</label>
+            <label class="form-label" for="name"><span data-lang="ca" class="lang-active">Nom</span><span data-lang="es">Nombre</span><span data-lang="en">Name</span></label>
             <input type="text" id="name" class="form-control" placeholder="El teu nom" required />
           </div>
           <div class="form-group">
@@ -1462,11 +1573,11 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label" for="subject">Assumpte</label>
+          <label class="form-label" for="subject"><span data-lang="ca" class="lang-active">Assumpte</span><span data-lang="es">Asunto</span><span data-lang="en">Subject</span></label>
           <input type="text" id="subject" class="form-control" placeholder="Oportunitat laboral / Projecte..." required />
         </div>
         <div class="form-group">
-          <label class="form-label" for="message">Missatge</label>
+          <label class="form-label" for="message"><span data-lang="ca" class="lang-active">Missatge</span><span data-lang="es">Mensaje</span><span data-lang="en">Message</span></label>
           <textarea id="message" class="form-control" placeholder="Hola Youssef, m'agradaria..."></textarea>
         </div>
         <button type="submit" class="btn-dark" style="width:100%; justify-content:center;">
@@ -1480,7 +1591,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>© <span id="year"></span> Youssef Fouad Mabrouki</span>
+    <span>© <span id="year"></span> Youssef Fouad Mabrouki · <span data-lang="ca" class="lang-active">Tots els drets reservats</span><span data-lang="es">Todos los derechos reservados</span><span data-lang="en">All rights reserved</span></span>
     <span>Tordera, Barcelona · IT &amp; Cloud Systems</span>
     <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </footer>
@@ -1591,3 +1702,49 @@
   </script>
 </body>
 </html>
+    // ── LANGUAGE SWITCHER ──────────────────────────────────────
+    function setLang(lang) {
+      // Save
+      localStorage.setItem('lang', lang);
+      // Toggle all [data-lang] elements
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.classList.toggle('lang-active', el.dataset.lang === lang);
+      });
+      // Update buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+      });
+      // Update html lang attr
+      document.documentElement.lang = lang;
+      // Nav links text via data-i18n
+      const navTexts = {
+        nav_about:    {ca:'Sobre mi',     es:'Sobre mí',     en:'About'},
+        nav_exp:      {ca:'Experiència',  es:'Experiencia',  en:'Experience'},
+        nav_skills:   {ca:'Habilitats',   es:'Habilidades',  en:'Skills'},
+        nav_projects: {ca:'Projectes',    es:'Proyectos',    en:'Projects'},
+        nav_edu:      {ca:'Formació',     es:'Formación',    en:'Education'},
+        nav_contact:  {ca:'Contacte',     es:'Contacto',     en:'Contact'},
+      };
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if(navTexts[key]) el.textContent = navTexts[key][lang] || el.textContent;
+      });
+      // Form placeholders
+      const ph = {
+        ca: {name:'El teu nom', email:'email@empresa.com', subject:'Oportunitat laboral / Projecte...', message:'Hola Youssef, m'agradaria...', btn:'Enviar Missatge'},
+        es: {name:'Tu nombre',  email:'email@empresa.com', subject:'Oportunidad laboral / Proyecto...',  message:'Hola Youssef, me gustaría...', btn:'Enviar Mensaje'},
+        en: {name:'Your name',  email:'email@company.com', subject:'Job opportunity / Project...',        message:'Hi Youssef, I would like to...', btn:'Send Message'},
+      };
+      const p = ph[lang];
+      if(document.getElementById('name'))    document.getElementById('name').placeholder    = p.name;
+      if(document.getElementById('email'))   document.getElementById('email').placeholder   = p.email;
+      if(document.getElementById('subject')) document.getElementById('subject').placeholder = p.subject;
+      if(document.getElementById('message')) document.getElementById('message').placeholder = p.message;
+      if(document.getElementById('btn-text')) document.getElementById('btn-text').textContent = p.btn;
+    }
+
+    // Init language on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('lang') || 'ca';
+      setLang(saved);
+    });
