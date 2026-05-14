@@ -7,638 +7,530 @@
   <meta name="description" content="Youssef Fouad — Tècnic en Sistemes i Xarxes, Cloud AWS, Windows Server, Ciberseguretat." />
   <meta name="author" content="Youssef Fouad" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
   <style>
-    /* =============================================
-       TOKENS & RESET
-    ============================================= */
+    /* ─── DESIGN TOKENS ─────────────────────────────── */
     :root {
-      --ink:    #0d0d0d;
-      --paper:  #f5f0e8;
-      --cream:  #ede8da;
-      --rust:   #c94b1f;
-      --rust2:  #e05a28;
-      --steel:  #2a3444;
-      --muted:  #7a7060;
-      --line:   rgba(13,13,13,0.12);
-      --mono: 'DM Mono', monospace;
-      --serif: 'DM Serif Display', serif;
-      --sans: 'Syne', sans-serif;
+      --bg:      #0a0a0f;
+      --surface: #111118;
+      --card:    #16161f;
+      --border:  rgba(255,255,255,0.07);
+      --rust:    #e8562a;
+      --rust2:   #ff6b3d;
+      --gold:    #c9a84c;
+      --text:    #f0ede8;
+      --muted:   #6b6878;
+      --soft:    #a09cb0;
+      --serif:   'Playfair Display', serif;
+      --sans:    'Space Grotesk', sans-serif;
+      --mono:    'Space Mono', monospace;
+      --ease:    cubic-bezier(0.22,1,0.36,1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: var(--sans);
-      background: var(--paper);
-      color: var(--ink);
+      background: var(--bg);
+      color: var(--text);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    a { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: inherit; transition: all 0.25s var(--ease); }
     ul { list-style: none; }
     img { display: block; max-width: 100%; }
 
-    /* =============================================
-       CUSTOM CURSOR
-    ============================================= */
+    /* ─── GRAIN OVERLAY ─────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9990;
+    }
+
+    /* ─── CURSOR ────────────────────────────────────── */
     .cursor {
       position: fixed; top: 0; left: 0;
-      width: 10px; height: 10px;
+      width: 6px; height: 6px;
       background: var(--rust);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      transition: transform 0.15s ease, width 0.25s ease, height 0.25s ease;
-      mix-blend-mode: multiply;
     }
     .cursor-ring {
       position: fixed; top: 0; left: 0;
-      width: 36px; height: 36px;
-      border: 1.5px solid var(--rust);
+      width: 30px; height: 30px;
+      border: 1px solid rgba(232,86,42,0.5);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
-      transition: transform 0.35s ease, opacity 0.3s;
-      opacity: 0.5;
-    }
-    body:hover .cursor, body:hover .cursor-ring { opacity: 1; }
-
-    /* =============================================
-       NOISE TEXTURE OVERLAY
-    ============================================= */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.035;
-      pointer-events: none;
-      z-index: 9997;
     }
 
-    /* =============================================
-       NAVBAR
-    ============================================= */
+    /* ─── NAV ───────────────────────────────────────── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 1000;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 48px;
-      mix-blend-mode: normal;
-      transition: background 0.4s, box-shadow 0.4s;
+      padding: 24px 52px;
+      transition: all 0.4s var(--ease);
     }
     .nav.scrolled {
-      background: rgba(245,240,232,0.94);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 1px 0 var(--line);
+      padding: 16px 52px;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
     .nav-logo {
       font-family: var(--serif);
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       letter-spacing: -0.01em;
-      color: var(--ink);
+      color: var(--text);
     }
     .nav-logo span { color: var(--rust); }
-    .nav-links {
-      display: flex; gap: 36px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
+    .nav-center { display: flex; align-items: center; gap: 40px; }
+    .nav-links { display: flex; gap: 32px; }
     .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
-      transition: color 0.2s;
       position: relative;
     }
     .nav-links a::after {
       content: '';
-      position: absolute; bottom: -3px; left: 0;
-      width: 0; height: 1.5px;
+      position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px;
       background: var(--rust);
-      transition: width 0.3s ease;
+      transition: width 0.3s var(--ease);
     }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { width: 100%; }
+
+    /* lang switcher */
+    .lang-btns { display: flex; gap: 2px; }
+    .lb {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      padding: 4px 8px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lb:hover { border-color: var(--rust); color: var(--rust); }
+    .lb.active { background: var(--rust); border-color: var(--rust); color: white; }
+
     .nav-cta {
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-family: var(--mono);
+      font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1.5px solid var(--ink);
-      padding: 8px 20px;
-      border-radius: 2px;
+      border: 1px solid rgba(232,86,42,0.4);
+      color: var(--rust);
+      padding: 8px 18px;
+      border-radius: 3px;
       transition: all 0.25s;
     }
-    .nav-cta:hover { background: var(--ink); color: var(--paper); }
-    .mobile-tog {
-      display: none;
-      background: none; border: none;
-      font-size: 1.4rem; cursor: pointer; color: var(--ink);
-    }
+    .nav-cta:hover { background: var(--rust); color: white; border-color: var(--rust); }
+    .mobile-tog { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text); }
 
-    /* =============================================
-       HERO
-    ============================================= */
+    /* ─── HERO ──────────────────────────────────────── */
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 0;
+      grid-template-columns: 1fr 440px;
       padding-top: 80px;
-      position: relative;
     }
     .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 40px 48px;
-      border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 60px 64px;
+      border-right: 1px solid var(--border);
       position: relative;
     }
+    /* animated gradient line left */
+    .hero-left::before {
+      content: '';
+      position: absolute; left: 0; top: 20%; bottom: 20%;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--rust), transparent);
+      opacity: 0.4;
+    }
     .hero-tag {
+      display: inline-flex; align-items: center; gap: 10px;
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--rust);
-      margin-bottom: 32px;
-      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 28px;
     }
     .hero-tag::before {
       content: '';
-      display: block;
-      width: 32px; height: 1px;
+      width: 28px; height: 1px;
       background: var(--rust);
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(3.2rem, 7vw, 6.5rem);
-      line-height: 0.92;
+      font-size: clamp(3.6rem, 7vw, 7rem);
+      font-weight: 700;
+      line-height: 0.9;
       letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .hero-title em { font-style: italic; color: var(--rust); }
     .hero-subtitle {
       font-size: 1rem;
-      color: var(--muted);
+      color: var(--soft);
       max-width: 460px;
-      line-height: 1.65;
-      margin-bottom: 32px;
+      line-height: 1.72;
+      margin-bottom: 40px;
       font-weight: 400;
     }
-    .hero-actions {
-      display: flex; gap: 16px; flex-wrap: wrap;
-    }
-    .btn-dark {
-      background: var(--ink);
-      color: var(--paper);
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--rust);
+      color: white;
       font-family: var(--sans);
       font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       padding: 14px 28px;
-      border: none; border-radius: 2px;
+      border: none; border-radius: 3px;
       cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.25s var(--ease);
+      position: relative;
+      overflow: hidden;
     }
-    .btn-dark:hover { background: var(--rust); transform: translateY(-2px); }
-    .btn-outline {
+    .btn-primary::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.1);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,86,42,0.35); }
+    .btn-primary:hover::after { opacity: 1; }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
       background: transparent;
-      color: var(--ink);
+      color: var(--text);
       font-family: var(--sans);
       font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 14px 28px;
-      border: 1.5px solid var(--ink);
-      border-radius: 2px;
+      padding: 13px 26px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
       cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.25s var(--ease);
     }
-    .btn-outline:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
-    .hero-scroll-hint {
-      position: absolute; bottom: 40px; left: 48px;
+    .btn-ghost:hover { border-color: var(--rust); color: var(--rust); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 64px;
       font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
       display: flex; align-items: center; gap: 12px;
-      animation: nudge 2.5s ease-in-out infinite;
+      animation: bob 2.5s ease-in-out infinite;
     }
-    @keyframes nudge {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
+    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
     .hero-right {
       position: relative;
       overflow: hidden;
-      background: var(--steel);
+      background: var(--surface);
     }
     .hero-right img {
       width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      opacity: 0.85;
-      filter: grayscale(15%);
-      transition: transform 8s ease;
+      object-fit: cover; object-position: center top;
+      opacity: 0.75;
+      filter: grayscale(20%) contrast(1.05);
+      transition: transform 10s var(--ease);
     }
-    .hero-right:hover img { transform: scale(1.04); }
+    .hero-right:hover img { transform: scale(1.05); }
+    /* dual gradient overlay */
     .hero-right-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(13,13,13,0.6) 0%, transparent 60%);
+      background:
+        linear-gradient(to top, rgba(10,10,15,0.85) 0%, transparent 50%),
+        linear-gradient(to right, rgba(10,10,15,0.2) 0%, transparent 60%);
     }
     .hero-right-label {
       position: absolute; bottom: 32px; left: 28px; right: 28px;
     }
     .hero-right-label h3 {
       font-family: var(--serif);
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       color: white;
       line-height: 1.2;
     }
     .hero-right-label p {
       font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.45);
       margin-top: 6px;
     }
     .avail-dot {
       display: inline-flex; align-items: center; gap: 8px;
       font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-top: 14px;
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 12px;
     }
     .avail-dot::before {
       content: '';
-      display: block;
-      width: 8px; height: 8px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: #4ade80;
-      box-shadow: 0 0 6px #4ade80;
-      animation: blink 2s infinite;
+      box-shadow: 0 0 8px rgba(74,222,128,0.8);
+      animation: pulse 2s infinite;
     }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    /* LinkedIn badge below hero */
-    .linkedin-badge-section {
-      background: var(--cream);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 32px 48px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
+    /* ─── LINKEDIN STRIP ────────────────────────────── */
+    .linkedin-strip {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 52px;
+      display: flex; align-items: center; gap: 20px;
     }
-    .linkedin-badge-section .badge-label {
+    .linkedin-strip .badge-label {
       font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--muted);
+      white-space: nowrap;
     }
 
-    /* =============================================
-       MARQUEE STRIP
-    ============================================= */
+    /* ─── MARQUEE ───────────────────────────────────── */
     .marquee-wrap {
-      background: var(--ink);
-      color: var(--paper);
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 14px 0;
-      border-top: 1px solid var(--line);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden; white-space: nowrap; padding: 12px 0;
     }
     .marquee-track {
       display: inline-flex;
-      animation: marquee 22s linear infinite;
+      animation: marquee 28s linear infinite;
     }
+    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
     .marquee-item {
-      display: inline-flex; align-items: center; gap: 14px;
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding-right: 60px;
-      color: rgba(245,240,232,0.55);
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding-right: 56px;
+      color: var(--muted);
     }
-    .marquee-item strong { color: var(--paper); }
-    .marquee-sep { color: var(--rust); font-size: 1rem; }
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+    .marquee-item strong { color: var(--soft); }
+    .marquee-sep { color: var(--rust); }
 
-    /* =============================================
-       SECTIONS SHARED
-    ============================================= */
+    /* ─── SECTION HELPERS ───────────────────────────── */
     section { position: relative; }
-    .section-label {
+    .sec-label {
       font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--rust);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex; align-items: center; gap: 10px;
     }
-    .section-label::before {
-      content: '';
-      display: block;
-      width: 24px; height: 1px;
-      background: var(--rust);
-    }
+    .sec-label::before { content: ''; width: 20px; height: 1px; background: var(--rust); }
 
-    /* =============================================
-       ABOUT
-    ============================================= */
+    /* ─── REVEAL ────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+
+    /* ─── ABOUT ─────────────────────────────────────── */
     .about {
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
     .about-left {
-      padding: 100px 64px;
-      border-right: 1px solid var(--line);
+      padding: 96px 64px;
+      border-right: 1px solid var(--border);
     }
     .about-right {
-      padding: 100px 64px;
-      background: var(--cream);
+      padding: 96px 64px;
+      background: var(--surface);
     }
     .about-title {
       font-family: var(--serif);
-      font-size: clamp(2.2rem, 4vw, 3.6rem);
-      line-height: 1.05;
-      margin-bottom: 28px;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.08; margin-bottom: 28px;
     }
     .about-title em { font-style: italic; color: var(--rust); }
     .about-body {
-      font-size: 0.975rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 28px;
+      font-size: 0.95rem; color: var(--soft);
+      line-height: 1.78; margin-bottom: 20px; font-weight: 400;
     }
+    /* stats */
     .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
       margin-top: 40px;
     }
     .stat-cell {
-      background: var(--cream);
-      padding: 24px 20px;
-      transition: background 0.25s;
+      background: var(--card); padding: 22px 18px;
+      transition: background 0.3s;
+      cursor: default;
     }
-    .stat-cell:hover { background: var(--ink); }
-    .stat-cell:hover .stat-num,
-    .stat-cell:hover .stat-desc { color: var(--paper); }
+    .stat-cell:hover { background: rgba(232,86,42,0.08); }
     .stat-num {
       font-family: var(--serif);
-      font-size: 2.4rem;
-      color: var(--rust);
-      transition: color 0.25s;
+      font-size: 2.2rem; color: var(--rust);
     }
     .stat-desc {
       font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 4px;
-      transition: color 0.25s;
+      font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-top: 4px;
     }
-    /* Skills list */
-    .skill-list { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
-    .skill-row { display: flex; flex-direction: column; gap: 6px; }
+    /* skill bars */
+    .skill-list { display: flex; flex-direction: column; gap: 18px; margin-top: 8px; }
+    .skill-row { display: flex; flex-direction: column; gap: 7px; }
     .skill-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--ink);
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
       display: flex; justify-content: space-between;
     }
-    .skill-name span { color: var(--muted); font-weight: 400; font-size: 0.75rem; }
-    .skill-bar-bg {
-      height: 3px;
-      background: var(--line);
-      border-radius: 2px;
-      overflow: hidden;
-    }
+    .skill-name span { color: var(--muted); font-weight: 400; font-size: 0.7rem; text-transform: none; letter-spacing: 0; }
+    .skill-bar-bg { height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
     .skill-bar {
-      height: 100%;
-      background: var(--rust);
-      width: 0;
-      border-radius: 2px;
-      transition: width 1.4s cubic-bezier(0.22,1,0.36,1);
+      height: 100%; background: linear-gradient(90deg, var(--rust), var(--rust2));
+      width: 0; border-radius: 2px;
+      transition: width 1.6s var(--ease);
     }
-    .lang-chips {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-top: 32px;
-    }
+    /* lang chips */
+    .lang-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
     .lang-chip {
       font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid var(--line);
-      padding: 6px 14px;
-      border-radius: 2px;
-      color: var(--ink);
+      font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 6px 13px; border-radius: 3px;
+      color: var(--soft);
       transition: all 0.2s;
     }
-    .lang-chip:hover { background: var(--rust); border-color: var(--rust); color: white; }
+    .lang-chip:hover { border-color: var(--rust); color: var(--rust); }
 
-    /* =============================================
-       EXPERIENCE
-    ============================================= */
+    /* ─── EXPERIENCE ────────────────────────────────── */
     .experience {
-      padding: 100px 48px;
-      background: var(--ink);
-      color: var(--paper);
+      padding: 96px 52px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
     }
-    .experience .section-label { color: var(--rust2); }
-    .experience .section-label::before { background: var(--rust2); }
     .exp-title {
       font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3.4rem);
-      color: var(--paper);
-      margin-bottom: 64px;
+      margin-bottom: 60px;
     }
     .exp-table { width: 100%; border-collapse: collapse; }
     .exp-table tr {
-      border-bottom: 1px solid rgba(245,240,232,0.08);
-      transition: background 0.25s;
-      cursor: default;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
     }
-    .exp-table tr:hover { background: rgba(245,240,232,0.03); }
-    .exp-table td {
-      padding: 28px 20px;
-      vertical-align: top;
-    }
-    .exp-num {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: rgba(245,240,232,0.25);
-      white-space: nowrap;
-      width: 50px;
-    }
-    .exp-date {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: rgba(245,240,232,0.4);
-      white-space: nowrap;
-      width: 180px;
-    }
-    .exp-role {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      color: var(--paper);
-      margin-bottom: 4px;
-    }
+    .exp-table tr:hover { background: rgba(255,255,255,0.02); }
+    .exp-table td { padding: 28px 16px; vertical-align: top; }
+    .exp-num { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); width: 44px; }
+    .exp-date { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); width: 190px; white-space: nowrap; }
+    .exp-role { font-family: var(--serif); font-size: 1.3rem; color: var(--text); margin-bottom: 4px; }
     .exp-company {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--rust2);
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 10px;
     }
-    .exp-desc {
-      font-size: 0.875rem;
-      color: rgba(245,240,232,0.5);
-      line-height: 1.65;
-      max-width: 500px;
-    }
+    .exp-desc { font-size: 0.875rem; color: var(--soft); line-height: 1.7; max-width: 520px; }
     .exp-badge {
       display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid rgba(201,75,31,0.4);
-      color: var(--rust2);
-      padding: 3px 8px;
-      border-radius: 2px;
-      white-space: nowrap;
-      margin-top: 12px;
+      font-family: var(--mono); font-size: 0.58rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid rgba(232,86,42,0.3); color: var(--rust);
+      padding: 3px 9px; border-radius: 3px; margin-top: 12px;
     }
 
-    /* =============================================
-       COMPETENCIES
-    ============================================= */
-    .comp {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-    }
+    /* ─── COMPETENCIES ──────────────────────────────── */
+    .comp { display: grid; grid-template-columns: 280px 1fr; }
     .comp-sidebar {
-      padding: 80px 40px;
-      background: var(--cream);
-      border-right: 1px solid var(--line);
-      position: sticky;
-      top: 0;
-      height: fit-content;
-    }
-    .comp-main {
-      padding: 80px 56px;
+      padding: 80px 36px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      position: sticky; top: 0; height: fit-content;
     }
     .comp-title {
       font-family: var(--serif);
-      font-size: 2.6rem;
-      line-height: 1.05;
-      margin-bottom: 20px;
+      font-size: 2.4rem; line-height: 1.1; margin-bottom: 16px;
     }
     .comp-title em { font-style: italic; color: var(--rust); }
-    .comp-intro {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-    .comp-nav { display: flex; flex-direction: column; gap: 4px; margin-top: 32px; }
+    .comp-intro { font-size: 0.875rem; color: var(--soft); line-height: 1.7; }
+    .comp-nav { display: flex; flex-direction: column; gap: 2px; margin-top: 28px; }
     .comp-nav-item {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--muted);
       padding: 10px 12px;
       border-left: 2px solid transparent;
-      transition: all 0.2s;
-      cursor: pointer;
+      transition: all 0.2s; cursor: pointer;
     }
     .comp-nav-item:hover, .comp-nav-item.active {
-      color: var(--ink);
-      border-left-color: var(--rust);
-      background: rgba(201,75,31,0.05);
+      color: var(--text); border-left-color: var(--rust);
+      background: rgba(232,86,42,0.05);
     }
-    .comp-cards { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .comp-main { padding: 80px 52px; background: var(--bg); }
+    .comp-cards { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
     .comp-card {
-      background: var(--paper);
-      padding: 36px 36px;
-      display: flex; gap: 28px; align-items: flex-start;
+      background: var(--card);
+      padding: 32px;
+      display: flex; gap: 24px; align-items: flex-start;
       transition: background 0.2s;
     }
-    .comp-card:hover { background: var(--cream); }
+    .comp-card:hover { background: rgba(255,255,255,0.03); }
     .comp-card-icon {
-      flex-shrink: 0;
-      width: 52px; height: 52px;
-      border: 1px solid var(--line);
+      flex-shrink: 0; width: 48px; height: 48px;
+      border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-      color: var(--rust);
-      border-radius: 2px;
+      font-size: 1.2rem; color: var(--rust); border-radius: 4px;
     }
-    .comp-card h3 {
-      font-family: var(--sans);
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .comp-card p {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 14px;
-    }
+    .comp-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .comp-card p { font-size: 0.862rem; color: var(--soft); line-height: 1.68; margin-bottom: 14px; }
     .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 4px 10px;
-      border-radius: 2px;
+      font-family: var(--mono); font-size: 0.58rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(255,255,255,0.05); color: var(--soft);
+      border: 1px solid var(--border);
+      padding: 4px 9px; border-radius: 3px;
+      transition: all 0.2s;
     }
+    .tag:hover { border-color: var(--rust); color: var(--rust); }
 
-    /* =============================================
-       PROJECTS
-    ============================================= */
+    /* ─── PROJECTS ──────────────────────────────────── */
     .projects {
-      padding: 100px 48px;
-      background: var(--cream);
-      border-top: 1px solid var(--line);
+      padding: 96px 52px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
     }
     .proj-header {
-      display: flex;
-      align-items: flex-end;
+      display: flex; align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 64px;
-      gap: 40px;
+      margin-bottom: 56px; gap: 40px;
     }
     .proj-title {
       font-family: var(--serif);
@@ -646,328 +538,186 @@
     }
     .proj-title em { font-style: italic; color: var(--rust); }
     .proj-main {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
     }
     .proj-card {
-      background: var(--paper);
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.25s;
+      background: var(--card);
+      padding: 36px; position: relative; overflow: hidden;
+      transition: background 0.3s;
     }
-    .proj-card:hover { background: var(--ink); }
-    .proj-card:hover .proj-card-title,
-    .proj-card:hover .proj-card-desc,
-    .proj-card:hover .proj-card-meta { color: var(--paper); }
-    .proj-card:hover .proj-card-meta { color: rgba(245,240,232,0.4); }
-    .proj-card:hover .proj-card-icon { color: var(--rust2); }
-    .proj-card:hover .tag { background: rgba(245,240,232,0.1); color: var(--paper); }
-    .proj-card-icon {
-      font-size: 1.4rem;
-      color: var(--rust);
-      margin-bottom: 20px;
-      transition: color 0.25s;
+    .proj-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--rust), transparent);
+      opacity: 0; transition: opacity 0.3s;
     }
-    .proj-card-title {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      margin-bottom: 10px;
-      transition: color 0.25s;
-    }
+    .proj-card:hover { background: rgba(232,86,42,0.05); }
+    .proj-card:hover::before { opacity: 1; }
+    .proj-card-icon { font-size: 1.4rem; color: var(--rust); margin-bottom: 18px; transition: transform 0.3s; }
+    .proj-card:hover .proj-card-icon { transform: scale(1.1); }
+    .proj-card-title { font-family: var(--serif); font-size: 1.28rem; margin-bottom: 8px; }
     .proj-card-meta {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-      transition: color 0.25s;
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 12px;
     }
-    .proj-card-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 20px;
-      transition: color 0.25s;
-    }
+    .proj-card-desc { font-size: 0.862rem; color: var(--soft); line-height: 1.68; margin-bottom: 18px; }
     .proj-wide {
       grid-column: span 2;
-      background: var(--steel);
-      color: var(--paper);
+      background: linear-gradient(135deg, #1a1025, #0f1a28);
       padding: 40px;
-      display: flex;
-      gap: 40px;
-      align-items: flex-start;
+      display: flex; gap: 40px; align-items: flex-start;
+      border-bottom: 1px solid var(--border);
     }
     .proj-wide-text { flex: 1; }
-    .proj-wide-text .proj-card-title,
-    .proj-wide-text .proj-card-desc { color: var(--paper); }
-    .proj-wide-text .proj-card-meta { color: rgba(245,240,232,0.4); }
-    .proj-wide-text .proj-card-icon { color: var(--rust2); }
-    .proj-wide-text .tag { background: rgba(245,240,232,0.1); color: var(--paper); }
-    .proj-wide-side {
-      flex-shrink: 0;
-      width: 220px;
-    }
-    .proj-wide-side .mini-stat {
-      border-top: 1px solid rgba(245,240,232,0.1);
-      padding: 14px 0;
-    }
-    .mini-stat-num {
-      font-family: var(--serif);
-      font-size: 1.8rem;
-      color: var(--rust2);
-    }
-    .mini-stat-label {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,0.4);
-    }
+    .proj-wide-side { flex-shrink: 0; width: 210px; }
+    .mini-stat { border-top: 1px solid var(--border); padding: 14px 0; }
+    .mini-stat-num { font-family: var(--serif); font-size: 1.75rem; color: var(--rust); }
+    .mini-stat-label { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
-    /* =============================================
-       EDUCATION & CERTIFICATIONS
-    ============================================= */
+    /* ─── EDUCATION ─────────────────────────────────── */
     .edu {
-      padding: 100px 48px;
-      background: var(--paper);
-      border-top: 1px solid var(--line);
+      padding: 96px 52px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
     }
-    .edu-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      margin-top: 60px;
-    }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 56px; }
     .edu-item {
-      border-left: 2px solid var(--line);
-      padding-left: 28px;
-      margin-bottom: 40px;
+      border-left: 2px solid var(--border);
+      padding-left: 24px; margin-bottom: 36px;
       transition: border-color 0.25s;
     }
     .edu-item:hover { border-left-color: var(--rust); }
     .edu-year {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 8px;
+      font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 7px;
     }
-    .edu-name {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      margin-bottom: 6px;
-    }
-    .edu-school {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .cert-grid { display: flex; flex-direction: column; gap: 20px; }
+    .edu-name { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 5px; }
+    .edu-school { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+    .cert-grid { display: flex; flex-direction: column; gap: 14px; }
     .cert-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 24px;
-      border: 1px solid var(--line);
-      border-radius: 2px;
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--border); border-radius: 4px;
+      background: var(--card);
       transition: all 0.25s;
     }
-    .cert-item:hover { border-color: var(--rust); transform: translateX(6px); }
+    .cert-item:hover { border-color: var(--rust); transform: translateX(5px); background: rgba(232,86,42,0.05); }
     .cert-icon {
-      flex-shrink: 0;
-      width: 44px; height: 44px;
+      flex-shrink: 0; width: 42px; height: 42px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(201,75,31,0.08);
-      border-radius: 2px;
-      font-size: 1.2rem;
-      color: var(--rust);
+      background: rgba(232,86,42,0.1); border-radius: 4px;
+      font-size: 1.1rem; color: var(--rust);
     }
-    .cert-name {
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-bottom: 3px;
-    }
-    .cert-by {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+    .cert-name { font-weight: 600; font-size: 0.875rem; margin-bottom: 3px; }
+    .cert-by { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
     .credly-wrap {
-      margin-top: 28px;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 2px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+      margin-top: 22px; background: white;
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 18px;
     }
     .credly-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #888; margin-bottom: 12px;
     }
 
-    /* =============================================
-       CONTACT
-    ============================================= */
+    /* ─── CONTACT ───────────────────────────────────── */
     .contact {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: var(--ink);
-      color: var(--paper);
-      border-top: 1px solid rgba(245,240,232,0.08);
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
     }
     .contact-left {
-      padding: 100px 64px;
-      border-right: 1px solid rgba(245,240,232,0.08);
+      padding: 96px 64px;
+      border-right: 1px solid var(--border);
+      position: relative; overflow: hidden;
     }
-    .contact-left .section-label { color: var(--rust2); }
-    .contact-left .section-label::before { background: var(--rust2); }
+    /* glow BG */
+    .contact-left::before {
+      content: '';
+      position: absolute; bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(232,86,42,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-left .sec-label { color: var(--rust2); }
+    .contact-left .sec-label::before { background: var(--rust2); }
     .contact-title {
       font-family: var(--serif);
       font-size: clamp(2.4rem, 4vw, 3.8rem);
-      color: var(--paper);
-      margin-bottom: 20px;
-      line-height: 1.05;
+      margin-bottom: 18px; line-height: 1.05;
     }
-    .contact-title em { font-style: italic; color: var(--rust2); }
-    .contact-body {
-      font-size: 0.95rem;
-      color: rgba(245,240,232,0.55);
-      line-height: 1.7;
-      margin-bottom: 48px;
-    }
+    .contact-title em { font-style: italic; color: var(--rust); }
+    .contact-body { font-size: 0.95rem; color: var(--soft); line-height: 1.72; margin-bottom: 44px; }
     .contact-info-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 18px 0;
-      border-top: 1px solid rgba(245,240,232,0.08);
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 0; border-top: 1px solid var(--border);
+      transition: padding-left 0.25s;
     }
     .contact-info-row:hover { padding-left: 8px; }
     .contact-info-icon {
       width: 36px; height: 36px;
-      border: 1px solid rgba(245,240,232,0.15);
-      border-radius: 2px;
+      border: 1px solid var(--border); border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
-      color: var(--rust2);
-      flex-shrink: 0;
+      color: var(--rust); flex-shrink: 0; font-size: 0.9rem;
     }
-    .contact-info-label {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,0.3);
-    }
-    .contact-info-val {
-      font-size: 0.9rem;
-      color: var(--paper);
-      font-weight: 600;
-    }
-    .social-row {
-      display: flex; gap: 12px;
-      margin-top: 40px;
-    }
+    .contact-info-label { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .contact-info-val { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+    .social-row { display: flex; gap: 10px; margin-top: 36px; }
     .social-btn {
-      width: 42px; height: 42px;
-      border: 1px solid rgba(245,240,232,0.15);
-      border-radius: 2px;
+      width: 40px; height: 40px;
+      border: 1px solid var(--border); border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
-      color: rgba(245,240,232,0.5);
-      font-size: 1rem;
+      color: var(--muted); font-size: 0.95rem;
       transition: all 0.2s;
     }
     .social-btn:hover { background: var(--rust); border-color: var(--rust); color: white; }
-    .contact-right {
-      padding: 100px 64px;
-    }
-    .form-group { margin-bottom: 20px; }
+    .contact-right { padding: 96px 64px; background: var(--bg); }
+    .form-group { margin-bottom: 18px; }
     .form-label {
-      display: block;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,0.4);
-      margin-bottom: 8px;
+      display: block; font-family: var(--mono);
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
     }
     .form-control {
       width: 100%;
-      background: rgba(245,240,232,0.05);
-      border: 1px solid rgba(245,240,232,0.1);
-      color: var(--paper);
-      padding: 14px 16px;
-      font-family: var(--sans);
-      font-size: 0.9rem;
-      border-radius: 2px;
-      transition: border-color 0.25s;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 13px 15px;
+      font-family: var(--sans); font-size: 0.9rem;
+      border-radius: 4px;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-    .form-control::placeholder { color: rgba(245,240,232,0.2); }
-    .form-control:focus { outline: none; border-color: var(--rust2); }
+    .form-control::placeholder { color: var(--muted); font-size: 0.85rem; }
+    .form-control:focus { outline: none; border-color: var(--rust); box-shadow: 0 0 0 3px rgba(232,86,42,0.1); }
     textarea.form-control { resize: vertical; min-height: 130px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    /* =============================================
-       FOOTER
-    ============================================= */
+    /* ─── FOOTER ────────────────────────────────────── */
     footer {
-      background: var(--ink);
-      color: rgba(245,240,232,0.3);
-      border-top: 1px solid rgba(245,240,232,0.06);
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 24px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted);
     }
-    footer a:hover { color: var(--rust2); }
+    footer a:hover { color: var(--rust); }
 
-    /* =============================================
-       SCROLL REVEAL
-    ============================================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.35s; }
-
-    /* =============================================
-       RESPONSIVE
-    ============================================= */
+    /* ─── RESPONSIVE ────────────────────────────────── */
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-right { min-height: 50vh; }
+      .hero-right { min-height: 55vw; }
       .about { grid-template-columns: 1fr; }
       .about-left, .about-right { padding: 64px 32px; border: none; }
       .comp { grid-template-columns: 1fr; }
-      .comp-sidebar { position: static; border: none; border-bottom: 1px solid var(--line); padding: 48px 32px 32px; }
+      .comp-sidebar { position: static; border: none; border-bottom: 1px solid var(--border); padding: 48px 32px 28px; }
       .comp-nav { flex-direction: row; flex-wrap: wrap; }
       .comp-main { padding: 48px 32px; }
       .contact { grid-template-columns: 1fr; }
@@ -978,48 +728,57 @@
       .proj-wide-side { width: 100%; }
     }
     @media (max-width: 768px) {
-      .nav { padding: 18px 24px; }
+      .nav { padding: 16px 20px; }
+      .nav-center { display: none; }
       .nav-links { display: none; }
       .nav-links.open {
         display: flex; flex-direction: column;
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: var(--ink); color: var(--paper);
+        position: fixed; inset: 0;
+        background: rgba(10,10,15,0.98); backdrop-filter: blur(20px);
         align-items: center; justify-content: center;
-        gap: 28px; z-index: 999;
-        font-size: 1.2rem;
+        gap: 28px; z-index: 999; font-size: 1.1rem;
       }
-      .nav-links.open a { color: rgba(245,240,232,0.7); }
+      .nav-links.open a { color: var(--soft); }
       .mobile-tog { display: block; }
       .nav-cta { display: none; }
-      .hero-left { padding: 56px 24px; }
-      .hero-scroll-hint { display: none; }
-      .experience { padding: 64px 24px; }
+      .hero-left { padding: 48px 20px; }
+      .hero-scroll { display: none; }
+      .experience { padding: 64px 20px; }
       .exp-table td { padding: 20px 8px; }
       .exp-date, .exp-num { display: none; }
-      .edu { padding: 64px 24px; }
-      .projects { padding: 64px 24px; }
-      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+      .edu { padding: 64px 20px; }
+      .projects { padding: 64px 20px; }
+      .linkedin-strip { padding: 18px 20px; flex-wrap: wrap; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- CURSOR -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- NAV -->
   <nav class="nav" id="navbar">
     <div class="nav-logo">Youssef <span>Fouad</span></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about" onclick="closeNav()">Sobre mi</a></li>
-      <li><a href="#experience" onclick="closeNav()">Experiència</a></li>
-      <li><a href="#competencies" onclick="closeNav()">Skills</a></li>
-      <li><a href="#projects" onclick="closeNav()">Projectes</a></li>
-      <li><a href="#education" onclick="closeNav()">Formació</a></li>
-      <li><a href="#contact" onclick="closeNav()">Contacte</a></li>
-    </ul>
-    <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf" class="nav-cta" rel="noopener noreferrer">↓ CV</a>
+    <div class="nav-center">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about"        onclick="closeNav()" id="nl-about">Sobre mi</a></li>
+        <li><a href="#experience"   onclick="closeNav()" id="nl-exp">Experiència</a></li>
+        <li><a href="#competencies" onclick="closeNav()" id="nl-skills">Habilitats</a></li>
+        <li><a href="#projects"     onclick="closeNav()" id="nl-proj">Projectes</a></li>
+        <li><a href="#project-suricata" onclick="closeNav()" id="nl-suricata">Suricata</a></li>
+      <li><a href="#education"    onclick="closeNav()" id="nl-edu">Formació</a></li>
+        <li><a href="#contact"      onclick="closeNav()" id="nl-contact">Contacte</a></li>
+      </ul>
+      <div class="lang-btns">
+        <button class="lb active" onclick="setLang('ca')">CA</button>
+        <button class="lb"        onclick="setLang('es')">ES</button>
+        <button class="lb"        onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+    <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf"
+       class="nav-cta" rel="noopener noreferrer" id="nav-cv">↓ CV</a>
     <button class="mobile-tog" id="mobileTog" aria-label="Menu">
       <i class="fa-solid fa-bars" id="togIcon"></i>
     </button>
@@ -1028,21 +787,29 @@
   <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero-left">
-      <div class="hero-tag">Disponible per a noves oportunitats</div>
-      <h1 class="hero-title">
-        Sistemes<br/>
-        <em>IT</em> &amp;<br/>
-        Cloud
+      <div class="hero-tag" id="h-tag">Disponible per a noves oportunitats</div>
+      <h1 class="hero-title" id="h-title">
+        Sistemes<br/><em>IT</em> &amp;<br/>Cloud
       </h1>
-      <p class="hero-subtitle">
-        Tècnic en Administració de Sistemes i Xarxes. Especialitzat en entorns Windows Server, arquitectures AWS i automatització. Ara fent pràctiques a SERHS Serveis (Pineda de Mar).
+      <p class="hero-subtitle" id="h-sub">
+        Tècnic en Administració de Sistemes i Xarxes. Especialitzat en entorns
+        Windows Server, arquitectures AWS i automatització. Ara fent pràctiques
+        a SERHS Serveis (Pineda de Mar).
       </p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-dark"><i class="fa-solid fa-paper-plane"></i> Parlem</a>
-        <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf" class="btn-outline" rel="noopener noreferrer"><i class="fa-solid fa-file-arrow-down"></i> Descarregar CV</a>
+        <a href="#contact" class="btn-primary">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span id="h-btn-talk">Parlem</span>
+        </a>
+        <a href="https://github.com/yousseffouad12/youssef_cv/raw/main/YoussefFouadMabrouki_CV.pdf"
+           class="btn-ghost" rel="noopener noreferrer">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span id="h-btn-cv">Descarregar CV</span>
+        </a>
       </div>
-      <div class="hero-scroll-hint">
-        <i class="fa-solid fa-arrow-down"></i> Scroll per veure més
+      <div class="hero-scroll">
+        <i class="fa-solid fa-arrow-down"></i>
+        <span id="h-scroll">Scroll per veure més</span>
       </div>
     </div>
     <div class="hero-right">
@@ -1051,23 +818,26 @@
       <div class="hero-right-label">
         <h3>Youssef Fouad Mabrouki</h3>
         <p>Tordera, Barcelona · SMX + ASIX</p>
-        <div class="avail-dot">Obert a oportunitats laborals</div>
+        <div class="avail-dot" id="h-avail">Obert a oportunitats laborals</div>
       </div>
     </div>
   </section>
 
-  <!-- LinkedIn Badge Section -->
-  <div class="linkedin-badge-section">
-    <span class="badge-label">Perfil LinkedIn verificat</span>
-    <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="youssef-fouad-mabrouki-12275630a" data-version="v1">
-      <a class="badge-base__link LI-simple-link" href="https://es.linkedin.com/in/youssef-fouad-mabrouki-12275630a?trk=profile-badge">Youssef Fouad M.</a>
+  <!-- LINKEDIN STRIP -->
+  <div class="linkedin-strip">
+    <span class="badge-label" id="li-label">Perfil LinkedIn verificat</span>
+    <div class="badge-base LI-profile-badge"
+         data-locale="es_ES" data-size="medium" data-theme="light"
+         data-type="HORIZONTAL" data-vanity="youssef-fouad-mabrouki-12275630a" data-version="v1">
+      <a class="badge-base__link LI-simple-link"
+         href="https://es.linkedin.com/in/youssef-fouad-mabrouki-12275630a?trk=profile-badge">Youssef Fouad M.</a>
     </div>
   </div>
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 
   <!-- MARQUEE -->
   <div class="marquee-wrap">
-    <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-track">
       <span class="marquee-item"><strong>Windows Server</strong> <span class="marquee-sep">·</span></span>
       <span class="marquee-item"><strong>AWS Cloud</strong> <span class="marquee-sep">·</span></span>
       <span class="marquee-item"><strong>Active Directory</strong> <span class="marquee-sep">·</span></span>
@@ -1098,104 +868,108 @@
   <!-- ABOUT -->
   <section id="about" class="about">
     <div class="about-left">
-      <div class="section-label reveal">Sobre el meu perfil</div>
-      <h2 class="about-title reveal reveal-delay-1">
-        Adaptació,<br/> <em>criteri tècnic</em><br/> i millora contínua.
+      <div class="sec-label reveal" id="a-label">Sobre el meu perfil</div>
+      <h2 class="about-title reveal reveal-delay-1" id="a-title">
+        Adaptació,<br/><em>criteri tècnic</em><br/>i millora contínua.
       </h2>
-      <p class="about-body reveal reveal-delay-2">
-        Sóc Tècnic en Sistemes Microinformàtics i Xarxes (SMX), ara cursant el CFGS d'Administració de Sistemes Informàtics en Xarxa (ASIX) a l'Institut Sa Palomera, amb enfocament especial en arquitectures Cloud (AWS) i Ciberseguretat.
+      <p class="about-body reveal reveal-delay-2" id="a-p1">
+        Sóc Tècnic en Sistemes Microinformàtics i Xarxes (SMX), ara cursant el CFGS
+        d'Administració de Sistemes Informàtics en Xarxa (ASIX) a l'Institut Sa Palomera,
+        amb enfocament especial en arquitectures Cloud (AWS) i Ciberseguretat.
       </p>
-      <p class="about-body reveal reveal-delay-2">
-        La meva trajectòria combina habilitats tècniques sòlides amb experiència de cara al públic i treball en equips internacionals —incloent una estada Erasmus+ a Leipzig (Alemanya) en l'àmbit de ciberseguretat i domòtica.
+      <p class="about-body reveal reveal-delay-2" id="a-p2">
+        La meva trajectòria combina habilitats tècniques sòlides amb experiència de cara
+        al públic i treball en equips internacionals —incloent una estada Erasmus+ a Leipzig
+        (Alemanya) en l'àmbit de ciberseguretat i domòtica.
       </p>
       <div class="stat-grid reveal reveal-delay-3">
-        <div class="stat-cell"><div class="stat-num">2+</div><div class="stat-desc">Anys d'exp. tècnica</div></div>
-        <div class="stat-cell"><div class="stat-num">3</div><div class="stat-desc">Pràctiques / Empresa</div></div>
-        <div class="stat-cell"><div class="stat-num">Erasmus+</div><div class="stat-desc">Leipzig, Alemanya</div></div>
-        <div class="stat-cell"><div class="stat-num">AWS</div><div class="stat-desc">Certified Foundations</div></div>
+        <div class="stat-cell"><div class="stat-num">2+</div><div class="stat-desc" id="st1">Anys d'exp. tècnica</div></div>
+        <div class="stat-cell"><div class="stat-num">3</div><div class="stat-desc" id="st2">Pràctiques / Empresa</div></div>
+        <div class="stat-cell"><div class="stat-num">Erasmus+</div><div class="stat-desc" id="st3">Leipzig, Alemanya</div></div>
+        <div class="stat-cell"><div class="stat-num">AWS</div><div class="stat-desc" id="st4">Certificat Foundations</div></div>
       </div>
     </div>
     <div class="about-right">
-      <div class="section-label reveal">Competències clau</div>
+      <div class="sec-label reveal" id="sk-label">Competències clau</div>
       <div class="skill-list" style="margin-top:24px;">
         <div class="skill-row reveal">
-          <div class="skill-name">Windows Server / AD <span>Expert</span></div>
+          <div class="skill-name">Windows Server / AD <span id="lv1">Expert</span></div>
           <div class="skill-bar-bg"><div class="skill-bar" data-w="88"></div></div>
         </div>
         <div class="skill-row reveal reveal-delay-1">
-          <div class="skill-name">Cloud AWS <span>Intermedi-Avançat</span></div>
+          <div class="skill-name">Cloud AWS <span id="lv2">Intermedi-Avançat</span></div>
           <div class="skill-bar-bg"><div class="skill-bar" data-w="72"></div></div>
         </div>
         <div class="skill-row reveal reveal-delay-1">
-          <div class="skill-name">Xarxes LAN/WAN · CISCO <span>Avançat</span></div>
+          <div class="skill-name">Xarxes LAN/WAN · CISCO <span id="lv3">Avançat</span></div>
           <div class="skill-bar-bg"><div class="skill-bar" data-w="80"></div></div>
         </div>
         <div class="skill-row reveal reveal-delay-2">
-          <div class="skill-name">Python · SQL <span>Intermedi</span></div>
+          <div class="skill-name">Python · SQL <span id="lv4">Intermedi</span></div>
           <div class="skill-bar-bg"><div class="skill-bar" data-w="65"></div></div>
         </div>
         <div class="skill-row reveal reveal-delay-2">
-          <div class="skill-name">Help Desk L1 &amp; L2 <span>Expert</span></div>
+          <div class="skill-name">Help Desk L1 &amp; L2 <span id="lv5">Expert</span></div>
           <div class="skill-bar-bg"><div class="skill-bar" data-w="92"></div></div>
         </div>
         <div class="skill-row reveal reveal-delay-3">
-          <div class="skill-name">Power BI / Jira <span>Intermedi</span></div>
+          <div class="skill-name">Power BI / Jira <span id="lv6">Intermedi</span></div>
           <div class="skill-bar-bg"><div class="skill-bar" data-w="60"></div></div>
         </div>
       </div>
-      <div class="lang-chips reveal reveal-delay-3" style="margin-top:40px;">
-        <div class="section-label" style="width:100%; margin-bottom:14px;">Idiomes</div>
-        <span class="lang-chip">🇪🇸 Castellà — Natiu</span>
-        <span class="lang-chip">🇨🇦 Català — Natiu</span>
-        <span class="lang-chip">🇬🇧 Anglès — Intermedi</span>
-        <span class="lang-chip">🇲🇦 Àrab — Natal</span>
+      <div class="lang-chips reveal reveal-delay-3" style="margin-top:36px;">
+        <div class="sec-label" style="width:100%;margin-bottom:12px;" id="lang-label">Idiomes</div>
+        <span class="lang-chip" id="lg1">🇪🇸 Castellà — Natiu</span>
+        <span class="lang-chip" id="lg2">🇨🇦 Català — Natiu</span>
+        <span class="lang-chip" id="lg3">🇬🇧 Anglès — Intermedi</span>
+        <span class="lang-chip" id="lg4">🇲🇦 Àrab — Natiu</span>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
   <section id="experience" class="experience">
-    <div class="section-label reveal">Trajectòria professional</div>
-    <h2 class="exp-title reveal reveal-delay-1">Experiència</h2>
+    <div class="sec-label reveal" id="e-label">Trajectòria professional</div>
+    <h2 class="exp-title reveal reveal-delay-1" id="e-title">Experiència</h2>
     <table class="exp-table">
       <tbody>
         <tr class="reveal">
           <td class="exp-num">01</td>
-          <td class="exp-date">Gen 2026 — Actualitat</td>
+          <td class="exp-date" id="e1-date">Gen 2026 — Actualitat</td>
           <td>
-            <div class="exp-role">Help Desk &amp; Suport IT</div>
+            <div class="exp-role" id="e1-role">Help Desk &amp; Suport IT</div>
             <div class="exp-company">SERHS Serveis · Pineda de Mar</div>
-            <p class="exp-desc">Suport tècnic de Nivell 1 i 2 a usuaris corporatius. Resolució d'incidències, gestió de tiquets (Jira), manteniment preventiu i administració bàsica d'usuaris i permisos de xarxa.</p>
-            <span class="exp-badge">Pràctiques ASIX en curs</span>
+            <p class="exp-desc" id="e1-desc">Suport tècnic de Nivell 1 i 2 a usuaris corporatius. Resolució d'incidències, gestió de tiquets (Jira), manteniment preventiu i administració bàsica d'usuaris i permisos de xarxa.</p>
+            <span class="exp-badge" id="e1-badge">Pràctiques ASIX en curs</span>
           </td>
         </tr>
         <tr class="reveal reveal-delay-1">
           <td class="exp-num">02</td>
-          <td class="exp-date">Ago 2025 — Actualitat</td>
+          <td class="exp-date" id="e2-date">Ago 2025 — Actualitat</td>
           <td>
-            <div class="exp-role">Atenció al Client / Caixer</div>
+            <div class="exp-role" id="e2-role">Atenció al Client / Caixer</div>
             <div class="exp-company">Grup Carrefour · Santa Susanna</div>
-            <p class="exp-desc">Atenció al client en entorn d'alt volum. Gestió de cobraments, resolució de conflictes en primera instància i treball sota pressió. Habilitats interpersonals i organitzatives.</p>
+            <p class="exp-desc" id="e2-desc">Atenció al client en entorn d'alt volum. Gestió de cobraments, resolució de conflictes en primera instància i treball sota pressió. Habilitats interpersonals i organitzatives.</p>
           </td>
         </tr>
         <tr class="reveal reveal-delay-2">
           <td class="exp-num">03</td>
-          <td class="exp-date">Gen 2024 — Abr 2024</td>
+          <td class="exp-date" id="e3-date">Gen 2024 — Abr 2024</td>
           <td>
-            <div class="exp-role">Help Desk Technician</div>
+            <div class="exp-role" id="e3-role">Help Desk Technician</div>
             <div class="exp-company">Escola Brianxa / I. Iglesias · Tordera</div>
-            <p class="exp-desc">Suport tècnic de nivell 1 a personal docent i alumnes. Manteniment de parc informàtic (+300h), diagnòstic d'avaries i configuració de xarxa local LAN/WLAN.</p>
-            <span class="exp-badge">Pràctiques SMX</span>
+            <p class="exp-desc" id="e3-desc">Suport tècnic de nivell 1 a personal docent i alumnes. Manteniment de parc informàtic (+300h), diagnòstic d'avaries i configuració de xarxa local LAN/WLAN.</p>
+            <span class="exp-badge" id="e3-badge">Pràctiques SMX</span>
           </td>
         </tr>
         <tr class="reveal reveal-delay-3">
           <td class="exp-num">04</td>
-          <td class="exp-date">Jul 2023 — Ago 2023</td>
+          <td class="exp-date" id="e4-date">Jul 2023 — Ago 2023</td>
           <td>
             <div class="exp-role">Erasmus+ IT Technician</div>
-            <div class="exp-company">IT Technologies Training · Leipzig, Alemanya</div>
-            <p class="exp-desc">Estada formativa internacional intensiva en Ciberseguretat, Xarxes i Domòtica (Smart Home / IoT). Treball en equips multiculturals en anglès tècnic.</p>
-            <span class="exp-badge">Beca Erasmus+</span>
+            <div class="exp-company" id="e4-co">IT Technologies Training · Leipzig, Alemanya</div>
+            <p class="exp-desc" id="e4-desc">Estada formativa internacional intensiva en Ciberseguretat, Xarxes i Domòtica (Smart Home / IoT). Treball en equips multiculturals en anglès tècnic.</p>
+            <span class="exp-badge" id="e4-badge">Beca Erasmus+</span>
           </td>
         </tr>
       </tbody>
@@ -1205,9 +979,9 @@
   <!-- COMPETENCIES -->
   <section id="competencies" class="comp">
     <div class="comp-sidebar">
-      <div class="section-label">Àrees</div>
-      <h2 class="comp-title">Àrees d'<em>expertise</em></h2>
-      <p class="comp-intro">Perfil tècnic orientat a infraestructures estables, segures i escalables.</p>
+      <div class="sec-label" id="c-label">Àrees</div>
+      <h2 class="comp-title" id="c-title">Àrees d'<em>expertesa</em></h2>
+      <p class="comp-intro" id="c-intro">Perfil tècnic orientat a infraestructures estables, segures i escalables.</p>
       <div class="comp-nav">
         <div class="comp-nav-item active">Server Admin</div>
         <div class="comp-nav-item">Networking</div>
@@ -1222,12 +996,10 @@
           <div class="comp-card-icon"><i class="fa-brands fa-windows"></i></div>
           <div>
             <h3>Server Administration</h3>
-            <p>Instal·lació i configuració de Windows Server 2016/2019/2022. Gestió avançada de rols (AD DS, DNS, DHCP) i polítiques de grup (GPO). Virtualització amb Hyper-V.</p>
+            <p id="c1-p">Instal·lació i configuració de Windows Server 2016/2019/2022. Gestió avançada de rols (AD DS, DNS, DHCP) i polítiques de grup (GPO). Virtualització amb Hyper-V.</p>
             <div class="tag-row">
-              <span class="tag">Active Directory</span>
-              <span class="tag">PowerShell</span>
-              <span class="tag">Hyper-V</span>
-              <span class="tag">GPO</span>
+              <span class="tag">Active Directory</span><span class="tag">PowerShell</span>
+              <span class="tag">Hyper-V</span><span class="tag">GPO</span>
             </div>
           </div>
         </div>
@@ -1235,12 +1007,10 @@
           <div class="comp-card-icon"><i class="fa-solid fa-network-wired"></i></div>
           <div>
             <h3>Network Engineering</h3>
-            <p>Disseny i manteniment de xarxes LAN/WAN. Configuració de routers i switches CISCO (CCNA). VLANs, subnetting, protocols d'enrutament i seguretat perimetral.</p>
+            <p id="c2-p">Disseny i manteniment de xarxes LAN/WAN. Configuració de routers i switches CISCO (CCNA). VLANs, subnetting, protocols d'enrutament i seguretat perimetral.</p>
             <div class="tag-row">
-              <span class="tag">VLAN</span>
-              <span class="tag">TCP/IP</span>
-              <span class="tag">Routing</span>
-              <span class="tag">Firewall</span>
+              <span class="tag">VLAN</span><span class="tag">TCP/IP</span>
+              <span class="tag">Routing</span><span class="tag">Firewall</span>
             </div>
           </div>
         </div>
@@ -1248,12 +1018,10 @@
           <div class="comp-card-icon"><i class="fa-brands fa-aws"></i></div>
           <div>
             <h3>Cloud Solutions (AWS)</h3>
-            <p>Implementació de solucions al núvol amb Amazon Web Services. Model de responsabilitat compartida, IAM, EC2, S3, VPC. Certificat AWS Academy Cloud Foundations.</p>
+            <p id="c3-p">Implementació de solucions al núvol amb Amazon Web Services. Model de responsabilitat compartida, IAM, EC2, S3, VPC. Certificat AWS Academy Cloud Foundations.</p>
             <div class="tag-row">
-              <span class="tag">EC2</span>
-              <span class="tag">S3</span>
-              <span class="tag">VPC</span>
-              <span class="tag">IAM</span>
+              <span class="tag">EC2</span><span class="tag">S3</span>
+              <span class="tag">VPC</span><span class="tag">IAM</span>
             </div>
           </div>
         </div>
@@ -1261,12 +1029,10 @@
           <div class="comp-card-icon"><i class="fa-solid fa-code"></i></div>
           <div>
             <h3>Programming &amp; DB</h3>
-            <p>Automatització de tasques amb Python i scripting Bash. Disseny i consultes de bases de dades relacionals SQL (PostgreSQL). Control de versions amb Git/GitHub.</p>
+            <p id="c4-p">Automatització de tasques amb Python i scripting Bash. Disseny i consultes de bases de dades relacionals SQL (PostgreSQL). Control de versions amb Git/GitHub.</p>
             <div class="tag-row">
-              <span class="tag">Python</span>
-              <span class="tag">SQL</span>
-              <span class="tag">Git</span>
-              <span class="tag">Bash</span>
+              <span class="tag">Python</span><span class="tag">SQL</span>
+              <span class="tag">Git</span><span class="tag">Bash</span>
             </div>
           </div>
         </div>
@@ -1274,10 +1040,9 @@
           <div class="comp-card-icon"><i class="fa-solid fa-headset"></i></div>
           <div>
             <h3>Technical Support L1 &amp; L2</h3>
-            <p>Diagnòstic de hardware i software. Resolució d'incidències per a usuari final. Gestió de tiquets amb Jira. Manteniment preventiu i gestió d'inventari de parc informàtic.</p>
+            <p id="c5-p">Diagnòstic de hardware i software. Resolució d'incidències per a usuari final. Gestió de tiquets amb Jira. Manteniment preventiu i gestió d'inventari de parc informàtic.</p>
             <div class="tag-row">
-              <span class="tag">Help Desk</span>
-              <span class="tag">Jira</span>
+              <span class="tag">Help Desk</span><span class="tag">Jira</span>
               <span class="tag">Troubleshooting</span>
             </div>
           </div>
@@ -1290,10 +1055,10 @@
   <section id="projects" class="projects">
     <div class="proj-header">
       <div>
-        <div class="section-label reveal">Projectes destacats</div>
-        <h2 class="proj-title reveal reveal-delay-1">Projectes<br/><em>reals</em></h2>
+        <div class="sec-label reveal" id="p-label">Projectes destacats</div>
+        <h2 class="proj-title reveal reveal-delay-1" id="p-title">Projectes<br/><em>reals</em></h2>
       </div>
-      <a href="https://github.com/yousseffouad12" target="_blank" rel="noopener noreferrer" class="btn-outline reveal">
+      <a href="https://github.com/yousseffouad12" target="_blank" rel="noopener noreferrer" class="btn-ghost reveal">
         <i class="fa-brands fa-github"></i> GitHub
       </a>
     </div>
@@ -1301,71 +1066,164 @@
       <div class="proj-wide reveal">
         <div class="proj-wide-text">
           <div class="proj-card-icon"><i class="fa-solid fa-hotel"></i></div>
-          <div class="proj-card-meta">Projecte final ASIX · Treball en equip</div>
-          <div class="proj-card-title">NoSQLPaTi — Gestió Hotelera Integral</div>
-          <p class="proj-card-desc">Plataforma centralitzada per a la gestió hotelera amb èmfasi en seguretat, alta disponibilitat i anàlisi de dades. Inclou app d'escriptori Python/Tkinter, base de dades PostgreSQL amb SSL automatitzat, RBAC i data masking, replicació actiu-passiu, i dashboard Power BI per a KPIs d'ingressos.</p>
-          <div class="tag-row" style="margin-bottom:16px;">
-            <span class="tag">Python · Tkinter</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Docker</span>
-            <span class="tag">SSL</span>
-            <span class="tag">RBAC</span>
-            <span class="tag">Power BI</span>
-            <span class="tag">bcrypt</span>
-            <span class="tag">Jira</span>
+          <div class="proj-card-meta" id="p1-meta">Projecte final ASIX · Treball en equip</div>
+          <div class="proj-card-title">NoSQLPaTi — <span id="p1-sub">Gestió Hotelera Integral</span></div>
+          <p class="proj-card-desc" id="p1-desc">Plataforma centralitzada per a la gestió hotelera amb èmfasi en seguretat, alta disponibilitat i anàlisi de dades. Inclou app d'escriptori Python/Tkinter, base de dades PostgreSQL amb SSL automatitzat, RBAC i data masking, replicació actiu-passiu, i dashboard Power BI per a KPIs d'ingressos.</p>
+          <div class="tag-row" style="margin-bottom:18px;">
+            <span class="tag">Python · Tkinter</span><span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span><span class="tag">SSL</span>
+            <span class="tag">RBAC</span><span class="tag">Power BI</span>
+            <span class="tag">bcrypt</span><span class="tag">Jira</span>
           </div>
-          <a href="https://github.com/adriiiii/NoSQLPaTi" target="_blank" rel="noopener noreferrer" class="btn-outline" style="border-color:rgba(245,240,232,0.2); color:var(--paper);">
-            <i class="fa-brands fa-github"></i> Veure codi
+          <a href="https://github.com/adriiiii/NoSQLPaTi" target="_blank" rel="noopener noreferrer"
+             class="btn-ghost" style="border-color:rgba(255,255,255,0.15); color:rgba(255,255,255,0.7);">
+            <i class="fa-brands fa-github"></i> <span id="p-code">Veure codi</span>
           </a>
         </div>
         <div class="proj-wide-side">
-          <div class="mini-stat"><div class="mini-stat-num">6</div><div class="mini-stat-label">Mòduls integrats</div></div>
-          <div class="mini-stat"><div class="mini-stat-num">3</div><div class="mini-stat-label">Coautors</div></div>
-          <div class="mini-stat"><div class="mini-stat-num">SSL</div><div class="mini-stat-label">Certificats automatitzats</div></div>
-          <div class="mini-stat"><div class="mini-stat-num">HA</div><div class="mini-stat-label">Alta disponibilitat</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">6</div><div class="mini-stat-label" id="ms1">Mòduls integrats</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">3</div><div class="mini-stat-label" id="ms2">Coautors</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">SSL</div><div class="mini-stat-label" id="ms3">Certificats automatitzats</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">HA</div><div class="mini-stat-label" id="ms4">Alta disponibilitat</div></div>
         </div>
       </div>
       <div class="proj-card reveal">
         <div class="proj-card-icon"><i class="fa-solid fa-database"></i></div>
-        <div class="proj-card-meta">Arquitectura · Base de Dades</div>
-        <div class="proj-card-title">Disseny ER i Normalització</div>
-        <p class="proj-card-desc">Disseny ER rigorós i normalització relacional sobre PostgreSQL desplegat en Debian 12, garantint integritat referencial i rendiment de consultes.</p>
+        <div class="proj-card-meta" id="p2-meta">Arquitectura · Base de Dades</div>
+        <div class="proj-card-title" id="p2-title">Disseny ER i Normalització</div>
+        <p class="proj-card-desc" id="p2-desc">Disseny ER rigorós i normalització relacional sobre PostgreSQL desplegat en Debian 12, garantint integritat referencial i rendiment de consultes.</p>
         <div class="tag-row"><span class="tag">PostgreSQL</span><span class="tag">ER Design</span><span class="tag">Debian 12</span></div>
       </div>
       <div class="proj-card reveal reveal-delay-1">
         <div class="proj-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <div class="proj-card-meta">Seguretat · DevOps</div>
-        <div class="proj-card-title">Seguretat Avançada &amp; HA</div>
-        <p class="proj-card-desc">SSL amb renovació automatitzada, enmascarament de dades, triggers PL/pgSQL per a eliminació de dades sensibles al check-out. Backups automatitzats amb Cron.</p>
+        <div class="proj-card-meta" id="p3-meta">Seguretat · DevOps</div>
+        <div class="proj-card-title" id="p3-title">Seguretat Avançada &amp; HA</div>
+        <p class="proj-card-desc" id="p3-desc">SSL amb renovació automatitzada, emmascarament de dades, triggers PL/pgSQL per a eliminació de dades sensibles al check-out. Còpies de seguretat automatitzades amb Cron.</p>
         <div class="tag-row"><span class="tag">SSL</span><span class="tag">PL/pgSQL</span><span class="tag">Cron</span><span class="tag">Bash</span></div>
       </div>
       <div class="proj-card reveal reveal-delay-2">
         <div class="proj-card-icon"><i class="fa-solid fa-chart-line"></i></div>
-        <div class="proj-card-meta">BI · Integracions</div>
-        <div class="proj-card-title">Dashboard Power BI &amp; API</div>
-        <p class="proj-card-desc">Integració amb API Mossos d'Esquadra (JSON), exportació XML de reserves i dashboard operatiu a Power BI per a anàlisi d'ingressos i KPIs en temps real.</p>
+        <div class="proj-card-meta" id="p4-meta">BI · Integracions</div>
+        <div class="proj-card-title" id="p4-title">Dashboard Power BI &amp; API</div>
+        <p class="proj-card-desc" id="p4-desc">Integració amb API Mossos d'Esquadra (JSON), exportació XML de reserves i dashboard operatiu a Power BI per a anàlisi d'ingressos i KPIs en temps real.</p>
         <div class="tag-row"><span class="tag">Power BI</span><span class="tag">API JSON</span><span class="tag">XML</span></div>
       </div>
       <div class="proj-card reveal reveal-delay-3">
         <div class="proj-card-icon"><i class="fa-solid fa-code"></i></div>
-        <div class="proj-card-meta">Backend · Aplicació</div>
-        <div class="proj-card-title">App Escriptori Python/Tkinter</div>
-        <p class="proj-card-desc">Aplicació d'escriptori lleugera per a front-office hoteler. Login segur amb hashing bcrypt i mòduls de gestió completa de reserves i check-in/out.</p>
+        <div class="proj-card-meta" id="p5-meta">Backend · Aplicació</div>
+        <div class="proj-card-title" id="p5-title">App Escriptori Python/Tkinter</div>
+        <p class="proj-card-desc" id="p5-desc">Aplicació d'escriptori lleugera per a front-office hoteler. Login segur amb hashing bcrypt i mòduls de gestió completa de reserves i check-in/out.</p>
         <div class="tag-row"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">bcrypt</span></div>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION & CERTS -->
+  <!-- PROJECT 2: IDS/IPS SURICATA -->
+  <section id="project-suricata" class="projects" style="background: var(--bg); border-top: 1px solid var(--border);">
+    <div class="proj-header">
+      <div>
+        <div class="sec-label reveal" id="p2s-label">Segon projecte destacat</div>
+        <h2 class="proj-title reveal reveal-delay-1" id="p2s-title">IDS/IPS<br/><em>Suricata</em></h2>
+      </div>
+      <a href="#" target="_blank" rel="noopener noreferrer" class="btn-ghost reveal" style="opacity:0.4; cursor:default; pointer-events:none;">
+        <i class="fa-solid fa-lock"></i> <span id="p2s-private">Projecte Acadèmic</span>
+      </a>
+    </div>
+
+    <!-- Wide card: overview -->
+    <div class="proj-main">
+      <div class="proj-wide reveal">
+        <div class="proj-wide-text">
+          <div class="proj-card-icon"><i class="fa-solid fa-shield-virus"></i></div>
+          <div class="proj-card-meta" id="p2s-meta1">Projecte final ASIX · INS Sa Palomera · 2025–2026</div>
+          <div class="proj-card-title" id="p2s-head1">Sistema IDS/IPS amb pfSense + Suricata</div>
+          <p class="proj-card-desc" id="p2s-desc1">Implementació d'un sistema professional de detecció i prevenció d'intrusions sobre pfSense en entorn virtualitzat (VirtualBox). El projecte cobreix des de la instal·lació i configuració del motor Suricata fins a la simulació d'atacs reals amb Kali Linux, generació de logs EVE JSON, notificacions en temps real via bot de Telegram i filtratge de continguts amb pfBlockerNG.</p>
+          <div class="tag-row" style="margin-bottom:18px;">
+            <span class="tag">pfSense</span><span class="tag">Suricata 7.0</span>
+            <span class="tag">Kali Linux</span><span class="tag">EVE JSON</span>
+            <span class="tag">pfBlockerNG</span><span class="tag">Telegram Bot</span>
+            <span class="tag">PHP / Cron</span><span class="tag">VirtualBox</span>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px;">
+            <span style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,240,232,0.5);" id="p2s-authors">Autors: Youssef Fouad · Izan Ruiz · Adrià Rodríguez</span>
+          </div>
+        </div>
+        <div class="proj-wide-side">
+          <div class="mini-stat"><div class="mini-stat-num">7+</div><div class="mini-stat-label" id="p2s-ms1">Atacs simulats LAN</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">6+</div><div class="mini-stat-label" id="p2s-ms2">Atacs simulats WAN</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">2</div><div class="mini-stat-label" id="p2s-ms3">Interfícies monitoritzades</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">RT</div><div class="mini-stat-label" id="p2s-ms4">Alertes en temps real</div></div>
+        </div>
+      </div>
+
+      <!-- Card 1: IDS vs IPS + metodologies -->
+      <div class="proj-card reveal">
+        <div class="proj-card-icon"><i class="fa-solid fa-eye"></i></div>
+        <div class="proj-card-meta" id="p2s-c1meta">Fonaments · Arquitectura</div>
+        <div class="proj-card-title" id="p2s-c1title">IDS vs IPS i Metodologies de Detecció</div>
+        <p class="proj-card-desc" id="p2s-c1desc">Estudi comparatiu entre Snort, Suricata i Wazuh. Justificació de la combinació pfSense + Suricata per la seva arquitectura multi-fil, mode IPS actiu i sortida de logs moderna en format EVE JSON integrable amb Zabbix.</p>
+        <div class="tag-row"><span class="tag">Signatures</span><span class="tag">Anomalies</span><span class="tag">DPI</span><span class="tag">Multi-fil</span></div>
+      </div>
+
+      <!-- Card 2: Configuració i polítiques -->
+      <div class="proj-card reveal reveal-delay-1">
+        <div class="proj-card-icon"><i class="fa-solid fa-sliders"></i></div>
+        <div class="proj-card-meta" id="p2s-c2meta">Configuració · Polítiques de Seguretat</div>
+        <div class="proj-card-title" id="p2s-c2title">Polítiques i Zones de Xarxa</div>
+        <p class="proj-card-desc" id="p2s-c2desc">Configuració de Suricata en mode Legacy IPS a LAN i WAN. Signatures Emerging Threats (ET Open), regles personalitzades per a força bruta SSH, Telnet, SQL Injection, DoS i protocols P2P. Pass List per evitar autobloqueig de l'administrador.</p>
+        <div class="tag-row"><span class="tag">ET Open</span><span class="tag">Legacy IPS</span><span class="tag">Pass List</span><span class="tag">Block Offenders</span></div>
+      </div>
+
+      <!-- Card 3: Pentesting LAN -->
+      <div class="proj-card reveal reveal-delay-2">
+        <div class="proj-card-icon"><i class="fa-solid fa-user-secret"></i></div>
+        <div class="proj-card-meta" id="p2s-c3meta">Pentesting · Xarxa LAN</div>
+        <div class="proj-card-title" id="p2s-c3title">Simulació d'Atacs a la LAN</div>
+        <p class="proj-card-desc" id="p2s-c3desc">7 proves d'intrusió des de Kali Linux: Nmap NULL Scan, Nikto, Hydra (SSH brute force), DIRB, hping3 SYN Flood, control de descàrregues i detecció de Telnet insegur. Totes detectades i bloquejades per Suricata.</p>
+        <div class="tag-row"><span class="tag">Nmap</span><span class="tag">Hydra</span><span class="tag">hping3</span><span class="tag">Nikto</span><span class="tag">DIRB</span></div>
+      </div>
+
+      <!-- Card 4: Pentesting WAN -->
+      <div class="proj-card reveal reveal-delay-3">
+        <div class="proj-card-icon"><i class="fa-solid fa-globe"></i></div>
+        <div class="proj-card-meta" id="p2s-c4meta">Pentesting · Xarxa WAN</div>
+        <div class="proj-card-title" id="p2s-c4title">Simulació d'Atacs des de la WAN</div>
+        <p class="proj-card-desc" id="p2s-c4desc">6 proves externes: Nmap -sV, SYN Flood (hping3), ICMP custom rule, Telnet, Hydra SSH i SQLMap. Prova final amb WAFW00F que confirma la presència de l'IPS: "blocking is being done at connection/packet level".</p>
+        <div class="tag-row"><span class="tag">sqlmap</span><span class="tag">WAFW00F</span><span class="tag">SYN Flood</span><span class="tag">SQLi</span></div>
+      </div>
+
+      <!-- Card 5: Telegram bot + pfBlockerNG -->
+      <div class="proj-card reveal">
+        <div class="proj-card-icon"><i class="fa-brands fa-telegram"></i></div>
+        <div class="proj-card-meta" id="p2s-c5meta">Automatització · Sistemes Complementaris</div>
+        <div class="proj-card-title" id="p2s-c5title">Bot Telegram + pfBlockerNG + EVE JSON</div>
+        <p class="proj-card-desc" id="p2s-c5desc">Script PHP + Cron que envia alertes de Suricata en temps real al mòbil de l'administrador via Telegram. pfBlockerNG per bloqueig DNS de contingut maliciós i no autoritzat. Logs estructurats en EVE JSON per a integració futura amb Zabbix.</p>
+        <div class="tag-row"><span class="tag">PHP</span><span class="tag">Cron</span><span class="tag">Telegram API</span><span class="tag">DNSBL</span><span class="tag">EVE JSON</span></div>
+      </div>
+
+      <!-- Card 6: Optimització -->
+      <div class="proj-card reveal reveal-delay-1">
+        <div class="proj-card-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div class="proj-card-meta" id="p2s-c6meta">Rendiment · Optimització</div>
+        <div class="proj-card-title" id="p2s-c6title">Optimització del Motor IDS/IPS</div>
+        <p class="proj-card-desc" id="p2s-c6desc">Ajust del mode d'execució AutoFP (multi-fil), límit de Flow Memory (128 MB) i Defrag Memory Cap (32 MB). Selecció estratègica de signatures per evitar saturació de CPU: només categories rellevants per a l'entorn.</p>
+        <div class="tag-row"><span class="tag">AutoFP</span><span class="tag">Flow Memory</span><span class="tag">Hardware Offload</span><span class="tag">ET Rules</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
   <section id="education" class="edu">
-    <div class="section-label reveal">Formació i certificacions</div>
-    <h2 class="about-title reveal reveal-delay-1" style="font-family:var(--serif); font-size:clamp(2.2rem,4vw,3.4rem); margin-bottom:0;">
-      Educació &amp; <em style="font-style:italic; color:var(--rust);">Certs</em>
+    <div class="sec-label reveal" id="ed-label">Formació i certificacions</div>
+    <h2 class="about-title reveal reveal-delay-1" id="ed-title"
+        style="font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);margin-bottom:0;">
+      Educació &amp; <em>Certs</em>
     </h2>
     <div class="edu-grid">
       <div>
         <div class="edu-item reveal">
-          <div class="edu-year">2024 – 2026 (en curs)</div>
+          <div class="edu-year" id="ed1-yr">2024 – 2026 (en curs)</div>
           <div class="edu-name">CFGS Administració de Sistemes Informàtics en Xarxa</div>
           <div class="edu-school">Institut Sa Palomera · Blanes</div>
         </div>
@@ -1375,9 +1233,9 @@
           <div class="edu-school">Institut Lluís Companys · Mataró</div>
         </div>
         <div class="edu-item reveal reveal-delay-2">
-          <div class="edu-year">Juliol – Agost 2023</div>
+          <div class="edu-year" id="ed3-yr">Juliol – Agost 2023</div>
           <div class="edu-name">Erasmus+ — IT Technologies Training</div>
-          <div class="edu-school">Leipzig, Alemanya · Ciberseguretat, Xarxes, IoT</div>
+          <div class="edu-school" id="ed3-sch">Leipzig, Alemanya · Ciberseguretat, Xarxes, IoT</div>
         </div>
       </div>
       <div>
@@ -1386,21 +1244,19 @@
             <div class="cert-icon"><i class="fa-brands fa-aws"></i></div>
             <div>
               <div class="cert-name">AWS Academy Cloud Foundations</div>
-              <div class="cert-by">Amazon Web Services · Oficial</div>
+              <div class="cert-by">Amazon Web Services · <span id="cert1-by">Oficial</span></div>
             </div>
           </div>
           <div class="cert-item reveal reveal-delay-1">
             <div class="cert-icon"><i class="fa-solid fa-network-wired"></i></div>
             <div>
               <div class="cert-name">Cisco CCNA — Routing &amp; Switching</div>
-              <div class="cert-by">Cisco · Nivell Avançat</div>
+              <div class="cert-by">Cisco · <span id="cert2-by">Nivell Avançat</span></div>
             </div>
           </div>
         </div>
-
-        <!-- CREDLY BADGE -->
         <div class="credly-wrap reveal reveal-delay-2">
-          <div class="credly-label">Verificació oficial · Credly</div>
+          <div class="credly-label" id="credly-lbl">Verificació oficial · Credly</div>
           <div data-iframe-width="150" data-iframe-height="270"
                data-share-badge-id="ea94ab6d-841e-48dd-8ad8-427c157fb4d7"
                data-share-badge-host="https://www.credly.com"></div>
@@ -1413,9 +1269,9 @@
   <!-- CONTACT -->
   <section id="contact" class="contact">
     <div class="contact-left">
-      <div class="section-label">Parlem</div>
-      <h2 class="contact-title">Tens un<br/> <em>projecte</em><br/> en ment?</h2>
-      <p class="contact-body">Estic obert a oportunitats laborals a jornada completa, mitja jornada o projectes en l'àmbit de la infraestructura IT i cloud. Escriu-me.</p>
+      <div class="sec-label" id="ct-label">Parlem</div>
+      <h2 class="contact-title" id="ct-title">Tens un<br/><em>projecte</em><br/>en ment?</h2>
+      <p class="contact-body" id="ct-body">Estic obert a oportunitats laborals a jornada completa, mitja jornada o projectes en l'àmbit de la infraestructura IT i cloud. Escriu-me.</p>
       <div class="contact-info-row">
         <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
         <div>
@@ -1426,34 +1282,28 @@
       <div class="contact-info-row">
         <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
         <div>
-          <div class="contact-info-label">Telèfon</div>
+          <div class="contact-info-label" id="ct-phone">Telèfon</div>
           <div class="contact-info-val">(+34) 641 61 70 18</div>
         </div>
       </div>
       <div class="contact-info-row">
         <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
         <div>
-          <div class="contact-info-label">Ubicació</div>
+          <div class="contact-info-label" id="ct-loc">Ubicació</div>
           <div class="contact-info-val">Tordera, Barcelona</div>
         </div>
       </div>
       <div class="social-row">
-        <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn">
-          <i class="fa-brands fa-linkedin-in"></i>
-        </a>
-        <a href="https://github.com/yousseffouad12" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="mailto:fouadyoussef0125@gmail.com" class="social-btn" title="Email">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
+        <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/yousseffouad12" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:fouadyoussef0125@gmail.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
       </div>
     </div>
     <div class="contact-right">
       <form id="contact-form">
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="name">Nom</label>
+            <label class="form-label" for="name" id="fl-name">Nom</label>
             <input type="text" id="name" class="form-control" placeholder="El teu nom" required />
           </div>
           <div class="form-group">
@@ -1462,134 +1312,388 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label" for="subject">Assumpte</label>
+          <label class="form-label" for="subject" id="fl-subject">Assumpte</label>
           <input type="text" id="subject" class="form-control" placeholder="Oportunitat laboral / Projecte..." required />
         </div>
         <div class="form-group">
-          <label class="form-label" for="message">Missatge</label>
+          <label class="form-label" for="message" id="fl-message">Missatge</label>
           <textarea id="message" class="form-control" placeholder="Hola Youssef, m'agradaria..."></textarea>
         </div>
-        <button type="submit" class="btn-dark" style="width:100%; justify-content:center;">
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
           <span id="btn-text">Enviar Missatge</span>
           <i class="fa-solid fa-paper-plane"></i>
         </button>
-        <p id="form-status" style="margin-top:14px; font-size:0.85rem; text-align:center; display:none;"></p>
+        <p id="form-status" style="margin-top:14px;font-size:0.85rem;text-align:center;display:none;"></p>
       </form>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <span>© <span id="year"></span> Youssef Fouad Mabrouki</span>
     <span>Tordera, Barcelona · IT &amp; Cloud Systems</span>
     <a href="https://www.linkedin.com/in/fouad-youssef-12275630a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </footer>
 
-  <!-- EMAIL JS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
   <script>
-    // YEAR
+  // ─── TRANSLATIONS ─────────────────────────────────────────────────────────
+  const T = {
+    ca: {
+      'nl-about':'Sobre mi','nl-exp':'Experiència','nl-skills':'Habilitats',
+      'nl-proj':'Projectes','nl-edu':'Formació','nl-contact':'Contacte','nav-cv':'↓ CV',
+      'h-tag':'Disponible per a noves oportunitats',
+      'h-title':'Sistemes<br/><em>IT</em> &amp;<br/>Cloud',
+      'h-sub':'Tècnic en Administració de Sistemes i Xarxes. Especialitzat en entorns Windows Server, arquitectures AWS i automatització. Ara fent pràctiques a SERHS Serveis (Pineda de Mar).',
+      'h-btn-talk':'Parlem','h-btn-cv':'Descarregar CV','h-scroll':'Scroll per veure més',
+      'h-avail':'Obert a oportunitats laborals','li-label':'Perfil LinkedIn verificat',
+      'a-label':'Sobre el meu perfil',
+      'a-title':'Adaptació,<br/><em>criteri tècnic</em><br/>i millora contínua.',
+      'a-p1':'Sóc Tècnic en Sistemes Microinformàtics i Xarxes (SMX), ara cursant el CFGS d\'Administració de Sistemes Informàtics en Xarxa (ASIX) a l\'Institut Sa Palomera, amb enfocament especial en arquitectures Cloud (AWS) i Ciberseguretat.',
+      'a-p2':'La meva trajectòria combina habilitats tècniques sòlides amb experiència de cara al públic i treball en equips internacionals —incloent una estada Erasmus+ a Leipzig (Alemanya) en l\'àmbit de ciberseguretat i domòtica.',
+      'st1':'Anys d\'exp. tècnica','st2':'Pràctiques / Empresa','st3':'Leipzig, Alemanya','st4':'Certificat Foundations',
+      'sk-label':'Competències clau','lang-label':'Idiomes',
+      'lv1':'Expert','lv2':'Intermedi-Avançat','lv3':'Avançat','lv4':'Intermedi','lv5':'Expert','lv6':'Intermedi',
+      'lg1':'🇪🇸 Castellà — Natiu','lg2':'🇨🇦 Català — Natiu','lg3':'🇬🇧 Anglès — Intermedi','lg4':'🇲🇦 Àrab — Natiu',
+      'e-label':'Trajectòria professional','e-title':'Experiència',
+      'e1-date':'Gen 2026 — Actualitat','e1-role':'Help Desk &amp; Suport IT',
+      'e1-desc':'Suport tècnic de Nivell 1 i 2 a usuaris corporatius. Resolució d\'incidències, gestió de tiquets (Jira), manteniment preventiu i administració bàsica d\'usuaris i permisos de xarxa.',
+      'e1-badge':'Pràctiques ASIX en curs',
+      'e2-date':'Ago 2025 — Actualitat','e2-role':'Atenció al Client / Caixer',
+      'e2-desc':'Atenció al client en entorn d\'alt volum. Gestió de cobraments, resolució de conflictes en primera instància i treball sota pressió. Habilitats interpersonals i organitzatives.',
+      'e3-date':'Gen 2024 — Abr 2024','e3-role':'Help Desk Technician',
+      'e3-desc':'Suport tècnic de nivell 1 a personal docent i alumnes. Manteniment de parc informàtic (+300h), diagnòstic d\'avaries i configuració de xarxa local LAN/WLAN.',
+      'e3-badge':'Pràctiques SMX',
+      'e4-date':'Jul 2023 — Ago 2023','e4-co':'IT Technologies Training · Leipzig, Alemanya',
+      'e4-desc':'Estada formativa internacional intensiva en Ciberseguretat, Xarxes i Domòtica (Smart Home / IoT). Treball en equips multiculturals en anglès tècnic.',
+      'e4-badge':'Beca Erasmus+',
+      'c-label':'Àrees','c-title':'Àrees d\'<em>expertesa</em>','c-intro':'Perfil tècnic orientat a infraestructures estables, segures i escalables.',
+      'c1-p':'Instal·lació i configuració de Windows Server 2016/2019/2022. Gestió avançada de rols (AD DS, DNS, DHCP) i polítiques de grup (GPO). Virtualització amb Hyper-V.',
+      'c2-p':'Disseny i manteniment de xarxes LAN/WAN. Configuració de routers i switches CISCO (CCNA). VLANs, subnetting, protocols d\'enrutament i seguretat perimetral.',
+      'c3-p':'Implementació de solucions al núvol amb Amazon Web Services. Model de responsabilitat compartida, IAM, EC2, S3, VPC. Certificat AWS Academy Cloud Foundations.',
+      'c4-p':'Automatització de tasques amb Python i scripting Bash. Disseny i consultes de bases de dades relacionals SQL (PostgreSQL). Control de versions amb Git/GitHub.',
+      'c5-p':'Diagnòstic de hardware i software. Resolució d\'incidències per a usuari final. Gestió de tiquets amb Jira. Manteniment preventiu i gestió d\'inventari de parc informàtic.',
+      'p-label':'Projectes destacats','p-title':'Projectes<br/><em>reals</em>',
+      'p1-meta':'Projecte final ASIX · Treball en equip','p1-sub':'Gestió Hotelera Integral',
+      'p1-desc':'Plataforma centralitzada per a la gestió hotelera amb èmfasi en seguretat, alta disponibilitat i anàlisi de dades. Inclou app d\'escriptori Python/Tkinter, base de dades PostgreSQL amb SSL automatitzat, RBAC i data masking, replicació actiu-passiu, i dashboard Power BI per a KPIs d\'ingressos.',
+      'p-code':'Veure codi',
+      'ms1':'Mòduls integrats','ms2':'Coautors','ms3':'Certificats automatitzats','ms4':'Alta disponibilitat',
+      'p2-meta':'Arquitectura · Base de Dades','p2-title':'Disseny ER i Normalització',
+      'p2-desc':'Disseny ER rigorós i normalització relacional sobre PostgreSQL desplegat en Debian 12, garantint integritat referencial i rendiment de consultes.',
+      'p3-meta':'Seguretat · DevOps','p3-title':'Seguretat Avançada &amp; HA',
+      'p3-desc':'SSL amb renovació automatitzada, emmascarament de dades, triggers PL/pgSQL per a eliminació de dades sensibles al check-out. Còpies de seguretat automatitzades amb Cron.',
+      'p4-meta':'BI · Integracions','p4-title':'Dashboard Power BI &amp; API',
+      'p4-desc':'Integració amb API Mossos d\'Esquadra (JSON), exportació XML de reserves i dashboard operatiu a Power BI per a anàlisi d\'ingressos i KPIs en temps real.',
+      'p5-meta':'Backend · Aplicació','p5-title':'App Escriptori Python/Tkinter',
+      'p5-desc':'Aplicació d\'escriptori lleugera per a front-office hoteler. Login segur amb hashing bcrypt i mòduls de gestió completa de reserves i check-in/out.',
+      'ed-label':'Formació i certificacions','ed-title':'Educació &amp; <em>Certs</em>',
+      'ed1-yr':'2024 – 2026 (en curs)','ed3-yr':'Juliol – Agost 2023',
+      'ed3-sch':'Leipzig, Alemanya · Ciberseguretat, Xarxes, IoT',
+      'cert1-by':'Oficial','cert2-by':'Nivell Avançat','credly-lbl':'Verificació oficial · Credly',
+      'ct-label':'Parlem','ct-title':'Tens un<br/><em>projecte</em><br/>en ment?',
+      'ct-body':'Estic obert a oportunitats laborals a jornada completa, mitja jornada o projectes en l\'àmbit de la infraestructura IT i cloud. Escriu-me.',
+      'ct-phone':'Telèfon','ct-loc':'Ubicació',
+      'fl-name':'Nom','fl-subject':'Assumpte','fl-message':'Missatge','btn-text':'Enviar Missatge',
+      'ph-name':'El teu nom','ph-sub':'Oportunitat laboral / Projecte...','ph-msg':'Hola Youssef, m\'agradaria...',
+      'f-sending':'Enviant...','f-sent':'Enviat! ✓','f-ok':'Missatge enviat correctament. Gràcies!',
+      'f-err':'Hi ha hagut un error. Torna-ho a provar.',
+      'nl-suricata':'Suricata',
+      'p2s-label':'Segon projecte destacat',
+      'p2s-title':'IDS/IPS<br/><em>Suricata</em>',
+      'p2s-private':'Projecte Acadèmic',
+      'p2s-meta1':'Projecte final ASIX · INS Sa Palomera · 2025–2026',
+      'p2s-head1':'Sistema IDS/IPS amb pfSense + Suricata',
+      'p2s-desc1':'Implementació d\'un sistema professional de detecció i prevenció d\'intrusions sobre pfSense en entorn virtualitzat (VirtualBox). El projecte cobreix des de la instal·lació i configuració del motor Suricata fins a la simulació d\'atacs reals amb Kali Linux, generació de logs EVE JSON, notificacions en temps real via bot de Telegram i filtratge de continguts amb pfBlockerNG.',
+      'p2s-authors':'Autors: Youssef Fouad · Izan Ruiz · Adrià Rodríguez',
+      'p2s-ms1':'Atacs simulats LAN','p2s-ms2':'Atacs simulats WAN',
+      'p2s-ms3':'Interfícies monitoritzades','p2s-ms4':'Alertes en temps real',
+      'p2s-c1meta':'Fonaments · Arquitectura','p2s-c1title':'IDS vs IPS i Metodologies de Detecció',
+      'p2s-c1desc':'Estudi comparatiu entre Snort, Suricata i Wazuh. Justificació de la combinació pfSense + Suricata per la seva arquitectura multi-fil, mode IPS actiu i sortida de logs moderna en format EVE JSON integrable amb Zabbix.',
+      'p2s-c2meta':'Configuració · Polítiques de Seguretat','p2s-c2title':'Polítiques i Zones de Xarxa',
+      'p2s-c2desc':'Configuració de Suricata en mode Legacy IPS a LAN i WAN. Signatures Emerging Threats (ET Open), regles personalitzades per a força bruta SSH, Telnet, SQL Injection, DoS i protocols P2P. Pass List per evitar autobloqueig de l\'administrador.',
+      'p2s-c3meta':'Pentesting · Xarxa LAN','p2s-c3title':'Simulació d\'Atacs a la LAN',
+      'p2s-c3desc':'7 proves d\'intrusió des de Kali Linux: Nmap NULL Scan, Nikto, Hydra (SSH brute force), DIRB, hping3 SYN Flood, control de descàrregues i detecció de Telnet insegur. Totes detectades i bloquejades per Suricata.',
+      'p2s-c4meta':'Pentesting · Xarxa WAN','p2s-c4title':'Simulació d\'Atacs des de la WAN',
+      'p2s-c4desc':'6 proves externes: Nmap -sV, SYN Flood (hping3), ICMP custom rule, Telnet, Hydra SSH i SQLMap. Prova final amb WAFW00F que confirma la presència de l\'IPS: "blocking is being done at connection/packet level".',
+      'p2s-c5meta':'Automatització · Sistemes Complementaris','p2s-c5title':'Bot Telegram + pfBlockerNG + EVE JSON',
+      'p2s-c5desc':'Script PHP + Cron que envia alertes de Suricata en temps real al mòbil de l\'administrador via Telegram. pfBlockerNG per bloqueig DNS de contingut maliciós i no autoritzat. Logs estructurats en EVE JSON per a integració futura amb Zabbix.',
+      'p2s-c6meta':'Rendiment · Optimització','p2s-c6title':'Optimització del Motor IDS/IPS',
+      'p2s-c6desc':'Ajust del mode d\'execució AutoFP (multi-fil), límit de Flow Memory (128 MB) i Defrag Memory Cap (32 MB). Selecció estratègica de signatures per evitar saturació de CPU: només categories rellevants per a l\'entorn.'
+    },
+    es: {
+      'nl-about':'Sobre mí','nl-exp':'Experiencia','nl-skills':'Habilidades',
+      'nl-proj':'Proyectos','nl-edu':'Formación','nl-contact':'Contacto','nav-cv':'↓ CV',
+      'h-tag':'Disponible para nuevas oportunidades',
+      'h-title':'Sistemas<br/><em>IT</em> &amp;<br/>Cloud',
+      'h-sub':'Técnico en Administración de Sistemas y Redes. Especializado en entornos Windows Server, arquitecturas AWS y automatización. Actualmente en prácticas en SERHS Serveis (Pineda de Mar).',
+      'h-btn-talk':'Hablemos','h-btn-cv':'Descargar CV','h-scroll':'Desplázate para ver más',
+      'h-avail':'Abierto a oportunidades laborales','li-label':'Perfil LinkedIn verificado',
+      'a-label':'Sobre mi perfil',
+      'a-title':'Adaptación,<br/><em>criterio técnico</em><br/>y mejora continua.',
+      'a-p1':'Soy Técnico en Sistemas Microinformáticos y Redes (SMX), actualmente cursando el CFGS de Administración de Sistemas Informáticos en Red (ASIX) en el Institut Sa Palomera, con enfoque especial en arquitecturas Cloud (AWS) y Ciberseguridad.',
+      'a-p2':'Mi trayectoria combina sólidas habilidades técnicas con experiencia de cara al público y trabajo en equipos internacionales —incluyendo una estancia Erasmus+ en Leipzig (Alemania) en el ámbito de la ciberseguridad y la domótica.',
+      'st1':'Años de exp. técnica','st2':'Prácticas / Empresa','st3':'Leipzig, Alemania','st4':'Certificado Foundations',
+      'sk-label':'Competencias clave','lang-label':'Idiomas',
+      'lv1':'Experto','lv2':'Intermedio-Avanzado','lv3':'Avanzado','lv4':'Intermedio','lv5':'Experto','lv6':'Intermedio',
+      'lg1':'🇪🇸 Castellano — Nativo','lg2':'🇨🇦 Catalán — Nativo','lg3':'🇬🇧 Inglés — Intermedio','lg4':'🇲🇦 Árabe — Nativo',
+      'e-label':'Trayectoria profesional','e-title':'Experiencia',
+      'e1-date':'Ene 2026 — Actualidad','e1-role':'Help Desk &amp; Soporte IT',
+      'e1-desc':'Soporte técnico de Nivel 1 y 2 a usuarios corporativos. Resolución de incidencias, gestión de tickets (Jira), mantenimiento preventivo y administración básica de usuarios y permisos de red.',
+      'e1-badge':'Prácticas ASIX en curso',
+      'e2-date':'Ago 2025 — Actualidad','e2-role':'Atención al Cliente / Cajero',
+      'e2-desc':'Atención al cliente en entorno de alto volumen. Gestión de cobros, resolución de conflictos en primera instancia y trabajo bajo presión. Habilidades interpersonales y organizativas.',
+      'e3-date':'Ene 2024 — Abr 2024','e3-role':'Help Desk Technician',
+      'e3-desc':'Soporte técnico de nivel 1 a personal docente y alumnos. Mantenimiento del parque informático (+300h), diagnóstico de averías y configuración de red local LAN/WLAN.',
+      'e3-badge':'Prácticas SMX',
+      'e4-date':'Jul 2023 — Ago 2023','e4-co':'IT Technologies Training · Leipzig, Alemania',
+      'e4-desc':'Estancia formativa internacional intensiva en Ciberseguridad, Redes y Domótica (Smart Home / IoT). Trabajo en equipos multiculturales en inglés técnico.',
+      'e4-badge':'Beca Erasmus+',
+      'c-label':'Áreas','c-title':'Áreas de <em>expertise</em>','c-intro':'Perfil técnico orientado a infraestructuras estables, seguras y escalables.',
+      'c1-p':'Instalación y configuración de Windows Server 2016/2019/2022. Gestión avanzada de roles (AD DS, DNS, DHCP) y políticas de grupo (GPO). Virtualización con Hyper-V.',
+      'c2-p':'Diseño y mantenimiento de redes LAN/WAN. Configuración de routers y switches CISCO (CCNA). VLANs, subnetting, protocolos de enrutamiento y seguridad perimetral.',
+      'c3-p':'Implementación de soluciones en la nube con Amazon Web Services. Modelo de responsabilidad compartida, IAM, EC2, S3, VPC. Certificado AWS Academy Cloud Foundations.',
+      'c4-p':'Automatización de tareas con Python y scripting Bash. Diseño y consultas de bases de datos relacionales SQL (PostgreSQL). Control de versiones con Git/GitHub.',
+      'c5-p':'Diagnóstico de hardware y software. Resolución de incidencias para el usuario final. Gestión de tickets con Jira. Mantenimiento preventivo y gestión de inventario.',
+      'p-label':'Proyectos destacados','p-title':'Proyectos<br/><em>reales</em>',
+      'p1-meta':'Proyecto final ASIX · Trabajo en equipo','p1-sub':'Gestión Hotelera Integral',
+      'p1-desc':'Plataforma centralizada para la gestión hotelera con énfasis en seguridad, alta disponibilidad y análisis de datos. App de escritorio Python/Tkinter, PostgreSQL con SSL automatizado, RBAC, data masking y dashboard Power BI para KPIs de ingresos.',
+      'p-code':'Ver código',
+      'ms1':'Módulos integrados','ms2':'Coautores','ms3':'Certificados automatizados','ms4':'Alta disponibilidad',
+      'p2-meta':'Arquitectura · Base de Datos','p2-title':'Diseño ER y Normalización',
+      'p2-desc':'Diseño ER riguroso y normalización relacional sobre PostgreSQL en Debian 12, garantizando integridad referencial y rendimiento de consultas.',
+      'p3-meta':'Seguridad · DevOps','p3-title':'Seguridad Avanzada &amp; HA',
+      'p3-desc':'SSL con renovación automatizada, enmascaramiento de datos, triggers PL/pgSQL para eliminar datos sensibles al check-out. Copias de seguridad automatizadas con Cron.',
+      'p4-meta':'BI · Integraciones','p4-title':'Dashboard Power BI &amp; API',
+      'p4-desc':'Integración con API Mossos d\'Esquadra (JSON), exportación XML de reservas y dashboard en Power BI para análisis de ingresos y KPIs en tiempo real.',
+      'p5-meta':'Backend · Aplicación','p5-title':'App Escritorio Python/Tkinter',
+      'p5-desc':'Aplicación de escritorio ligera para front-office hotelero. Login seguro con hashing bcrypt y módulos de gestión completa de reservas y check-in/out.',
+      'ed-label':'Formación y certificaciones','ed-title':'Educación &amp; <em>Certs</em>',
+      'ed1-yr':'2024 – 2026 (en curso)','ed3-yr':'Julio – Agosto 2023',
+      'ed3-sch':'Leipzig, Alemania · Ciberseguridad, Redes, IoT',
+      'cert1-by':'Oficial','cert2-by':'Nivel Avanzado','credly-lbl':'Verificación oficial · Credly',
+      'ct-label':'Hablemos','ct-title':'¿Tienes un<br/><em>proyecto</em><br/>en mente?',
+      'ct-body':'Estoy abierto a oportunidades laborales a jornada completa, media jornada o proyectos en el ámbito de la infraestructura IT y cloud. Escríbeme.',
+      'ct-phone':'Teléfono','ct-loc':'Ubicación',
+      'fl-name':'Nombre','fl-subject':'Asunto','fl-message':'Mensaje','btn-text':'Enviar Mensaje',
+      'ph-name':'Tu nombre','ph-sub':'Oportunidad laboral / Proyecto...','ph-msg':'Hola Youssef, me gustaría...',
+      'f-sending':'Enviando...','f-sent':'¡Enviado! ✓','f-ok':'Mensaje enviado. ¡Gracias!',
+      'f-err':'Ha habido un error. Inténtalo de nuevo.',
+      'nl-suricata':'Suricata',
+      'p2s-label':'Segundo proyecto destacado',
+      'p2s-title':'IDS/IPS<br/><em>Suricata</em>',
+      'p2s-private':'Proyecto Académico',
+      'p2s-meta1':'Proyecto final ASIX · INS Sa Palomera · 2025–2026',
+      'p2s-head1':'Sistema IDS/IPS con pfSense + Suricata',
+      'p2s-desc1':'Implementación de un sistema profesional de detección y prevención de intrusiones sobre pfSense en entorno virtualizado (VirtualBox). El proyecto abarca desde la instalación y configuración del motor Suricata hasta la simulación de ataques reales con Kali Linux, generación de logs EVE JSON, notificaciones en tiempo real vía bot de Telegram y filtrado de contenidos con pfBlockerNG.',
+      'p2s-authors':'Autores: Youssef Fouad · Izan Ruiz · Adrià Rodríguez',
+      'p2s-ms1':'Ataques simulados LAN','p2s-ms2':'Ataques simulados WAN',
+      'p2s-ms3':'Interfaces monitorizadas','p2s-ms4':'Alertas en tiempo real',
+      'p2s-c1meta':'Fundamentos · Arquitectura','p2s-c1title':'IDS vs IPS y Metodologías de Detección',
+      'p2s-c1desc':'Estudio comparativo entre Snort, Suricata y Wazuh. Justificación de la combinación pfSense + Suricata por su arquitectura multi-hilo, modo IPS activo y salida de logs moderna en formato EVE JSON integrable con Zabbix.',
+      'p2s-c2meta':'Configuración · Políticas de Seguridad','p2s-c2title':'Políticas y Zonas de Red',
+      'p2s-c2desc':'Configuración de Suricata en modo Legacy IPS en LAN y WAN. Firmas Emerging Threats (ET Open), reglas personalizadas para fuerza bruta SSH, Telnet, SQL Injection, DoS y protocolos P2P. Pass List para evitar el autobloqueo del administrador.',
+      'p2s-c3meta':'Pentesting · Red LAN','p2s-c3title':'Simulación de Ataques en la LAN',
+      'p2s-c3desc':'7 pruebas de intrusión desde Kali Linux: Nmap NULL Scan, Nikto, Hydra (SSH brute force), DIRB, hping3 SYN Flood, control de descargas y detección de Telnet inseguro. Todas detectadas y bloqueadas por Suricata.',
+      'p2s-c4meta':'Pentesting · Red WAN','p2s-c4title':'Simulación de Ataques desde la WAN',
+      'p2s-c4desc':'6 pruebas externas: Nmap -sV, SYN Flood (hping3), regla ICMP personalizada, Telnet, Hydra SSH y SQLMap. Prueba final con WAFW00F que confirma la presencia del IPS: "blocking is being done at connection/packet level".',
+      'p2s-c5meta':'Automatización · Sistemas Complementarios','p2s-c5title':'Bot Telegram + pfBlockerNG + EVE JSON',
+      'p2s-c5desc':'Script PHP + Cron que envía alertas de Suricata en tiempo real al móvil del administrador vía Telegram. pfBlockerNG para bloqueo DNS de contenido malicioso y no autorizado. Logs estructurados en EVE JSON para integración futura con Zabbix.',
+      'p2s-c6meta':'Rendimiento · Optimización','p2s-c6title':'Optimización del Motor IDS/IPS',
+      'p2s-c6desc':'Ajuste del modo de ejecución AutoFP (multi-hilo), límite de Flow Memory (128 MB) y Defrag Memory Cap (32 MB). Selección estratégica de firmas para evitar saturación de CPU: solo categorías relevantes para el entorno.'
+    },
+    en: {
+      'nl-about':'About','nl-exp':'Experience','nl-skills':'Skills',
+      'nl-proj':'Projects','nl-edu':'Education','nl-contact':'Contact','nav-cv':'↓ CV',
+      'h-tag':'Available for new opportunities',
+      'h-title':'IT &amp;<br/><em>Cloud</em><br/>Systems',
+      'h-sub':'Systems and Networks Administration Technician. Specialised in Windows Server environments, AWS architectures and automation. Currently on internship at SERHS Serveis (Pineda de Mar).',
+      'h-btn-talk':'Let\'s Talk','h-btn-cv':'Download CV','h-scroll':'Scroll to see more',
+      'h-avail':'Open to job opportunities','li-label':'Verified LinkedIn profile',
+      'a-label':'About me',
+      'a-title':'Adaptability,<br/><em>technical judgment</em><br/>and growth.',
+      'a-p1':'I am a Microcomputer Systems and Networks Technician (SMX), currently studying the CFGS in Networked Computer Systems Administration (ASIX) at Institut Sa Palomera, with a focus on Cloud architectures (AWS) and Cybersecurity.',
+      'a-p2':'My career combines solid technical skills with customer-facing experience and international teamwork — including an Erasmus+ stay in Leipzig (Germany) focused on cybersecurity and home automation.',
+      'st1':'Years tech experience','st2':'Internships / Jobs','st3':'Leipzig, Germany','st4':'Certified Foundations',
+      'sk-label':'Key skills','lang-label':'Languages',
+      'lv1':'Expert','lv2':'Intermediate-Advanced','lv3':'Advanced','lv4':'Intermediate','lv5':'Expert','lv6':'Intermediate',
+      'lg1':'🇪🇸 Spanish — Native','lg2':'🇨🇦 Catalan — Native','lg3':'🇬🇧 English — Intermediate','lg4':'🇲🇦 Arabic — Native',
+      'e-label':'Professional journey','e-title':'Experience',
+      'e1-date':'Jan 2026 — Present','e1-role':'Help Desk &amp; IT Support',
+      'e1-desc':'Level 1 and 2 technical support for corporate users. Incident resolution, ticket management (Jira), preventive maintenance and basic user and network permissions administration.',
+      'e1-badge':'ASIX internship — ongoing',
+      'e2-date':'Aug 2025 — Present','e2-role':'Customer Service / Cashier',
+      'e2-desc':'Customer service in a high-volume environment. Payment processing and first-instance conflict resolution. Working under pressure and organisational skills.',
+      'e3-date':'Jan 2024 — Apr 2024','e3-role':'Help Desk Technician',
+      'e3-desc':'Level 1 technical support for teaching staff and students. IT equipment maintenance (+300h), fault diagnosis and LAN/WLAN network configuration.',
+      'e3-badge':'SMX internship',
+      'e4-date':'Jul 2023 — Aug 2023','e4-co':'IT Technologies Training · Leipzig, Germany',
+      'e4-desc':'Intensive international training placement in Cybersecurity, Networks and Home Automation (Smart Home / IoT). Working in multicultural teams in technical English.',
+      'e4-badge':'Erasmus+ Grant',
+      'c-label':'Areas','c-title':'Areas of <em>expertise</em>','c-intro':'Technical profile focused on stable, secure and scalable infrastructures.',
+      'c1-p':'Installation and configuration of Windows Server 2016/2019/2022. Advanced role management (AD DS, DNS, DHCP) and group policies (GPO). Hyper-V virtualisation.',
+      'c2-p':'LAN/WAN network design and maintenance. CISCO router and switch configuration (CCNA). VLANs, subnetting, routing protocols and perimeter security.',
+      'c3-p':'Cloud solution deployment with Amazon Web Services. Shared responsibility model, IAM, EC2, S3, VPC. AWS Academy Cloud Foundations certified.',
+      'c4-p':'Task automation with Python and Bash scripting. Relational SQL database design and querying (PostgreSQL). Version control with Git/GitHub.',
+      'c5-p':'Hardware and software diagnostics. End-user incident resolution. Ticket management with Jira. Preventive maintenance and IT asset inventory.',
+      'p-label':'Featured projects','p-title':'Real<br/><em>projects</em>',
+      'p1-meta':'Final ASIX project · Team work','p1-sub':'Hotel Management Platform',
+      'p1-desc':'Centralised platform for hotel management focused on security, high availability and data analysis. Python/Tkinter desktop app, PostgreSQL with automated SSL, RBAC, data masking and Power BI dashboard for revenue KPIs.',
+      'p-code':'View code',
+      'ms1':'Integrated modules','ms2':'Co-authors','ms3':'Automated certificates','ms4':'High availability',
+      'p2-meta':'Architecture · Database','p2-title':'ER Design & Normalisation',
+      'p2-desc':'Rigorous ER design and relational normalisation on PostgreSQL running on Debian 12, ensuring referential integrity and query performance.',
+      'p3-meta':'Security · DevOps','p3-title':'Advanced Security &amp; HA',
+      'p3-desc':'SSL with automated renewal, data masking, PL/pgSQL triggers to delete sensitive card data at check-out. Automated backups with Cron.',
+      'p4-meta':'BI · Integrations','p4-title':'Power BI Dashboard &amp; API',
+      'p4-desc':'Integration with the Mossos d\'Esquadra API (JSON), XML export of bookings and a Power BI operational dashboard for real-time revenue and KPI analysis.',
+      'p5-meta':'Backend · App','p5-title':'Python/Tkinter Desktop App',
+      'p5-desc':'Lightweight desktop app for hotel front-office. Secure login with bcrypt hashing and full booking management and check-in/out modules.',
+      'ed-label':'Education & certifications','ed-title':'Education &amp; <em>Certs</em>',
+      'ed1-yr':'2024 – 2026 (ongoing)','ed3-yr':'July – August 2023',
+      'ed3-sch':'Leipzig, Germany · Cybersecurity, Networks, IoT',
+      'cert1-by':'Official','cert2-by':'Advanced Level','credly-lbl':'Official verification · Credly',
+      'ct-label':'Let\'s talk','ct-title':'Got a<br/><em>project</em><br/>in mind?',
+      'ct-body':'I am open to full-time, part-time or freelance opportunities in IT infrastructure and cloud. Get in touch.',
+      'ct-phone':'Phone','ct-loc':'Location',
+      'fl-name':'Name','fl-subject':'Subject','fl-message':'Message','btn-text':'Send Message',
+      'ph-name':'Your name','ph-sub':'Job opportunity / Project...','ph-msg':'Hi Youssef, I would like to...',
+      'f-sending':'Sending...','f-sent':'Sent! ✓','f-ok':'Message sent successfully. Thank you!',
+      'f-err':'Something went wrong. Please try again.',
+      'nl-suricata':'Suricata',
+      'p2s-label':'Second featured project',
+      'p2s-title':'IDS/IPS<br/><em>Suricata</em>',
+      'p2s-private':'Academic Project',
+      'p2s-meta1':'Final ASIX project · INS Sa Palomera · 2025–2026',
+      'p2s-head1':'IDS/IPS System with pfSense + Suricata',
+      'p2s-desc1':'Deployment of a professional intrusion detection and prevention system on pfSense in a virtualised environment (VirtualBox). The project covers everything from Suricata engine installation and configuration to real attack simulation with Kali Linux, EVE JSON log generation, real-time Telegram bot notifications and content filtering with pfBlockerNG.',
+      'p2s-authors':'Authors: Youssef Fouad · Izan Ruiz · Adrià Rodríguez',
+      'p2s-ms1':'LAN attacks simulated','p2s-ms2':'WAN attacks simulated',
+      'p2s-ms3':'Monitored interfaces','p2s-ms4':'Real-time alerts',
+      'p2s-c1meta':'Fundamentals · Architecture','p2s-c1title':'IDS vs IPS and Detection Methodologies',
+      'p2s-c1desc':'Comparative study of Snort, Suricata and Wazuh. Justification for the pfSense + Suricata combination based on its multi-threaded architecture, active IPS mode and modern EVE JSON log output integrable with Zabbix.',
+      'p2s-c2meta':'Configuration · Security Policies','p2s-c2title':'Policies and Network Zones',
+      'p2s-c2desc':'Suricata configured in Legacy IPS mode on both LAN and WAN. Emerging Threats (ET Open) signatures, custom rules for SSH brute force, Telnet, SQL Injection, DoS and P2P protocols. Pass List to prevent administrator self-lockout.',
+      'p2s-c3meta':'Pentesting · LAN Network','p2s-c3title':'Attack Simulation on the LAN',
+      'p2s-c3desc':'7 intrusion tests from Kali Linux: Nmap NULL Scan, Nikto, Hydra (SSH brute force), DIRB, hping3 SYN Flood, download control and insecure Telnet detection. All detected and blocked by Suricata.',
+      'p2s-c4meta':'Pentesting · WAN Network','p2s-c4title':'Attack Simulation from the WAN',
+      'p2s-c4desc':'6 external tests: Nmap -sV, SYN Flood (hping3), custom ICMP rule, Telnet, Hydra SSH and SQLMap. Final test with WAFW00F confirming IPS presence: "blocking is being done at connection/packet level".',
+      'p2s-c5meta':'Automation · Complementary Systems','p2s-c5title':'Telegram Bot + pfBlockerNG + EVE JSON',
+      'p2s-c5desc':'PHP + Cron script that sends Suricata alerts in real time to the administrator\'s phone via Telegram. pfBlockerNG for DNS blocking of malicious and unauthorised content. EVE JSON structured logs for future Zabbix integration.',
+      'p2s-c6meta':'Performance · Optimisation','p2s-c6title':'IDS/IPS Engine Optimisation',
+      'p2s-c6desc':'AutoFP run mode tuning (multi-threaded), Flow Memory cap (128 MB) and Defrag Memory Cap (32 MB). Strategic signature selection to avoid CPU saturation: only categories relevant to the environment.'
+    }
+  };
+
+  let curLang = 'ca';
+
+  function setLang(l) {
+    curLang = l;
+    localStorage.setItem('lang', l);
+    const t = T[l];
+    // fill all elements with matching id
+    Object.keys(t).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = t[id];
+    });
+    // lang buttons
+    document.querySelectorAll('.lb').forEach(b => {
+      b.classList.toggle('active', b.textContent.trim().toLowerCase() === l);
+    });
+    // form placeholders
+    const phn = document.getElementById('name');
+    const phs = document.getElementById('subject');
+    const phm = document.getElementById('message');
+    if (phn) phn.placeholder = t['ph-name'];
+    if (phs) phs.placeholder = t['ph-sub'];
+    if (phm) phm.placeholder = t['ph-msg'];
+    document.documentElement.lang = l;
+  }
+
+  // ─── INIT ────────────────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
+    const saved = localStorage.getItem('lang') || 'ca';
+    setLang(saved);
+  });
 
-    // CURSOR
-    const cursor = document.getElementById('cursor');
-    const cursorRing = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    function animateCursor() {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
-      cursorRing.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    document.querySelectorAll('a, button, .comp-card, .cert-item, .proj-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.style.transform += ' scale(2.5)');
-      el.addEventListener('mouseleave', () => {});
+  // ─── CURSOR ──────────────────────────────────────────────────────────────
+  const cur = document.getElementById('cursor');
+  const curR = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function tick(){
+    rx += (mx-rx)*0.16; ry += (my-ry)*0.16;
+    cur.style.transform  = `translate(${mx-3}px,${my-3}px)`;
+    curR.style.transform = `translate(${rx-15}px,${ry-15}px)`;
+    requestAnimationFrame(tick);
+  })();
+
+  // ─── NAVBAR ──────────────────────────────────────────────────────────────
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 40));
+
+  // ─── MOBILE MENU ─────────────────────────────────────────────────────────
+  const mobTog = document.getElementById('mobileTog');
+  const navLinks = document.getElementById('navLinks');
+  const togIcon = document.getElementById('togIcon');
+  mobTog.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    togIcon.className = navLinks.classList.contains('open') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  });
+  function closeNav() {
+    navLinks.classList.remove('open');
+    togIcon.className = 'fa-solid fa-bars';
+  }
+
+  // ─── SCROLL REVEAL ───────────────────────────────────────────────────────
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }
     });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-    // NAVBAR SCROLL
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
+  // ─── SKILL BARS ──────────────────────────────────────────────────────────
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.width = e.target.dataset.w + '%'; barObs.unobserve(e.target); }
     });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.skill-bar').forEach(b => barObs.observe(b));
 
-    // MOBILE MENU
-    const mobileTog = document.getElementById('mobileTog');
-    const navLinks = document.getElementById('navLinks');
-    const togIcon = document.getElementById('togIcon');
-    mobileTog.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      togIcon.className = navLinks.classList.contains('open') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-    });
-    function closeNav() {
-      navLinks.classList.remove('open');
-      togIcon.className = 'fa-solid fa-bars';
-    }
+  // ─── EMAILJS ─────────────────────────────────────────────────────────────
+  (function(){ if(typeof emailjs!=='undefined') emailjs.init('FC0HEcEgzVjCPFVIp'); })();
 
-    // SCROLL REVEAL
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.08 });
-    reveals.forEach(el => obs.observe(el));
-
-    // SKILL BARS
-    const barObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if(e.isIntersecting) {
-          const bar = e.target;
-          bar.style.width = bar.dataset.w + '%';
-          barObs.unobserve(bar);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.skill-bar').forEach(b => barObs.observe(b));
-
-    // EMAILJS
-    (function() {
-      if(typeof emailjs !== 'undefined') emailjs.init("FC0HEcEgzVjCPFVIp");
-    })();
-    const form = document.getElementById('contact-form');
-    const btnText = document.getElementById('btn-text');
-    const formStatus = document.getElementById('form-status');
-    form && form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      btnText.textContent = 'Enviant...';
-      form.querySelector('button').disabled = true;
-      const params = {
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const t = T[curLang];
+    const btnEl = document.getElementById('btn-text');
+    const status = document.getElementById('form-status');
+    btnEl.textContent = t['f-sending'];
+    this.querySelector('button').disabled = true;
+    if (typeof emailjs !== 'undefined') {
+      emailjs.send('service_f7ge46s', 'template_g1gec17', {
         from_name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-      };
-      if(typeof emailjs !== 'undefined') {
-        emailjs.send("service_f7ge46s", "template_g1gec17", params)
-          .then(() => {
-            btnText.textContent = 'Enviat! ✓';
-            formStatus.style.display = 'block';
-            formStatus.style.color = '#4ade80';
-            formStatus.textContent = 'Missatge enviat correctament. Gràcies!';
-            form.reset();
-            setTimeout(() => {
-              btnText.textContent = 'Enviar Missatge';
-              form.querySelector('button').disabled = false;
-              formStatus.style.display = 'none';
-            }, 5000);
-          })
-          .catch(() => {
-            btnText.textContent = 'Error';
-            formStatus.style.display = 'block';
-            formStatus.style.color = '#f87171';
-            formStatus.textContent = 'Hi ha hagut un error. Torna-ho a provar.';
-            form.querySelector('button').disabled = false;
-          });
-      }
-    });
+        email:     document.getElementById('email').value,
+        subject:   document.getElementById('subject').value,
+        message:   document.getElementById('message').value
+      }).then(() => {
+        btnEl.textContent = t['f-sent'];
+        status.style.display='block'; status.style.color='#4ade80';
+        status.textContent = t['f-ok'];
+        this.reset();
+        setTimeout(() => {
+          btnEl.textContent = t['btn-text'];
+          this.querySelector('button').disabled = false;
+          status.style.display = 'none';
+        }, 5000);
+      }).catch(() => {
+        btnEl.textContent = 'Error';
+        status.style.display='block'; status.style.color='#f87171';
+        status.textContent = t['f-err'];
+        this.querySelector('button').disabled = false;
+      });
+    }
+  });
   </script>
 </body>
 </html>
-
-
